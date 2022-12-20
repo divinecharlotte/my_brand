@@ -4,31 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/mylogo.png" type="image/png">
     <title>Charlotte Divine Dusenge</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" />
+    <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700,900);</style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <nav>
-      <ul class="nav-elements">
+      <ul class="nav-elements-mode">
         <li><img src="./assets/mylogo.png" alt="My-Logo" /></li>
         <li>
-          <ul class="mode-elements">
+        
             <li><p>DARK MODE</p></li>
-            <li>
-              <button type="button">
-                <img src="./assets/mode-button.png" alt="mode-button" />
-              </button>
+            <li class="mode">
+              <input type="checkbox" id="darkmode-toggle"/>
+              <label for="darmode-toggle"></label>
             </li>
-          </ul>
+       
         </li>
-        <li>01.Experience</li>
-        <li>02.Work</li>
-        <li>03.About</li>
-        <li>04.Contact</li>
-        <li>05.Blogs</li>
-        <li>06.Admin</li>
-        <li>07.Login</li>
-        <li class="resume"><button type="button">Resume</button></li>
+       
       </ul>
+      <ul class="nav-elements">
+        <li><a href="#experience">01.Experience</a></li>
+        <li><a href="#work">02.Work</a></li>
+        <li><a href="#about">03.About</a></li>
+        <li><a href="#contact">04.Contact</a></li>
+        <li><a href="#blogs">05.Blogs</a></li>
+        <li><a href="#admin">06.Admin</a></li>
+        <li><a href="#login">07.Login</a></li>
+        <li class="resume"><button type="button">Resume</button></li></ul>
     </nav>
     <section class="my-intro">
       <div class="social-icons">
@@ -55,10 +60,11 @@
               ><img src="./assets/angellist.png" alt="angellist-icon"
             /></a>
           </li>
-          <li><hr /></li>
+        
         </ul>
+        <hr>
       </div>
-      <div>
+      <div id="intro-section">
         <p>Hi,my name is</p>
         <h1>Charlotte Divine Dusenge</h1>
         <h1>I build things for the web.</h1>
@@ -70,14 +76,14 @@
         </p>
         <button type="button">checkout my projects!</button>
       </div>
-      <div>
+      <div class="email-icons">
         <ul>
-          <li><p>divinemaina@gmail.com</p></li>
-          <li><hr /></li>
+          <li><img src="./assets/email.png" alt="email-path"></li>
+          <hr />
         </ul>
       </div>
     </section>
-    <section class="experience">
+    <section class="experience" id="experience">
       <div class="header-wrapper">
         <h1>01.Work Experience</h1>
         <hr />
@@ -125,14 +131,14 @@
         </div>
       </div>
     </section>
-    <section class="work">
+    <section class="work" id="work">
       <div class="header-wrapper">
         <h1>02.My Recent Works</h1>
         <hr />
       </div>
       <div class="work-wrapper">
         <div>
-          <img src="./assets/rails.PNG" alt="RoR-project" />
+          <!-- <img src="./assets/rails.PNG" alt="RoR-project" /> -->
         </div>
         <div>
           <h2>Tourify</h2>
@@ -164,19 +170,19 @@
           </ul>
           <button type="button">see project</button>
           <div>
-            <img src="./assets/spacetravel.PNG" alt="React-project" />
+            <!-- <img src="./assets/spacetravel.PNG" alt="React-project" /> -->
           </div>
         </div>
       </div>
     </section>
-    <section class="about-me">
+    <section class="about-me" id="about">
       <div class="header-wrapper">
         <h1>03.About Me</h1>
         <hr />
       </div>
       <div class="about-first-container">
         <div class="my-image">
-          <img src="./assets/me.JPG" alt="my-picture" />
+          <!-- <img src="./assets/me.JPG" alt="my-picture" /> -->
         </div>
         <p>
           Hello I’m a software developer! I can help you build a product ,
@@ -250,7 +256,7 @@
         <hr />
       </div>
     </section>
-    <section class="contact-me">
+    <section class="contact-me" id="contact">
       <p>04."What’s Next?"</p>
       <h1>Get In Touch</h1>
       <p>
@@ -260,7 +266,7 @@
       </p>
       <button type="button">Say Hello</button>
     </section>
-    <section class="blogs">
+    <section class="blogs" id="blogs">
       <div class="header-wrapper">
         <h1>05.Blogs</h1>
         <hr />
@@ -383,7 +389,7 @@
     </section>
     <section class="single-blog">
       <div class="blog-img">
-        <img src="./assets/boks.png" alt="bookstore-img" />
+        <!-- <img src="./assets/boks.png" alt="bookstore-img" /> -->
       </div>
       <div class="content">
         <h2>Bookstore</h2>
@@ -421,7 +427,7 @@
         </div>
       </div>
     </section>
-    <section class="admin-pannel">
+    <section class="admin-pannel" id="admin">
       <div class="header-wrapper">
         <h1>06.Admin</h1>
         <hr />
@@ -497,7 +503,7 @@
         <input type="submit" value="Submit" />
       </form>
     </section>
-    <section class="login">
+    <section class="login" id="login">
       <div class="header-wrapper">
         <h1>07.login</h1>
         <hr />
