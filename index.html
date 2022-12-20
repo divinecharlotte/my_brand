@@ -382,107 +382,139 @@
       <button type="button">Show More</button>
     </section>
     <section class="single-blog">
-        <div class="blog-img">
-            <img src="./assets/boks.png" alt="bookstore-img">
+      <div class="blog-img">
+        <img src="./assets/boks.png" alt="bookstore-img" />
+      </div>
+      <div class="content">
+        <h2>Bookstore</h2>
+        <p>
+          'Bookstore' is a web app that displays a list of books and allows
+          users to add and remove books from that list.
+        </p>
+      </div>
+
+      <div>
+        <div class="comments">
+          <h4>comments</h4>
+          <p>I like it by Andrew</p>
+          <p>wow so interesting by Kendra</p>
         </div>
-        <div class="content">
-            <h2>Bookstore</h2>
-            <p>'Bookstore' is a web app that displays a list of books and allows users to add and remove books from that list.</p> 
-        </div>
-     
         <div>
-            <div class="comments">
-                <h4>comments</h4>
-                <p>I like it by Andrew</p>
-                <p>wow so interesting by Kendra</p>
-            </div>
-            <div>
-                <form >
-                    <h3 class='form-title'>Add your comment</h3>
-                    <input type='text' name='username' class='name' required placeholder='Your name'>
-         <textarea class='textarea' id='' cols='2' rows='4' placeholder='Your Comment'></textarea>
-         <button type='submit' id= 'submit-button' >Save Blog</button>
-                </form>
-            </div>
+          <form>
+            <h3 class="form-title">Add your comment</h3>
+            <input
+              type="text"
+              name="username"
+              class="name"
+              required
+              placeholder="Your name"
+            />
+            <textarea
+              class="textarea"
+              id=""
+              cols="2"
+              rows="4"
+              placeholder="Your Comment"
+            ></textarea>
+            <button type="submit" id="submit-button">Save Blog</button>
+          </form>
         </div>
+      </div>
     </section>
     <section class="admin-pannel">
-        <div class="header-wrapper">
-            <h1>06.Admin</h1>
-            <hr />
-            <p>Admin pannel</p>
-          </div>
-          <div>
-            <table>
-                <tr>
-                    <th>Blog Name</th>
-                    <th>Likes</th>
-                    <th>comments</th>
-                    <th>Delete blog</th>
-                    <th>Edit blog</th>
-                  </tr>
-                  <tr>
-                    <td>Digital Currency</td>
-                    <td>12 likes</td>
-                    <td>20 comments</td>
-                    <td><button>delete</button></td>
-                    <td><button>edit</button></td>
-                  </tr>
-                  <tr>
-                    <td>Space travel hub</td>
-                    <td>12 likes</td>
-                    <td>20 comments</td>
-                    <td><button>delete</button></td>
-                    <td><button>edit</button></td>
-                  </tr>
-                  <tr>
-                    <td>Bookstore</td>
-                    <td>12 likes</td>
-                    <td>20 comments</td>
-                    <td><button>delete</button></td>
-                    <td><button>edit</button></td>
-                  </tr>
-                  <tr>
-                    <td>Todolist</td>
-                    <td>12 likes</td>
-                    <td>20 comments</td>
-                    <td><button>delete</button></td>
-                    <td><button>edit</button></td>
-                  </tr>
-                  <tr>
-                    <td>Leaderboard</td>
-                    <td>12 likes</td>
-                    <td>20 comments</td>
-                    <td><button>delete</button></td>
-                    <td><button>edit</button></td>
-                  </tr>
-                  <tr>
-                    <td>uPaged</td>
-                    <td>12 likes</td>
-                    <td>20 comments</td>
-                    <td><button>delete</button></td>
-                    <td><button>edit</button></td>
-                  </tr>
-            </table>
-          </div>
+      <div class="header-wrapper">
+        <h1>06.Admin</h1>
+        <hr />
+        <p>Admin pannel</p>
+      </div>
+      <div>
+        <table>
+          <tr>
+            <th>Blog Name</th>
+            <th>Likes</th>
+            <th>comments</th>
+            <th>Delete blog</th>
+            <th>Edit blog</th>
+          </tr>
+          <tr>
+            <td>Digital Currency</td>
+            <td>12 likes</td>
+            <td>20 comments</td>
+            <td><button>delete</button></td>
+            <td><button>edit</button></td>
+          </tr>
+          <tr>
+            <td>Space travel hub</td>
+            <td>12 likes</td>
+            <td>20 comments</td>
+            <td><button>delete</button></td>
+            <td><button>edit</button></td>
+          </tr>
+          <tr>
+            <td>Bookstore</td>
+            <td>12 likes</td>
+            <td>20 comments</td>
+            <td><button>delete</button></td>
+            <td><button>edit</button></td>
+          </tr>
+          <tr>
+            <td>Todolist</td>
+            <td>12 likes</td>
+            <td>20 comments</td>
+            <td><button>delete</button></td>
+            <td><button>edit</button></td>
+          </tr>
+          <tr>
+            <td>Leaderboard</td>
+            <td>12 likes</td>
+            <td>20 comments</td>
+            <td><button>delete</button></td>
+            <td><button>edit</button></td>
+          </tr>
+          <tr>
+            <td>uPaged</td>
+            <td>12 likes</td>
+            <td>20 comments</td>
+            <td><button>delete</button></td>
+            <td><button>edit</button></td>
+          </tr>
+        </table>
+      </div>
     </section>
-<section class="create-blog">
-    <p>Create a Blog.</p>
-    <form >
-        <label for="fname">Blog Name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">Blog Description:</label><br>
+    <section class="create-blog">
+      <p>Create a Blog.</p>
+      <form>
+        <label for="fname">Blog Name:</label><br />
+        <input type="text" id="fname" name="fname" /><br />
+        <label for="lname">Blog Description:</label><br />
         <textarea
-            rows="10"
-            maxlength="500"
-      
-            name="message"
-            id="user-message"
-            required
-          ></textarea>
-        <input type="submit" value="Submit">
-      </form> 
-</section>
+          rows="10"
+          maxlength="500"
+          name="message"
+          id="user-message"
+          required
+        ></textarea>
+        <input type="submit" value="Submit" />
+      </form>
+    </section>
+    <section class="login">
+      <div class="header-wrapper">
+        <h1>07.login</h1>
+        <hr />
+      </div>
+      <div>
+        <p>Log In.</p>
+        <form>
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" name="name" /><br />
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" /><br />
+          <label for="pwd">Password:</label><br />
+          <input type="password" id="pwd" name="pwd" /><br /><br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </section>
     <footer><p>Designed & Built by Charlotte Divine Dusenge</p></footer>
   </body>
 </html>
