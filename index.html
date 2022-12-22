@@ -86,22 +86,20 @@
       </div>
     </div>
     </section>
-    <section class="experience" id="experience">
+    <!-- /************************************************************************* ***EXPERIENCE SECTION******************************************************** */ -->
+    <section id="experience">
+    <div class="experience" >
       <div class="header-wrapper">
-        <!-- /************************************************************************* ***EXPERIENCE SECTION******************************************************** */ -->
         <h1><span>01.</span>Work Experience</h1>
         <hr />
       </div>
       <div class="recent-job-cont">
         <div class="recent-job-first-cont">
-          <ul>
-            <li><hr /></li>
-            <li>
+          
               <ul>
-                <li>Payingtone</li>
-                <li>HviewTech</li>
-              </ul>
-            </li>
+                <li class="first">Payingtone</li>
+                <li class="second">HviewTech</li>
+           
           </ul>
         </div>
         <div class="recent-job-second-cont">
@@ -134,7 +132,8 @@
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
     <section class="work" id="work">
       <div class="header-wrapper">
         <h1><span>02.</span>My Recent Works</h1>
@@ -283,8 +282,9 @@
         <h1><span>05.</span>Blogs</h1>
         <hr />
       </div>
+      <div class="blog-cards">
       <div class="blog-card">
-        <div class="icons">
+        <div class="blog-icons">
           <img src="./assets/boxArrow.png" alt="box-arrow" />
           <a href="https://github.com/divinecharlotte/metrics-webapp"
             ><img src="./assets/github.png" alt="github-icon"
@@ -336,7 +336,6 @@
         <ul>
           <li>React</li>
           <li>Redux</li>
-          <li>Jest</li>
           <li>Css</li>
           <li>Responsive-web</li>
         </ul>
@@ -397,47 +396,57 @@
           <li>Jest</li>
         </ul>
       </div>
+    </div>
       <button type="button">Show More</button>
     </section>
     <section class="single-blog">
+      <div class="single-blog-container">
       <div class="blog-img">
         <!-- <img src="./assets/boks.png" alt="bookstore-img" /> -->
       </div>
+      <div class="content-container">
       <div class="content">
         <h2>Bookstore</h2>
         <p>
           'Bookstore' is a web app that displays a list of books and allows
           users to add and remove books from that list.
         </p>
-      </div>
-
-      <div>
         <div class="comments">
-          <h4>comments</h4>
+          <h4>Comments</h4>
           <p>I like it by Andrew</p>
           <p>wow so interesting by Kendra</p>
         </div>
-        <div>
-          <form>
+      </div>
+
+      <div class="comments-wrapper">
+       
+        
+          <form class="comment">
             <h3 class="form-title">Add your comment</h3>
+            <div class="comment-form"></div>
             <input
               type="text"
               name="username"
               class="name"
               required
-              placeholder="Your name"
-            />
+              placeholder="Your name :"
+            /> 
+            <br> <br>
             <textarea
               class="textarea"
               id=""
               cols="2"
               rows="4"
-              placeholder="Your Comment"
+              placeholder="Your Comment :"
             ></textarea>
-            <button type="submit" id="submit-button">Save Blog</button>
+            <br/>
+            <button type="submit" id="submit-button">Submitt</button>
+          </div>
           </form>
-        </div>
+       
       </div>
+     </div>
+
     </section>
     <section class="admin-pannel" id="admin">
       <div class="header-wrapper">

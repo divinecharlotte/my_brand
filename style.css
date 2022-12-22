@@ -437,3 +437,141 @@ footer {
 
   cursor: pointer;
 }
+/************************************************************************* ***EXPERIENCE SECTION******************************************************** */
+.experience {
+  height: 100vh;
+  background-color: rgba(17, 34, 64, 0.9);
+  border-top-right-radius: 6rem;
+  padding: 10%;
+  
+}
+
+#experience{
+background-color: var(--lightest-navy);
+}
+.recent-job-cont{
+  display: flex;
+  gap: 6rem;
+}
+.recent-job-first-cont ul li{
+border: red solid;
+padding: 0.9rem;
+
+}
+/* ************************************************************************ ***BLOGS SECTION******************************************************** */
+.blogs{
+  padding:10%;
+  background-color: var(--navy);
+
+}
+.blog-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.blog-card{
+  padding: 8% 2% 12% 5%;
+  margin: 6% 3% 0;
+  background-color: var(--light-navy);
+  border-radius: var(--border-radius);
+ 
+}
+.blog-icons{
+  display: flex;
+  flex-direction: row;
+ align-items: center;
+ justify-content: space-between;
+}
+/* .content h4, */
+.content h2,
+.blog-card h2{
+  width: 90%;
+    color: var(--light-slate);
+    font-size: var(--fz-lg);
+    font-weight: 450;
+    margin: 1rem 0;
+    line-height: 1.5;
+}
+.content p,
+.blog-card p{
+  color: var(--md-slate);
+  font-size: var(--small-size);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+.blog-card ul{
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+  width: 90%;
+  color: var(--md-slate);
+
+}
+.blogs button{
+ margin: 5% 44%;
+ outline: none;
+ border: 1px solid var(--green);
+ padding: 15px 18px;
+ background-color: transparent;
+ color: var(--green);
+ border-radius: var(--border-radius);
+ font-size: var(--fz-xs);
+
+
+}
+/* ************************************************************************ *** SINGLE BLOG SECTION******************************************************** */
+.single-blog{
+  padding:5% 0 5%0;
+  background-color: var(--light-navy);
+  width: 100%;
+  display: none;
+}
+.single-blog-container{
+   background-color: var(--navy);
+  width: 60%;
+  margin: auto;
+  padding-top: 3%;
+}
+.blog-img{
+  margin: 5%;
+  height: 54vh;
+  background-image: url(./assets/boks.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 20px;
+}
+.content-container{
+  display: flex;
+}
+.content{
+  width: 60%;
+  margin: 5%;
+}
+.comments p{
+
+  font-size: 10px;
+  margin-bottom : 10px;
+}
+.form-title,
+.comments h4{
+  color: var(--light-slate);
+}
+.comment-form{
+  display: flex;
+  flex-direction: column;
+ justify-content: space-between;
+}
+body > section.single-blog > div > div.content-container > div.comments-wrapper > form > textarea,
+body > section.single-blog > div > div.content-container > div.comments-wrapper > form > input{
+  width: 80%;
+  border-radius: 8px;
+  background-color: transparent;
+  padding: 0.6rem;
+  border: 1px var(--green) solid;
+}
+.comment button{
+ margin-left: 5.8rem;
+ color: #ffff;
+ background-color: var(--green);
+}
+::placeholder {
+  color:var(--green);
+}
