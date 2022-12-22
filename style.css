@@ -454,10 +454,58 @@ background-color: var(--lightest-navy);
   gap: 6rem;
 }
 .recent-job-first-cont ul li{
-border: red solid;
-padding: 0.9rem;
-
+list-style: none;
+height: 50px;
+font-size: var(--fz-xs);
+font-weight: 600;
+color: var(--slate);
+display: flex;
+align-items: center;
+padding: 0 20px;
+transition: var(--transition);
+cursor: pointer;
 }
+.recent-job-first-cont ul :first-child{
+  color: var(--green);
+}
+ .first{
+  border-left: 2px solid var(--green);
+  color: red;
+}
+.second{
+  border-left: 2px solid var(--slate);
+}
+.exp-hr{
+  width: 2px;
+  height: 30vh;
+  border: none;
+  background-color: var(--slate);
+}
+.recent-job-second-cont h2{
+  margin-top: 15px;
+    color: var(--light-slate);
+    font-size: var(--fz-xl);
+    font-weight: 500;
+}
+.recent-job-second-cont p {
+  margin: 0.5rem 0 1rem 0;
+  color: var(--dark-slate);
+  font-size: var(--fz-xxs);
+  font-weight: 500;}
+  .sm-description{
+    display:flex;
+    margin-bottom: 3%;
+    align-items: center;
+  }
+  .sm-description img{
+ height: 13px;
+  }
+  .sm-description p{
+  margin: 0 0 0 20px;
+    line-height: 1.5;
+    color: var(--slate);
+    font-weight: 400;
+    font-size: var(--small-size);}
 /* ************************************************************************ ***BLOGS SECTION******************************************************** */
 .blogs{
   padding:10%;
