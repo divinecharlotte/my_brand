@@ -21,10 +21,14 @@
               <input type="checkbox" id="darkmode-toggle"/>
               <label for="darmode-toggle"></label>
             </li>
-       
         </li>
-       
+   
       </ul>
+      <ul class="humbuger">
+        <li class="line1"></li>
+        <li class="line2"></li>
+        <li class="line3"></li>
+       </ul>
       <ul class="nav-elements">
         <li><a href="#experience"> <span>01.</span> Experience</a></li>
         <li><a href="#work"><span>02.</span>Work</a></li>
@@ -35,10 +39,9 @@
         <li><a href="#login"><span>07.</span>Login</a></li>
         <li class="resume"><button type="button">Resume</button></li></ul>
     </nav>
-    <!-- /************************************************************************* ***INTRO SECTION******************************************************** */ -->
+   <!-- ************************************************************************* ***INTRO SECTION******************************************************** */ -->
     <section class="whole-intro">
       <div class="my-intro">
-      <!-- <div class="socials-hr"> -->
       <div class="social-icons">
         <ul>
           <li>
@@ -67,7 +70,7 @@
         </ul>
         <hr>
       </div>
-    <!-- </div> -->
+
       <div id="intro-section">
         <p>Hi,my name is</p>
         <h1>Charlotte Divine Dusenge</h1>
@@ -86,6 +89,7 @@
       </div>
     </div>
     </section>
+    
     <!-- /************************************************************************* ***EXPERIENCE SECTION******************************************************** */ -->
     <section id="experience">
     <div class="experience" >
@@ -245,7 +249,7 @@
       <div class="about-cards">
       <div class="about-first-container">
         <div class="my-image">
-          <!-- <img src="./assets/me.JPG" alt="my-picture" /> -->
+        
         </div>
         <p>
           Full-stack developer with 3+ years of experience in commercial application and software development. Enthusiastic about writing clean, efficient, and accessible code in a functional framework. Committed to the total development lifecycle, user-friendly applications, and the maintenance of code quality is of the utmost importance. Confident communicator, problem solver, strategic thinker, and innovative creator of software applications that meet a company’s needs, highlight its core competencies, and further its success. Able to effectively self-manage during independent projects as well as collaborate in a team to achieve the same business goals
@@ -314,7 +318,7 @@
           <h3>Cloud & Hosting</h3>
           <img class="left-arrow" src="./assets/leftArrow.png" alt="left-arrow" />
         </div>
-        <!-- <hr /> -->
+
         <hr />
       </div>
     </div>
@@ -359,7 +363,7 @@
         </ul>
       </div>
       <div class="blog-card">
-        <div class="icons">
+        <div class="blog-icons">
           <img src="./assets/boxArrow.png" alt="box-arrow" />
           <a href="https://github.com/divinecharlotte/metrics-webapp"
             ><img src="./assets/github.png" alt="github-icon"
@@ -378,7 +382,7 @@
         </ul>
       </div>
       <div class="blog-card">
-        <div class="icons">
+        <div class="blog-icons">
           <img src="./assets/boxArrow.png" alt="box-arrow" />
           <a href="https://github.com/aliatayee/Space-Travelers-Hub"
             ><img src="./assets/github.png" alt="github-icon"
@@ -397,7 +401,7 @@
         </ul>
       </div>
       <div class="blog-card">
-        <div class="icons">
+        <div class="blog-icons">
           <img src="./assets/boxArrow.png" alt="box-arrow" />
           <a href="https://github.com/divinecharlotte/bookstore-app"
             ><img src="./assets/github.png" alt="github-icon"
@@ -416,7 +420,7 @@
         </ul>
       </div>
       <div class="blog-card">
-        <div class="icons">
+        <div class="blog-icons">
           <img src="./assets/boxArrow.png" alt="box-arrow" />
           <a href="https://github.com/divinecharlotte/todo-list"
             ><img src="./assets/github.png" alt="github-icon"
@@ -434,7 +438,7 @@
         </ul>
       </div>
       <div class="blog-card">
-        <div class="icons">
+        <div class="blog-icons">
           <img src="./assets/boxArrow.png" alt="box-arrow" />
           <a href="https://github.com/divinecharlotte/leader-board-project"
             ><img src="./assets/github.png" alt="github-icon"
@@ -458,7 +462,6 @@
     <section class="single-blog">
       <div class="single-blog-container">
       <div class="blog-img">
-        <!-- <img src="./assets/boks.png" alt="bookstore-img" /> -->
       </div>
       <div class="content-container">
       <div class="content">
@@ -504,15 +507,16 @@
      </div>
 
     </section>
-    <section class="admin-pannel" id="admin">
+     <!-- /************************************************************************* ***ADMIN SECTION******************************************************** */ -->
+    <section class="admin-pannel" >
       <div class="header-wrapper">
-        <!-- /************************************************************************* ***ADMIN SECTION******************************************************** */ -->
+       
         <h1><span>06.</span>Admin</h1>
         <hr />
         <p>Admin pannel</p>
       </div>
       <div>
-        <table>
+        <table id="admin">
           <tr>
             <th>Blog Name</th>
             <th>Likes</th>
@@ -566,7 +570,7 @@
       </div>
     </section>
     <section class="create-blog">
-      <p>Create a Blog.</p>
+      <p>Create a <span>Blog.</span></p>
       <form>
         <label for="fname">Blog Name:</label><br />
         <input type="text" id="fname" name="fname" /><br />
@@ -578,7 +582,7 @@
           id="user-message"
           required
         ></textarea>
-        <input type="submit" value="Submit" />
+        <button type="button">Save blog</button>
       </form>
     </section>
     <!-- /************************************************************************* ***LOGIN SECTION******************************************************** */ -->

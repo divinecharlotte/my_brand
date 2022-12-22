@@ -386,13 +386,16 @@ button {
   align-items: center;
   gap: 10%;
 }
+.create-blog p,
 .login-page p {
   font-size: 5rem;
   color: var(--lightest-slate);
 }
+.create-blog p span,
 .login-page p span {
   color: var(--green);
 }
+.create-blog form,
 .inputform {
   width: 40%;
 
@@ -400,11 +403,14 @@ button {
   padding: 3rem;
   border: 1px solid var(--green);
 }
+.create-blog form label, 
 .inputform form label {
   font-size: 1.4rem;
 
   color: var(--lightest-slate);
 }
+.create-blog form input,
+.create-blog form textarea,
 .inputform form input {
   width: 90%;
   height: 6vh;
@@ -412,6 +418,7 @@ button {
   border: 1px solid var(--green);
   background-color: var(--lightest-navy);
 }
+.create-blog form button,
 .inputform form button {
   margin-left: 20rem;
   padding: 0.9em 2rem;
@@ -685,4 +692,59 @@ width: 90%;
 }
 .work-description button{
   width: 25%;
+}
+/* ************************************************************************ *** ADMIN SECTION******************************************************** */
+.create-blog,
+.admin-pannel{
+  padding:10%;
+  background-color: var(--light-navy);
+  
+}
+.header-wrapper p{
+  color:var(--green);
+  font-weight: 700;
+font-size: 30px;
+line-height: 30px;
+margin-left: 2%;
+}
+#admin{
+  border-collapse: collapse;
+  width: 100%;
+  color: var(--light-slate);
+}
+#admin th{
+  font-weight: 600;
+font-size: 36px;
+
+}
+
+
+tr td button:hover {background-color: var(--lightest-navy);}
+#admin td{
+  font-weight: 200;
+font-size: 26px;
+
+}
+#admin td,#admin th{
+  border: 1px solid var(--light-slate);
+  padding: 8px;
+
+}
+tr td button{
+  margin-left:29%;
+}
+.create-blog{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+gap: 2%;
+}
+.create-blog p{
+  font-size: 4rem;
+}
+.create-blog form textarea{
+  height: auto;
+}
+.create-blog form button{
+  margin-left: 15.5rem;
 }
