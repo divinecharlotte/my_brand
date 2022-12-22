@@ -623,3 +623,66 @@ body > section.single-blog > div > div.content-container > div.comments-wrapper 
 ::placeholder {
   color:var(--green);
 }
+/* ************************************************************************ *** WORK SECTION******************************************************** */
+.work{
+  padding:10%;
+  background-color: var(--light-navy);
+}
+
+.single-work-wrapper{
+  width: 88%;
+  height: 60vh;
+  margin: 4% auto;
+  border: var(--slate) solid 1px;
+  padding:2% 0 2% 2% ;
+  display: grid;
+  gap: 20px;
+  border-radius:24px ;
+  background-color: var(--lightest-navy);
+  grid-template-columns: 1fr 1fr;
+
+}
+.single-work-wrapper h2{
+  font-size: var(--x-medium-size);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--lightest-slate);
+}
+.single-work-wrapper p{
+  color: var(--md-slate);
+  font-size: var(--small-size);
+  font-weight: 400;
+  line-height: 24px;
+}
+.work-image{
+
+background-image: url(./assets/rails.PNG);
+
+background-size:contain;
+width: 90%;
+
+  border-radius: 24px;
+
+}
+.work-description{
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  gap: 20px;
+}
+.work-description ul{
+  display: flex;
+
+}
+.work-description ul li{
+  background-color: var(--light-navy);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: var(--xx-small-size);
+  color: var(--light-slate);
+  margin: 0 10px 10px 0;
+}
+.work-description button{
+  width: 25%;
+}
