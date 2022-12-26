@@ -431,7 +431,7 @@ footer {
 }
 /************************************************************************* ***EXPERIENCE SECTION******************************************************** */
 .experience {
-  height: 100vh;
+  height: auto;
   background-color: rgba(17, 34, 64, 0.9);
   border-top-right-radius: 6rem;
   padding: 10%;
@@ -442,7 +442,7 @@ background-color: var(--lightest-navy);
 }
 .recent-job-cont{
   display: flex;
-  gap: 6rem;
+  gap: 5%;
 }
 .recent-job-first-cont ul li{
 list-style: none;
@@ -461,7 +461,6 @@ cursor: pointer;
 }
  .first{
   border-left: 2px solid var(--green);
-  color: red;
 }
 .second{
   border-left: 2px solid var(--slate);
@@ -728,6 +727,10 @@ gap: 2%;
   .nav-elements-mode li p {
     font-size: 14px;
 }
+
+.experience {
+  margin-top: -1px;
+}
 }
 /* *************************************************************************TABLET SCREEN********************************************************* */
 @media only screen and (min-width: 768px){
@@ -767,9 +770,13 @@ nav{
 #intro-section p:nth-child(4) {
     width: 41vw;
   }
+  .recent-job-first-cont ul li {
+    font-size: 12px;
+  }
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
+  .exp-hr,
   .nav-elements{
     display: none;
   }
@@ -824,4 +831,21 @@ nav{
   .whole-intro {
     padding-bottom: 40%;
   }
+  .header-wrapper h1 {
+    font-size: 25px;
+  }
+  
+.recent-job-cont {
+  flex-direction: column;
 }
+.recent-job-first-cont ul{
+  display: flex;
+}
+.recent-job-first-cont ul li {
+  font-size: 14px;
+  border: none;}
+  .header-wrapper {
+    margin-bottom: 20%;
+    }
+
+  }
