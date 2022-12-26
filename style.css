@@ -175,6 +175,7 @@ button {
   align-items: center;
   margin: 16% 0 0 -11%;
   position: fixed;
+  bottom: 0;
 }
 .social-icons ul {
   display: flex;
@@ -184,7 +185,7 @@ button {
 }
 .social-icons hr {
   width: 1px;
-  height: 36vh;
+  height: 48vh;
   background-color: var(--light-slate);
   border: none;
 }
@@ -192,13 +193,13 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 36%;
   left: 95%;
   position: fixed;
+  bottom: 0;
 }
 .email-icons hr {
   width: 1px;
-  height: 36vh;
+  height: 48vh;
   background-color: var(--light-slate);
   border: none;
 }
@@ -214,7 +215,7 @@ button {
 }
 #intro-section h1 {
   width: 100%;
-  font-size: var(--fz-heading);
+  font-size: 60px;
   font-weight: 700;
   margin: 1rem 0;
 }
@@ -755,6 +756,17 @@ nav{
   padding: 0.3rem 0.5rem;
   margin-left: 5%;
 }
+#intro-section h1 {
+  font-size: 45px;
+  margin: 0.1rem 0;
+}
+.my-intro{
+  padding: 14% 0 0 100px;
+}
+
+#intro-section p:nth-child(4) {
+    width: 41vw;
+  }
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
@@ -792,5 +804,24 @@ nav{
   .nav-elements-mode li p {
     font-size: 13px;
   }
+#intro-section h1{
+  
+  font-size: 35px;
 
+}
+.social-icons,
+.email-icons{
+  display: none;
+}
+.my-intro {
+  width: 90%;
+  padding: 40% 0 0 10px;
+
+}
+#intro-section p:nth-child(4) {
+ 
+  width: 80vw;}
+  .whole-intro {
+    padding-bottom: 40%;
+  }
 }
