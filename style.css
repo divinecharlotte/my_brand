@@ -618,12 +618,12 @@ body > section.single-blog > div > div.content-container > div.comments-wrapper 
   height: 60vh;
   margin: 4% auto;
   border: var(--slate) solid 1px;
-  padding:2% 0 2% 2% ;
+  padding:2%;
   display: grid;
   gap: 20px;
   border-radius:24px ;
   background-color: var(--lightest-navy);
-  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr; */
 }
 .single-work-wrapper h2{
   font-size: var(--x-medium-size);
@@ -640,8 +640,11 @@ body > section.single-blog > div > div.content-container > div.comments-wrapper 
 .work-image{
 background-image: url(./assets/rails.PNG);
 background-size:contain;
-width: 90%;
+width: 100%;
+height:100vh;
   border-radius: 24px;
+  object-fit: cover;
+  background-repeat: no-repeat;
 }
 .work-description{
   display: flex;
@@ -731,6 +734,9 @@ gap: 2%;
 .experience {
   margin-top: -1px;
 }
+.single-work-wrapper{
+  grid-template-columns: 1fr 1fr;
+}
 }
 /* *************************************************************************TABLET SCREEN********************************************************* */
 @media only screen and (min-width: 768px){
@@ -773,6 +779,12 @@ nav{
   .recent-job-first-cont ul li {
     font-size: 12px;
   }
+  .single-work-wrapper{
+    height:auto;
+  }
+.work-image{
+  height: 50vh;
+}
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
@@ -847,5 +859,14 @@ nav{
   .header-wrapper {
     margin-bottom: 20%;
     }
-
+    
+.work-image {
+  height: 20vh;}
+  .single-work-wrapper {
+     height: auto;
+    }
+    .work-description button {
+      width: 45%;
+      padding: 3%;
+  }
   }
