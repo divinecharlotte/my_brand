@@ -361,9 +361,9 @@ button {
 }
 /************************************************************************* ***LOGIN SECTION******************************************************** */
 .login {
-  height: 100vh;
+  /* height: 100vh; */
   background-color: var(--navy);
-  padding: 4rem 0 0 7rem;
+  padding: 7rem ;
 }
 .login-page {
   display: flex;
@@ -767,10 +767,13 @@ margin: 0;
 #admin td {
 font-size: 16px;
 }
+.login-page ,
 .create-blog{
   flex-direction: column;
 }
-
+.login-page p {
+  display: none;
+}
 }
 @media only screen and (max-width: 1025px){
   .blog-cards{
@@ -995,4 +998,8 @@ flex-direction: column;
   .create-blog form button, .inputform form button {
     padding: 0.5rem 1rem;
   }
+  .login {
+   
+    padding: 2rem;
+}
 }
