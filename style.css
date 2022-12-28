@@ -395,6 +395,7 @@ button {
 
   color: var(--lightest-slate);
 }
+
 .create-blog form input,
 .create-blog form textarea,
 .inputform form input {
@@ -406,7 +407,6 @@ button {
 }
 .create-blog form button,
 .inputform form button {
-  /* margin-left: 20rem; */
   padding: 0.9em 2rem;
   background-color: var(--lightest-navy);
   outline: none;
@@ -581,7 +581,6 @@ cursor: pointer;
 }
 .content{
   width: 60%;
-  /* margin: 5%; */
 }
 .comments-wrapper{
   margin: 25% 0;
@@ -726,9 +725,7 @@ gap: 2%;
 .create-blog form textarea{
   height: auto;
 }
-.create-blog form button{
-  margin-left: 60%;
-}
+
 /* *************************************************************************LAPTOP SCREEN********************************************************* */
 @media only screen and (min-width: 992px) {
   .nav-elements li a {
@@ -770,12 +767,10 @@ margin: 0;
 #admin td {
 font-size: 16px;
 }
-/* .create-blog form button {
-  margin-left: 46%;
-} */
-/* .create-blog form button {
-  margin-left: 36%;
-} */
+.create-blog{
+  flex-direction: column;
+}
+
 }
 @media only screen and (max-width: 1025px){
   .blog-cards{
@@ -791,9 +786,7 @@ tr td button{
 #admin td {
   font-size: 16px;
 }
-.create-blog form button {
-  margin-left: 46%;
-}
+
 }
 @media only screen and (min-width: 768px){
 
@@ -846,19 +839,8 @@ nav{
 }
 .blogs button {
   margin: 5% 40%;}
-  /* #admin th{
-    font-size: 13px;
-  }
-  
-tr td button{
-  margin: 0;
-}
-#admin td {
-  font-size: 16px;
-} */
 .create-blog form button {
-  margin-left: 36%;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
 }
 
 }
@@ -990,7 +972,6 @@ tr td button{
           font-size: 7px;
   }
   #admin > tbody > tr > td > button{
-    /* border: red solid 1px; */
     padding: 0.4rem 0.6rem;
     font-size: 5px;
   }
@@ -1004,4 +985,14 @@ flex-direction: column;
 .header-wrapper {
   margin-bottom: 10%;
 }
+
+.create-blog p {
+  font-size: 2rem;
+}
+.create-blog form, .inputform {
+  width: 90%;
+  padding: 1rem;}
+  .create-blog form button, .inputform form button {
+    padding: 0.5rem 1rem;
+  }
 }
