@@ -540,7 +540,7 @@ footer {
 }
 .blog-card ul {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   width: 90%;
   color: var(--md-slate);
 }
@@ -560,7 +560,7 @@ footer {
   background-color: var(--light-navy);
   margin-top: -1px;
   width: 100%;
-  display: none;
+  /* display: none; */
 }
 .single-blog-container {
   background-color: var(--navy);
@@ -584,6 +584,10 @@ footer {
 }
 .content {
   width: 60%;
+}
+.content img{
+  width: 25px;
+  background-color: var(--green);
 }
 .comments-wrapper {
   margin: 25% 0;
