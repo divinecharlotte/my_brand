@@ -77,7 +77,6 @@ nav {
   position: fixed;
   gap: 5%;
   width: 100%;
-  /* height: 10%; */
   background-color: var(--lightest-navy);
 }
 .nav-elements-mode {
@@ -109,6 +108,9 @@ nav {
   text-decoration: none;
   font-weight: 600;
 }
+.nav-elements li a:hover{
+  color: var(--green);
+}
 .nav-elements li a span {
   color: var(--green);
   font-family: var(--font-mono);
@@ -125,7 +127,6 @@ ul li {
   border: var(--light-slate) solid 1px;
   border-radius: 20rem;
   cursor: pointer;
-
 }
 .mode label:after {
   content: "";
@@ -152,6 +153,10 @@ button {
   font-family: var(--font-mono);
   cursor: pointer;
   transition: var(--transition);
+}
+.blogs button:hover,
+button:hover{
+  background-color: var(--slate);
 }
 /************************************************************************* ***INTRO SECTION******************************************************** */
 .whole-intro {
@@ -361,9 +366,8 @@ button {
 }
 /************************************************************************* ***LOGIN SECTION******************************************************** */
 .login {
-  /* height: 100vh; */
   background-color: var(--navy);
-  padding: 7rem ;
+  padding: 7rem;
 }
 .login-page {
   display: flex;
@@ -389,7 +393,7 @@ button {
   padding: 3rem;
   border: 1px solid var(--green);
 }
-.create-blog form label, 
+.create-blog form label,
 .inputform form label {
   font-size: 1.4rem;
 
@@ -435,137 +439,136 @@ footer {
   background-color: rgba(17, 34, 64, 0.9);
   border-top-right-radius: 6rem;
   padding: 10%;
-  
 }
-#experience{
-background-color: var(--lightest-navy);
+#experience {
+  background-color: var(--lightest-navy);
 }
-.recent-job-cont{
+.recent-job-cont {
   display: flex;
   gap: 5%;
 }
-.recent-job-first-cont ul li{
-list-style: none;
-height: 50px;
-font-size: var(--fz-xs);
-font-weight: 600;
-color: var(--slate);
-display: flex;
-align-items: center;
-padding: 0 20px;
-transition: var(--transition);
-cursor: pointer;
+.recent-job-first-cont ul li {
+  list-style: none;
+  height: 50px;
+  font-size: var(--fz-xs);
+  font-weight: 600;
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  transition: var(--transition);
+  cursor: pointer;
 }
-.recent-job-first-cont ul :first-child{
+.recent-job-first-cont ul :first-child {
   color: var(--green);
 }
- .first{
+.first {
   border-left: 2px solid var(--green);
 }
-.second{
+.second {
   border-left: 2px solid var(--slate);
 }
-.exp-hr{
+.exp-hr {
   width: 2px;
   height: 30vh;
   border: none;
   background-color: var(--slate);
 }
-.recent-job-second-cont h2{
+.recent-job-second-cont h2 {
   margin-top: 15px;
-    color: var(--light-slate);
-    font-size: var(--fz-xl);
-    font-weight: 500;
+  color: var(--light-slate);
+  font-size: var(--fz-xl);
+  font-weight: 500;
 }
 .recent-job-second-cont p {
   margin: 0.5rem 0 1rem 0;
   color: var(--dark-slate);
   font-size: var(--fz-xxs);
-  font-weight: 500;}
-  .sm-description{
-    display:flex;
-    margin-bottom: 3%;
-    align-items: center;
-  }
-  .sm-description img{
- height: 13px;
-  }
-  .sm-description p{
+  font-weight: 500;
+}
+.sm-description {
+  display: flex;
+  margin-bottom: 3%;
+  align-items: center;
+}
+.sm-description img {
+  height: 13px;
+}
+.sm-description p {
   margin: 0 0 0 20px;
-    line-height: 1.5;
-    color: var(--slate);
-    font-weight: 400;
-    font-size: var(--small-size);}
+  line-height: 1.5;
+  color: var(--slate);
+  font-weight: 400;
+  font-size: var(--small-size);
+}
 /* ************************************************************************ ***BLOGS SECTION******************************************************** */
-.blogs{
-  padding:10%;
+.blogs {
+  padding: 10%;
   background-color: var(--navy);
 }
-.blog-cards{
+.blog-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
-.blog-card{
+.blog-card {
   padding: 8% 2% 12% 5%;
   margin: 6% 3% 0;
   background-color: var(--light-navy);
   border-radius: var(--border-radius);
- 
 }
-.blog-icons{
+.blog-icons {
   display: flex;
   flex-direction: row;
- align-items: center;
- justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 }
-/* .content h4, */
 .content h2,
-.blog-card h2{
+.blog-card h2 {
   width: 90%;
-    color: var(--light-slate);
-    font-size: var(--fz-lg);
-    font-weight: 450;
-    margin: 1rem 0;
-    line-height: 1.5;
+  color: var(--light-slate);
+  font-size: var(--fz-lg);
+  font-weight: 450;
+  margin: 1rem 0;
+  line-height: 1.5;
 }
 .content p,
-.blog-card p{
+.blog-card p {
   color: var(--md-slate);
   font-size: var(--small-size);
   margin-bottom: 1.5rem;
   line-height: 1.5;
 }
-.blog-card ul{
- display: grid;
- grid-template-columns: 1fr 1fr 1fr;
+.blog-card ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 90%;
   color: var(--md-slate);
 }
-.blogs button{
- margin: 5% 44%;
- outline: none;
- border: 1px solid var(--green);
- padding: 15px 18px;
- background-color: transparent;
- color: var(--green);
- border-radius: var(--border-radius);
- font-size: var(--fz-xs);
+.blogs button {
+  margin: 5% 44%;
+  outline: none;
+  border: 1px solid var(--green);
+  padding: 15px 18px;
+  background-color: transparent;
+  color: var(--green);
+  border-radius: var(--border-radius);
+  font-size: var(--fz-xs);
 }
 /* ************************************************************************ *** SINGLE BLOG SECTION******************************************************** */
-.single-blog{
-  padding:5% 0 5%0;
+.single-blog {
+  padding: 5% 0 5%0;
   background-color: var(--light-navy);
   margin-top: -1px;
   width: 100%;
-  /* display: none; */
+  display: none;
 }
-.single-blog-container{
-   background-color: var(--navy);
+.single-blog-container {
+  background-color: var(--navy);
   width: 60%;
   margin: auto;
   padding-top: 3%;
 }
-.blog-img{
+.blog-img {
   margin: 5%;
   height: 54vh;
   background-image: url(./assets/boks.png);
@@ -573,94 +576,106 @@ cursor: pointer;
   background-size: contain;
   border-radius: 20px;
 }
-.content-container{
+.content-container {
   margin: 5%;
   gap: 10%;
   display: flex;
   flex-direction: row;
 }
-.content{
+.content {
   width: 60%;
 }
-.comments-wrapper{
+.comments-wrapper {
   margin: 25% 0;
 }
-.comments p{
+.comments p {
   font-size: 10px;
-  margin-bottom : 10px;
+  margin-bottom: 10px;
 }
 .form-title,
-.comments h4{
+.comments h4 {
   color: var(--light-slate);
 }
-.comment-form{
+.comment-form {
   display: flex;
   flex-direction: column;
- justify-content: space-between;
+  justify-content: space-between;
 }
-body > section.single-blog > div > div.content-container > div.comments-wrapper > form > textarea,
-body > section.single-blog > div > div.content-container > div.comments-wrapper > form > input{
+body
+  > section.single-blog
+  > div
+  > div.content-container
+  > div.comments-wrapper
+  > form
+  > textarea,
+body
+  > section.single-blog
+  > div
+  > div.content-container
+  > div.comments-wrapper
+  > form
+  > input {
   width: 80%;
   border-radius: 8px;
   background-color: transparent;
   padding: 0.6rem;
   border: 1px var(--green) solid;
 }
-.comment button{
- margin-left: 45%;
- color: #ffff;
- background-color: var(--green);
+.comment button {
+  margin-left: 45%;
+  color: #ffff;
+  background-color: var(--green);
 }
 ::placeholder {
-  color:var(--green);
+  color: var(--green);
 }
 /* ************************************************************************ *** WORK SECTION******************************************************** */
-.work{
-  padding:10%;
+.work {
+  padding: 10%;
   background-color: var(--light-navy);
 }
-.single-work-wrapper{
+.single-work-wrapper {
   width: 88%;
   height: 60vh;
   margin: 4% auto;
   border: var(--slate) solid 1px;
-  padding:2%;
+  padding: 2%;
   display: grid;
   gap: 20px;
-  border-radius:24px ;
+  border-radius: 24px;
   background-color: var(--lightest-navy);
 }
-.single-work-wrapper h2{
+.single-work-wrapper h2 {
   font-size: var(--x-medium-size);
-    font-family: var(--font-sans);
-    font-weight: 700;
-    color: var(--lightest-slate);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--lightest-slate);
 }
-.single-work-wrapper p{
+.single-work-wrapper p {
   color: var(--md-slate);
   font-size: var(--small-size);
   font-weight: 400;
   line-height: 24px;
 }
-.work-image{
-background-image: url(./assets/rails.PNG);
-background-size:contain;
-width: 100%;
-height:100vh;
+.work-image {
+  background-image: url(./assets/rails.PNG);
+  background-size: contain;
+  width: 100%;
+  height: 100vh;
   border-radius: 24px;
   object-fit: cover;
   background-repeat: no-repeat;
 }
-.work-description{
+.work-description {
   display: flex;
   flex-direction: column;
   padding: 24px 0;
   gap: 20px;
 }
-.work-description ul{
+.work-description ul {
   display: flex;
 }
-.work-description ul li{
+.work-description ul li {
   background-color: var(--light-navy);
   padding: 4px 12px;
   border-radius: 8px;
@@ -669,188 +684,192 @@ height:100vh;
   color: var(--light-slate);
   margin: 0 10px 10px 0;
 }
-.work-description button{
+.work-description button {
   width: 35%;
 }
 /* ************************************************************************ *** ADMIN SECTION******************************************************** */
 .create-blog,
-.admin-pannel{
+.admin-pannel {
   margin-top: -1px;
-  padding:10%;
+  padding: 10%;
   background-color: var(--light-navy);
-
 }
-.header-wrapper p{
-  color:var(--green);
+.header-wrapper p {
+  color: var(--green);
   font-weight: 700;
-font-size: 30px;
-line-height: 30px;
-margin-left: 2%;
+  font-size: 30px;
+  line-height: 30px;
+  margin-left: 2%;
 }
-#admin{
+#admin {
   border-collapse: collapse;
   width: 100%;
   color: var(--light-slate);
 }
-#admin th{
+#admin th {
   font-weight: 600;
-font-size: 36px;
-
+  font-size: 36px;
 }
 
-
-tr td button:hover {background-color: var(--lightest-navy);}
-#admin td{
+tr td button:hover {
+  background-color: var(--lightest-navy);
+}
+#admin td {
   font-weight: 200;
-font-size: 26px;
-
+  font-size: 26px;
 }
-#admin td,#admin th{
+#admin td,
+#admin th {
   border: 1px solid var(--light-slate);
   padding: 8px;
-
 }
-tr td button{
-  margin-left:29%;
+tr td button {
+  margin-left: 29%;
 }
-.create-blog{
+.create-blog {
   display: flex;
   flex-direction: row;
   align-items: center;
-gap: 2%;
+  gap: 2%;
 }
-.create-blog p{
+.create-blog p {
   font-size: 4rem;
 }
-.create-blog form textarea{
+.create-blog form textarea {
   height: auto;
 }
 
 /* *************************************************************************LAPTOP SCREEN********************************************************* */
 @media only screen and (min-width: 992px) {
   .nav-elements li a {
-   font-size: 14px;
+    font-size: 14px;
   }
   .nav-elements-mode li p {
     font-size: 14px;
-}
+  }
 
-.experience {
-  margin-top: -1px;
-}
-.single-work-wrapper{
-  grid-template-columns: 1fr 1fr;
-}
-.about-cards{
-  flex-direction: row;
-}
-.blogs button {
-  margin: 5% 40%;}
-  
-.create-blog{
-margin-top: -1px;
-}
-
-}
-/* *************************************************************************TABLET SCREEN********************************************************* */
-@media only screen and (max-width: 769px){
-.about-cards{
-  flex-direction: column;
-}
-#admin th{
-  font-size: 13px;
-}
-
-tr td button{
-margin: 0;
-}
-#admin td {
-font-size: 16px;
-}
-.login-page ,
-.create-blog{
-  flex-direction: column;
-}
-.login-page p {
-  display: none;
-}
-}
-@media only screen and (max-width: 1025px){
-  .blog-cards{
+  .experience {
+    margin-top: -1px;
+  }
+  .single-work-wrapper {
     grid-template-columns: 1fr 1fr;
   }
-  #admin th{
+  .about-cards {
+    flex-direction: row;
+  }
+  .blogs button {
+    margin: 5% 40%;
+  }
+
+  .create-blog {
+    margin-top: -1px;
+  }
+  .section-wrapper,
+  .work,
+  .login,
+  .contact-me {
+    margin-top: -1px;
+  }
+}
+/* *************************************************************************TABLET SCREEN********************************************************* */
+@media only screen and (max-width: 769px) {
+  .about-cards {
+    flex-direction: column;
+  }
+  #admin th {
     font-size: 13px;
   }
-  
-tr td button{
-  margin: 0;
-}
-#admin td {
-  font-size: 16px;
-}
 
-}
-@media only screen and (min-width: 768px){
-
-  .nav-elements-mode {
-      width: 30%;
-   margin-left: 0;
-      font-size: 14px;
+  tr td button {
+    margin: 0;
   }
-  .nav-elements-mode p{
+  #admin td {
+    font-size: 16px;
+  }
+  .login-page,
+  .create-blog {
+    flex-direction: column;
+  }
+  .login-page p {
+    display: none;
+  }
+  .contact-me {
+    padding: 4rem 0 8rem 0;
+  }
+}
+@media only screen and (max-width: 1025px) {
+  .blog-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  #admin th {
+    font-size: 13px;
+  }
+
+  tr td button {
+    margin: 0;
+  }
+  #admin td {
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .nav-elements-mode {
+    width: 30%;
+    margin-left: 0;
+    font-size: 14px;
+  }
+  .nav-elements-mode p {
     font-size: 10px;
   }
-  
-.nav-elements {
+
+  .nav-elements {
     width: 65%;
-  font-size: 10px;
-}
-.nav-elements li a {
-  margin-left: 12px;
-}
-nav{
-  gap: 1%;
-}
- li.resume > button{
+    font-size: 10px;
+  }
+  .nav-elements li a {
+    margin-left: 12px;
+  }
+  nav {
+    gap: 1%;
+  }
+  li.resume > button {
+    padding: 0.3rem 0.5rem;
+    margin-left: 5%;
+  }
+  #intro-section h1 {
+    font-size: 45px;
+    margin: 0.1rem 0;
+  }
+  .my-intro {
+    padding: 14% 0 0 100px;
+  }
 
-  padding: 0.3rem 0.5rem;
-  margin-left: 5%;
-}
-#intro-section h1 {
-  font-size: 45px;
-  margin: 0.1rem 0;
-}
-.my-intro{
-  padding: 14% 0 0 100px;
-}
-
-#intro-section p:nth-child(4) {
+  #intro-section p:nth-child(4) {
     width: 41vw;
   }
   .recent-job-first-cont ul li {
     font-size: 12px;
   }
-  .single-work-wrapper{
-    height:auto;
+  .single-work-wrapper {
+    height: auto;
   }
-.work-image{
-  height: 50vh;
-}
-.about-first-container p{
-  font-size: 14px;
-}
-.blogs button {
-  margin: 5% 40%;}
-.create-blog form button {
-  padding: 0.4rem 0.8rem;
-}
-
+  .work-image {
+    height: 50vh;
+  }
+  .about-first-container p {
+    font-size: 14px;
+  }
+  .blogs button {
+    margin: 5% 40%;
+  }
+  .create-blog form button {
+    padding: 0.4rem 0.8rem;
+  }
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
   .exp-hr,
-  .nav-elements{
+  .nav-elements {
     display: none;
   }
   nav ul.humbuger {
@@ -884,56 +903,55 @@ nav{
   .nav-elements-mode li p {
     font-size: 13px;
   }
-#intro-section h1{
-  
-  font-size: 35px;
-
-}
-.social-icons,
-.email-icons{
-  display: none;
-}
-.my-intro {
-  width: 90%;
-  padding: 40% 0 0 10px;
-
-}
-#intro-section p:nth-child(4) {
- 
-  width: 80vw;}
+  #intro-section h1 {
+    font-size: 35px;
+  }
+  .social-icons,
+  .email-icons {
+    display: none;
+  }
+  .my-intro {
+    width: 90%;
+    padding: 40% 0 0 10px;
+  }
+  #intro-section p:nth-child(4) {
+    width: 80vw;
+  }
   .whole-intro {
     padding-bottom: 40%;
   }
   .header-wrapper h1 {
     font-size: 25px;
   }
-  
-.recent-job-cont {
-  flex-direction: column;
-}
-.recent-job-first-cont ul{
-  display: flex;
-}
-.recent-job-first-cont ul li {
-  font-size: 14px;
-  border: none;}
+
+  .recent-job-cont {
+    flex-direction: column;
+  }
+  .recent-job-first-cont ul {
+    display: flex;
+  }
+  .recent-job-first-cont ul li {
+    font-size: 14px;
+    border: none;
+  }
   .header-wrapper {
     margin-bottom: 20%;
-    }
-    
-.work-image {
-  height: 20vh;}
+  }
+
+  .work-image {
+    height: 20vh;
+  }
   .single-work-wrapper {
-     height: auto;
-    }
-    .work-description button {
-      width: 45%;
-      padding: 3%;
+    height: auto;
+  }
+  .work-description button {
+    width: 45%;
+    padding: 3%;
   }
   .about-cards {
     flex-direction: column;
   }
-  .about-me{
+  .about-me {
     width: 90%;
     font-size: 12px;
   }
@@ -944,62 +962,83 @@ nav{
     grid-template-columns: 1fr;
   }
   .blogs button {
-    margin:5% 30%;
+    margin: 5% 30%;
     padding: 10px 15px;
     font-size: 12px;
     width: 40%;
   }
-  .content-container{
+  .content-container {
     flex-direction: column;
   }
   .single-blog-container {
-  
-    width: 90%;}
-    .content{
-      width: 100%;
-    }
-    .blog-img {
-      height: 24vh;}
-      .single-blog-container {
-        padding-top: 9%;}
-        .comment button {
-          margin-left: 55%;}
-          #admin th{
-            font-size: 7px;
-          }
-          
-        tr td button{
-          margin: 0;
-        }
-        #admin td {
-          font-size: 7px;
+    width: 90%;
   }
-  #admin > tbody > tr > td > button{
+  .content {
+    width: 100%;
+  }
+  .blog-img {
+    height: 24vh;
+  }
+  .single-blog-container {
+    padding-top: 9%;
+  }
+  .comment button {
+    margin-left: 55%;
+  }
+  #admin th {
+    font-size: 7px;
+  }
+
+  tr td button {
+    margin: 0;
+  }
+  #admin td {
+    font-size: 7px;
+  }
+  #admin > tbody > tr > td > button {
     padding: 0.4rem 0.6rem;
     font-size: 5px;
   }
-  
-.header-wrapper {
-flex-direction: column;
-}
-.header-wrapper p {
-  font-size: 25px;
-}
-.header-wrapper {
-  margin-bottom: 10%;
-}
 
-.create-blog p {
-  font-size: 2rem;
-}
-.create-blog form, .inputform {
-  width: 90%;
-  padding: 1rem;}
-  .create-blog form button, .inputform form button {
+  .header-wrapper {
+    flex-direction: column;
+  }
+  .header-wrapper p {
+    font-size: 25px;
+  }
+  .header-wrapper {
+    margin-bottom: 10%;
+  }
+
+  .create-blog p {
+    font-size: 2rem;
+  }
+  .create-blog form,
+  .inputform {
+    width: 90%;
+    padding: 1rem;
+  }
+  .create-blog form button,
+  .inputform form button {
     padding: 0.5rem 1rem;
   }
   .login {
-   
     padding: 2rem;
-}
+  }
+
+  .contact-me h1 {
+    font-size: 40px;
+    margin: 1.5rem;
+  }
+  .contact-me p:nth-child(3) {
+    padding: 0.5rem;
+  }
+  .contact-me p:first-child {
+    padding: 0.5rem 0 1rem 0;
+    font-size: 12px;
+  }
+
+  .contact-me p:nth-child(3) {
+    width: auto;
+  }
 }
