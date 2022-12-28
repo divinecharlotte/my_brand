@@ -406,7 +406,7 @@ button {
 }
 .create-blog form button,
 .inputform form button {
-  margin-left: 20rem;
+  /* margin-left: 20rem; */
   padding: 0.9em 2rem;
   background-color: var(--lightest-navy);
   outline: none;
@@ -555,6 +555,7 @@ cursor: pointer;
 .single-blog{
   padding:5% 0 5%0;
   background-color: var(--light-navy);
+  margin-top: -1px;
   width: 100%;
   /* display: none; */
 }
@@ -675,6 +676,7 @@ height:100vh;
 /* ************************************************************************ *** ADMIN SECTION******************************************************** */
 .create-blog,
 .admin-pannel{
+  margin-top: -1px;
   padding:10%;
   background-color: var(--light-navy);
 
@@ -725,7 +727,7 @@ gap: 2%;
   height: auto;
 }
 .create-blog form button{
-  margin-left: 15.5rem;
+  margin-left: 60%;
 }
 /* *************************************************************************LAPTOP SCREEN********************************************************* */
 @media only screen and (min-width: 992px) {
@@ -747,18 +749,51 @@ gap: 2%;
 }
 .blogs button {
   margin: 5% 40%;}
+  
+.create-blog{
+margin-top: -1px;
+}
+
 }
 /* *************************************************************************TABLET SCREEN********************************************************* */
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 769px){
 .about-cards{
   flex-direction: column;
 }
+#admin th{
+  font-size: 13px;
+}
 
+tr td button{
+margin: 0;
+}
+#admin td {
+font-size: 16px;
+}
+/* .create-blog form button {
+  margin-left: 46%;
+} */
+/* .create-blog form button {
+  margin-left: 36%;
+} */
 }
 @media only screen and (max-width: 1025px){
   .blog-cards{
     grid-template-columns: 1fr 1fr;
   }
+  #admin th{
+    font-size: 13px;
+  }
+  
+tr td button{
+  margin: 0;
+}
+#admin td {
+  font-size: 16px;
+}
+.create-blog form button {
+  margin-left: 46%;
+}
 }
 @media only screen and (min-width: 768px){
 
@@ -811,6 +846,21 @@ nav{
 }
 .blogs button {
   margin: 5% 40%;}
+  /* #admin th{
+    font-size: 13px;
+  }
+  
+tr td button{
+  margin: 0;
+}
+#admin td {
+  font-size: 16px;
+} */
+.create-blog form button {
+  margin-left: 36%;
+  padding: 0.5rem 1rem;
+}
+
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
@@ -929,4 +979,29 @@ nav{
         padding-top: 9%;}
         .comment button {
           margin-left: 55%;}
+          #admin th{
+            font-size: 7px;
+          }
+          
+        tr td button{
+          margin: 0;
+        }
+        #admin td {
+          font-size: 7px;
   }
+  #admin > tbody > tr > td > button{
+    /* border: red solid 1px; */
+    padding: 0.4rem 0.6rem;
+    font-size: 5px;
+  }
+  
+.header-wrapper {
+flex-direction: column;
+}
+.header-wrapper p {
+  font-size: 25px;
+}
+.header-wrapper {
+  margin-bottom: 10%;
+}
+}
