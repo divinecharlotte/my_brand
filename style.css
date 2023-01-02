@@ -692,11 +692,12 @@ body
   width: 35%;
 }
 /* ************************************************************************ *** ADMIN SECTION******************************************************** */
-.create-blog,
+
 .admin-pannel {
   margin-top: -1px;
   padding: 10%;
   background-color: var(--light-navy);
+  display: none;
 }
 .header-wrapper p {
   color: var(--green);
@@ -735,6 +736,7 @@ tr td button {
   flex-direction: row;
   align-items: center;
   gap: 2%;
+  padding-top: 10%;
 }
 .create-blog p {
   font-size: 4rem;
