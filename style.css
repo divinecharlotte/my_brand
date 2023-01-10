@@ -560,7 +560,7 @@ footer {
   background-color: var(--light-navy);
   margin-top: -1px;
   width: 100%;
-  display: none;
+/*   display: none; */
 }
 .single-blog-container {
   background-color: var(--navy);
