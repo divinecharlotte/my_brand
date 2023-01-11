@@ -69,6 +69,26 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--poppins);
+ /* background-color: var(--navy); */
+}
+div{
+  animation: section 2s ease-in-out 1;
+}
+@keyframes section {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  20% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 nav {
   display: flex;
@@ -87,9 +107,13 @@ nav {
   justify-content: space-around;
   font-weight: 600;
   color: var(--light-slate);
+  z-index: 30;
 }
 .nav-elements-mode img {
   margin-top: 4px;
+}
+.close-humburger{
+  display: none;
 }
 .nav-elements {
   width: 70%;
@@ -443,6 +467,9 @@ footer {
 #experience {
   background-color: var(--lightest-navy);
 }
+.recent-job-second-cont2{
+  display: none;
+}
 .recent-job-cont {
   display: flex;
   gap: 5%;
@@ -458,12 +485,13 @@ footer {
   padding: 0 20px;
   transition: var(--transition);
   cursor: pointer;
+  border-left: 2px solid var(--slate);
 }
-.recent-job-first-cont ul :first-child {
+
+.recent-job-first-cont ul :hover {
   color: var(--green);
-}
-.first {
   border-left: 2px solid var(--green);
+  background-color: var(--slate);
 }
 .second {
   border-left: 2px solid var(--slate);
@@ -474,13 +502,15 @@ footer {
   border: none;
   background-color: var(--slate);
 }
-.recent-job-second-cont h2 {
+.recent-job-second-cont1 h2,
+.recent-job-second-cont2 h2 {
   margin-top: 15px;
   color: var(--light-slate);
   font-size: var(--fz-xl);
   font-weight: 500;
 }
-.recent-job-second-cont p {
+.recent-job-second-cont1 p,
+.recent-job-second-cont2 p {
   margin: 0.5rem 0 1rem 0;
   color: var(--dark-slate);
   font-size: var(--fz-xxs);
@@ -874,9 +904,27 @@ tr td button {
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
-  .exp-hr,
-  .nav-elements {
+  .exp-hr {
     display: none;
+  }
+  .close-humburger{
+    display: flex;
+    margin: 0.3rem 2rem 0 12rem;
+
+  }
+  .nav-elements{
+    flex-direction:column;
+    height: 93vh;
+    background: #112240;
+    opacity: 0.97;
+    top: 0;
+    right: 0;
+    margin: 0;
+    position: fixed;
+    transition: 1s;
+    right: -100%;
+    justify-content: space-around;
+    cursor: pointer;
   }
   nav ul.humbuger {
     width: 30px;
@@ -889,16 +937,26 @@ tr td button {
     border: 1px solid transparent;
     border-radius: var(--border-radius);
     cursor: pointer;
+
   }
-  ul.humbuger li {
+  .humbuger{
+    z-index: -1;
+  }
+  nav ul.closeHumbuger{
+    border: 1px dashed;
+  }
+  .closeHumbuger li,
+  .humbuger li {
     background-color: var(--green);
     height: 2px;
     width: 100%;
   }
-  ul.humbuger > li.line2 {
+  .humbuger > li.line2 {
     width: 80%;
   }
-  ul.humbuger > li.line3 {
+
+
+.humbuger > li.line3 {
     width: 60%;
   }
 
