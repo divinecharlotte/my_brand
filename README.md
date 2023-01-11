@@ -10,7 +10,7 @@
 To get a local copy up and running follow these simple example steps.
 
 ## Live Demo
-[MY-BRAND](https://cute-sunburst-6df70f.netlify.app/)
+[MY-BRAND](https://divinecharlotte.netlify.app/)
 
 ### Setup 
 clone the project to ypour local environment.
