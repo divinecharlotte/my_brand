@@ -69,7 +69,26 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--poppins);
- 
+ /* background-color: var(--navy); */
+}
+div{
+  animation: section 2s ease-in-out 1;
+}
+@keyframes section {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  20% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 nav {
   display: flex;
@@ -448,6 +467,9 @@ footer {
 #experience {
   background-color: var(--lightest-navy);
 }
+.recent-job-second-cont2{
+  display: none;
+}
 .recent-job-cont {
   display: flex;
   gap: 5%;
@@ -463,12 +485,13 @@ footer {
   padding: 0 20px;
   transition: var(--transition);
   cursor: pointer;
+  border-left: 2px solid var(--slate);
 }
-.recent-job-first-cont ul :first-child {
+
+.recent-job-first-cont ul :hover {
   color: var(--green);
-}
-.first {
   border-left: 2px solid var(--green);
+  background-color: var(--slate);
 }
 .second {
   border-left: 2px solid var(--slate);
@@ -479,13 +502,15 @@ footer {
   border: none;
   background-color: var(--slate);
 }
-.recent-job-second-cont h2 {
+.recent-job-second-cont1 h2,
+.recent-job-second-cont2 h2 {
   margin-top: 15px;
   color: var(--light-slate);
   font-size: var(--fz-xl);
   font-weight: 500;
 }
-.recent-job-second-cont p {
+.recent-job-second-cont1 p,
+.recent-job-second-cont2 p {
   margin: 0.5rem 0 1rem 0;
   color: var(--dark-slate);
   font-size: var(--fz-xxs);
