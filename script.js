@@ -7,6 +7,9 @@ const second = document.querySelector(".second");
 const recentJob1 = document.querySelector(".recent-job-second-cont1");
 const recentJob2 = document.querySelector(".recent-job-second-cont2");
 const singleBlog = document.querySelector(".single-blog");
+const mainContainer = document.querySelector(".blog-card");
+const closeIcon2 = document.getElementById('closeIcon2');
+
 burger.onclick = function burger() {
   navLinks.style.right = "0";
 };
@@ -29,8 +32,9 @@ second.onclick = function second() {
 };
 
 
-const mainContainer = document.querySelector(".blog-card");
-const closeIcon2 = document.getElementById('closeIcon2');
+
+
+//  ********************see blog****************
 
 mainContainer.onclick = function mainContainer(){
     singleBlog.style.display = "flex";
@@ -42,17 +46,3 @@ closeIcon2.onclick = function closeIcon2(){
     singleBlog.style.display= "none";
     console.log("closed")
 };
-//  ********************see blog****************
-// const blogs = [document.getElementsByClassName(".blog-card")];
-// const seeBlogs = [];
-// blogs.forEach((blog, index) => seeBlogs.push(document.getElementById(`blog`)));
-
-// seeBlogs.forEach((seeBlog) => {
-//   seeBlog.addEventListener('click', () => {
-//     mainContainer.classList.add('show');
-//     console.log("clicked")
-//   });
-// });
-// closeIcon2.addEventListener('click', () => {
-//   mainContainer.classList.remove('show');
-// });

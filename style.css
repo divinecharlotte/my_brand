@@ -263,11 +263,20 @@ button:hover{
   border-top-left-radius: 6rem;
   padding: 6rem 0 8rem 0;
 }
+
+.header{
+  color: var(--green);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 30px;
+  margin: 4% 0;
+  text-align: center;
+}
 .header-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 5rem;
+  /* margin-bottom: 5rem; */
 }
 .header-wrapper hr {
   width: 20%;
@@ -603,7 +612,7 @@ z-index: 999;
   display: none;
 }
 #closeIcon2{
-  margin-left: 40rem;
+  margin-left: 80%;
 }
 .single-blog.show {
   opacity: 1;
@@ -615,10 +624,12 @@ z-index: 999;
   margin: auto;
   padding: 3% 0;
   border-radius: 5rem;
+  margin-top: 3rem;
 }
 .blog-img {
   margin: 5%;
-  height: 54vh;
+  height: 74vh;
+  width: 90%;
   background-image: url(./assets/boks.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -745,13 +756,13 @@ body
   background-color: var(--light-navy);
 /*   display: none; */
 }
-.header-wrapper p {
+/* .header-wrapper p {
   color: var(--green);
   font-weight: 700;
   font-size: 30px;
   line-height: 30px;
   margin-left: 2%;
-}
+} */
 #admin {
   border-collapse: collapse;
   width: 100%;
@@ -1041,6 +1052,11 @@ tr td button {
   .blog-cards {
     grid-template-columns: 1fr;
   }
+  
+.single-blog-container{
+  border-radius: 2rem;
+  margin-top: 1rem;
+}
   .blogs button {
     margin: 5% 30%;
     padding: 10px 15px;
