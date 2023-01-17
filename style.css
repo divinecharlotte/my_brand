@@ -212,6 +212,9 @@ button:hover{
   justify-content: space-between;
   height: 25%;
 }
+#froala{
+  color: red;
+  }
 .social-icons hr {
   width: 1px;
   height: 48vh;
@@ -397,6 +400,84 @@ button:hover{
   width: 500px;
   line-height: 2;
 }
+.contact-form{
+  width: 60%;
+  min-height: 60%;
+  background-color: rgb(17, 34, 64, 0.9);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px -10px var(--navy-shadow);
+  display: none;
+  font-family: var(--font-sans);
+  padding: 2%;
+  backdrop-filter: blur(5px);
+  top: 20%;
+  bottom: 40%;
+  position: fixed;
+  z-index: 999;
+}
+.side1 h1{
+  font-size: 38px;
+}
+.sides{
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+.contact-form input{
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid var(--lightest-navy);
+  background-color: transparent;
+  color: var(--slate);
+}
+.side1{
+  width: 40%;
+}
+.side2{
+  width: 50%;
+}
+#contactForm > form > div > hr{
+  width: 2px;
+  height: 20rem;
+  border: none;
+  background-color:  var(--lightest-navy);
+}
+.side2 textarea{
+  background-color: transparent;
+  border: none;
+  width: 90%;
+
+}
+ .side1 > hr{
+  width: 30%;
+  margin-bottom: 10px;
+  height: 2px;
+  border: none;
+  background-color: #00d9ff;
+ }
+ #sendMessage{
+ 
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+  cursor: pointer;
+  /* font-weight: 800; */
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  width: 100%;
+  background-image: linear-gradient(to left, var(--lightest-slate)0.3%, transparent 100%);
+  /* text-align: center; */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ border: none;
+ 
+ }
+ 
+ #sendMessage p{
+  color: var(--lightest-slate);
+}
 /************************************************************************* ***LOGIN SECTION******************************************************** */
 .login {
   background-color: var(--navy);
@@ -426,6 +507,7 @@ button:hover{
   padding: 3rem;
   border: 1px solid var(--green);
 }
+.contact-form label,
 .create-blog form label,
 .inputform form label {
   font-size: 1.4rem;
@@ -614,6 +696,10 @@ z-index: 999;
 #closeIcon2{
   margin-left: 80%;
 }
+#closeIcon3 > img{
+display: flex;
+margin-left: 95%;
+}
 .single-blog.show {
   opacity: 1;
   pointer-events: auto;
@@ -754,6 +840,7 @@ body
 .work-description button {
   width: 35%;
 }
+
 /* ************************************************************************ *** ADMIN SECTION******************************************************** */
 
 .admin-pannel {

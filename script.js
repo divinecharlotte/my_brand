@@ -9,9 +9,12 @@ const recentJob2 = document.querySelector(".recent-job-second-cont2");
 const singleBlog = document.querySelector(".single-blog");
 const mainContainer = document.querySelector(".blog-card");
 const closeIcon2 = document.getElementById('closeIcon2');
+const closeIcon3 = document.getElementById('closeIcon3');
 const workContainer = document.getElementById('work');
 const admin = document.getElementById('adminPannel');
 const logged = document.getElementById('login');
+const contactButton = document.getElementById('contactButton');
+const contactForm = document.getElementById('contactForm');
 // const popupContainer = document.getElementById('popupContainer');
 
 burger.onclick = function burger() {
@@ -204,3 +207,15 @@ const details = [
         return;
     }
 }
+ var editor = new FroalaEditor('#froala');
+
+ contactButton.onclick = function contactButton(){
+  contactForm.style.display = "block";
+ 
+  console.log("clicked")
+};
+
+closeIcon3.onclick = function closeIcon3(){
+ contactForm.style.display= "none";
+  console.log("closed")
+};
