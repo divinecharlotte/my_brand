@@ -760,7 +760,7 @@ body
   margin-top: -1px;
   padding: 10%;
   background-color: var(--light-navy);
-/*   display: none; */
+  display: none;
 }
 /* .header-wrapper p {
   color: var(--green);
@@ -1037,9 +1037,9 @@ tr td button {
   .work-place-img{
     border-radius: 15px;
   }
-  .work-image {
+  /* .work-image {
     height: 20vh;
-  }
+  } */
   .single-work-wrapper {
     height: auto;
   }

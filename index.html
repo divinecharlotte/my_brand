@@ -38,8 +38,8 @@
     <li ><a href="#work"><span>02.</span>Work</a></li>
     <li><a href="#about"><span>03.</span>About</a></li>
     <li ><a href="#blogs"><span>04.</span>Blogs</a></li>
-    <li ><a href="#admin"><span>05.</span>Admin</a></li>
-    <li ><a href="#login"><span>06.</span>Login</a></li>
+    <li ><a href="#login"><span>05.</span>Admin</a></li>
+    <!-- <li ><a href="#login"><span>06.</span>Login</a></li> -->
     <li><a href="#contact"><span>07.</span>Contact</a></li>
     <li class="resume"><button type="button">Resume</button></li></ul>
 
@@ -283,6 +283,7 @@
     </div> -->
   </div>
     </section>
+    <section class="single-blog"></section>
     <!-- /************************************************************************* ***ABOUT SECTION******************************************************** */ -->
     <section class="section-wrapper">
     <div  id="about">
@@ -615,7 +616,7 @@
 
     </section>
      <!-- /************************************************************************* ***ADMIN SECTION******************************************************** */ -->
-    <section class="admin-pannel" >
+    <section id="adminPannel" class="admin-pannel" >
       <div class="header-wrapper">
        
         <h1><span>06.</span>Admin</h1>
@@ -728,7 +729,7 @@
         <p>Create a <span>Blog.</span></p>
         <form>
           <label for="fname">Blog Name:</label><br /><br />
-          <input type="text" id="fname" name="fname" /><br /><br />
+          <input type="text" id="fname" name="fname" required /><br /><br />
           <label for="lname">Blog Description:</label><br /><br />
           <textarea
             rows="10"
@@ -737,7 +738,7 @@
             id="user-message"
             required
           ></textarea><br /><br />
-          <button type="button">Save blog</button>
+          <button type="submit">Save blog</button>
         </form>
       </div> 
     </section>
@@ -754,10 +755,10 @@
         <div class="inputform">
         <form>
           <label for="email">Email:</label><br />
-          <input type="email" id="email" name="email" /><br />
+          <input type="email" id="email" name="email" required /><br />
           <label for="pwd">Password:</label><br />
-          <input type="password" id="pwd" name="pwd" /><br /><br />
-          <button type="submit">Login</button>
+          <input type="password" id="pwd" name="pwd" required /><br /><br />
+          <button type="submit" onClick="login(event)">Login</button>
         </form>
       </div>
       </div>
