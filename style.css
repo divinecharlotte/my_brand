@@ -483,6 +483,10 @@ button:hover{
   background-color: var(--navy);
   padding: 7rem;
 }
+small{
+  color: red;
+  font-family: var(--font-mono);
+}
 .login-page {
   display: flex;
   flex-direction: row;

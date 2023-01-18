@@ -15,6 +15,7 @@ const admin = document.getElementById('adminPannel');
 const logged = document.getElementById('login');
 const contactButton = document.getElementById('contactButton');
 const contactForm = document.getElementById('contactForm');
+const blogCard = document.querySelector('.blog-card');
 // const popupContainer = document.getElementById('popupContainer');
 
 burger.onclick = function burger() {
@@ -187,6 +188,8 @@ const details = [
   window.addEventListener('load', () => {
     workContainer.innerHTML = getWorkData;
     return workContainer;
+    blogCard.innerHTML = card;
+    return blogCard
   });
 
   // ******************************forms********************************
@@ -202,12 +205,17 @@ const details = [
         logged.style.display = "none"
 
 
-    } else {
-        alert("Invalid information");
-        return;
+ 
+      } else {
+        // alert("Invalid information");
+        const errorTag = logged.getElementsByTagName('small');
+        errorTag[0].innerHTML = 'Please insert admin email and password!';
+      return;
     }
 }
- var editor = new FroalaEditor('#froala');
+
+
+//  var editor = new FroalaEditor('#froala');
 
  contactButton.onclick = function contactButton(){
   contactForm.style.display = "block";
@@ -219,3 +227,43 @@ closeIcon3.onclick = function closeIcon3(){
  contactForm.style.display= "none";
   console.log("closed")
 };
+
+
+// ***********************************new blog*************************
+const blogs = [];
+
+// const newBlog = new Blog();
+const addNewBlog = document.querySelector('.add-new-blog');
+addNewBlog.addEventListener('submit',(e) =>{
+  e.preventDefault();
+  const blogName = addNewBlog.name.value;
+  const blogDescription =addNewBlog.message.value;
+  // newBlog.addBlog({blogName,blogDescription});
+  addNewBlog.name.value = '';
+  addNewBlog.message.value = '';
+
+});
+
+ blogCard.innerHTML = `<div class="blog-card">
+<div class="blog-icons">
+  <img src="./assets/boxArrow.png" alt="box-arrow" />
+  <a href="https://github.com/divinecharlotte/metrics-webapp"><img src="./assets/github.png"
+      alt="github-icon" /></a>
+</div>
+<h2>Digital Currency</h2>
+<p>
+  'Digital Currency' is about working with the live data from the
+  Blockchain API. It provides information such as trending coins, coins'
+  prices, crypto transactions, and full crypto descriptions.
+</p>
+<ul>
+  <li>12 likes</li>
+  <li>12 comments</li>
+</ul>
+</div>
+`
+;
+window.addEventListener('load', () => {
+  blogCard.innerHTML = card;
+  return blogCard
+});

@@ -490,7 +490,7 @@
           <li>12 likes</li>
           <li>12 comments</li>
         </ul>
-      </div>
+      </div> 
     </div>
     <button type="button">Show More</button>
   </section>
@@ -773,12 +773,12 @@
     </div>
     <div class="create-blog">
       <p>Create a <span>Blog.</span></p>
-      <form>
+      <form class="add-new-blog">
         <!-- <div></div> -->
-        <label for="fname">Blog Name:</label><br /><br />
-        <input type="text" id="fname" name="fname" required /><br /><br />
-        <label for="lname">Blog Description:</label><br /><br />
-        <textarea rows="10" maxlength="500" name="message" id="froala" required></textarea><br /><br />
+        <label for="name">Blog Name:</label><br /><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+        <label for="description">Blog Description:</label><br /><br />
+        <textarea rows="10" maxlength="500" name="message"  required></textarea><br /><br />
         <button type="submit">Save blog</button>
       </form>
     </div>
@@ -799,6 +799,7 @@
           <input type="email" id="email" name="email" required /><br />
           <label for="pwd">Password:</label><br />
           <input type="password" id="pwd" name="pwd" required /><br /><br />
+          <small></small> <br> <br>
           <button type="submit" onClick="login(event)">Login</button>
         </form>
       </div>
