@@ -132,55 +132,55 @@ const details = [
   });
 
 
-  // const popupDetailsFunc = (cardId) => {
-  //   if (cardId === null) return;
-  //   let item = details;
+  const popupDetailsFunc = (cardId) => {
+    if (cardId === null) return;
+    let item = details;
     
-  //   item = item.shift();
-  //   const skillsList = item.skills.map((list) => `<li>${list}</li>`).join('');
-  //   const res = `
+    item = item.shift();
+    const skillsList = item.skills.map((list) => `<li>${list}</li>`).join('');
+    const res = `
     
 
-  //   <div class="single-blog-container">
-  //       <p id="closeIcon2" onclick="closePopupFunc()"><img src="./assets/Group90.png" alt=""></p>
-  //       <div class="work-image">
-  //     <img src=${item.image} class="work-place-img" />
-  //     </div>
-  //     <ul>${skillsList}</ul>
-  //     <div class="content-container">
-  //     <div class="content">
-  //     <h2 id="popupTitle">${item.title}</h2>
-  //       <p id="popupDescription">${item.description}</p>
-  //       <div class="popup-link-main-cont">
-  //                 <a href="#" target="_blank" class="popup-link-cont" id="liveDemo">
-  //                   <span class="popup-link">
-  //                 See live
-  //                 <i class="fa-solid fa-up-right-from-square"></i>
-  //                </span>
-  //                 </a>
-  //                 <a href="#" target="_blank" class="popup-link-cont" id="sourceCode">
-  //                   <span class="popup-link">
-  //                 <span>See Source</span>
-  //                   <i class="fa-brands fa-github"></i>
-  //                   </span>
-  //                 </a>
-  //               </div>
-  //     </div>
-  //    </div>
-  //   `;
+    <div class="single-blog-container">
+        <p id="closeIcon2" onclick="closePopupFunc()"><img src="./assets/Group90.png" alt=""></p>
+        <div class="work-image">
+      <img src=${item.image} class="work-place-img" />
+      </div>
+      <ul>${skillsList}</ul>
+      <div class="content-container">
+      <div class="content">
+      <h2 id="popupTitle">${item.title}</h2>
+        <p id="popupDescription">${item.description}</p>
+        <div class="popup-link-main-cont">
+                  <a href="#" target="_blank" class="popup-link-cont" id="liveDemo">
+                    <span class="popup-link">
+                  See live
+                  <i class="fa-solid fa-up-right-from-square"></i>
+                 </span>
+                  </a>
+                  <a href="#" target="_blank" class="popup-link-cont" id="sourceCode">
+                    <span class="popup-link">
+                  <span>See Source</span>
+                    <i class="fa-brands fa-github"></i>
+                    </span>
+                  </a>
+                </div>
+      </div>
+     </div>
+    `;
   
-  //   singleBlog.style.display = "flex";
-  //   console.log('clicked')
-  //   singleBlog.innerHTML = res;
-  // };
+    singleBlog.style.display = "flex";
+    console.log('clicked')
+    singleBlog.innerHTML = res;
+  };
   
-  // const closePopupFunc = (status) => {
-  //   if (status === null) return;
-  //   document.body.style.overflow = 'scroll';
-  //  singleBlog.style.display = "none";
-  // };
-  // closePopupFunc(null);
-  // popupDetailsFunc(null);
+  const closePopupFunc = (status) => {
+    if (status === null) return;
+    document.body.style.overflow = 'scroll';
+   singleBlog.style.display = "none";
+  };
+  closePopupFunc(null);
+  popupDetailsFunc(null);
 
 
   window.addEventListener('load', () => {
@@ -226,7 +226,7 @@ closeIcon3.onclick = function closeIcon3(){
 };
 // ************************contact form validation*************************
 
-  function validateForm() {
+function validateForm() {
 const contactName = document.getElementById('name1')
 const contactEmail = document.getElementById('email1')
 const contactMessage = document.getElementById('contact_message')
@@ -268,11 +268,11 @@ const textError = contactForm.querySelector('.small3');
 
 
     
-function checkLength(el) {
-  if (el.value.length <= 6) {
-    alert("length must be exactly 6 characters")
-  }
-}
+// function checkLength(el) {
+//   if (el.value.length <= 6) {
+//     alert("length must be exactly 6 characters")
+//   }
+// }
 // ***********************************new blog*************************
 // const blogs = [];
 
