@@ -6,19 +6,17 @@ const first = document.querySelector(".first");
 const second = document.querySelector(".second");
 const recentJob1 = document.querySelector(".recent-job-second-cont1");
 const recentJob2 = document.querySelector(".recent-job-second-cont2");
-const singleBlog = document.getElementById('single_blog');
-const fullWork = document.querySelector('.single-blog');
+const singleBlog = document.getElementById("single_blog");
+const fullWork = document.querySelector(".single-blog");
 const mainContainer = document.querySelector(".blog-card");
-const closeIcon2 = document.getElementById('closeIcon2');
-const closeIcon3 = document.getElementById('closeIcon3');
-const workContainer = document.getElementById('work');
-const admin = document.getElementById('adminPannel');
-const logged = document.getElementById('login');
-const contactButton = document.getElementById('contactButton');
-const contactForm = document.getElementById('contactForm');
-const blogCard = document.querySelector('.blog-card');
-
-
+const closeIcon2 = document.getElementById("closeIcon2");
+const closeIcon3 = document.getElementById("closeIcon3");
+const workContainer = document.getElementById("work");
+const admin = document.getElementById("adminPannel");
+const logged = document.getElementById("login");
+const contactButton = document.getElementById("contactButton");
+const contactForm = document.getElementById("contactForm");
+const blogCard = document.querySelector(".blog-card");
 
 burger.onclick = function burger() {
   navLinks.style.right = "0";
@@ -41,67 +39,64 @@ second.onclick = function second() {
   recentJob2.style.display = "flex";
 };
 
-
-
-
 //  ********************see blog****************
 
-mainContainer.onclick = function mainContainer(){
-    singleBlog.style.display = "flex";
-    console.log('blog clicked')
+mainContainer.onclick = function mainContainer() {
+  singleBlog.style.display = "flex";
+  console.log("blog clicked");
 };
 
-closeIcon2.onclick = function closeIcon2(){
-    singleBlog.style.display= "none";
-    console.log("closed")
+closeIcon2.onclick = function closeIcon2() {
+  singleBlog.style.display = "none";
+  console.log("closed");
 };
-
-
 
 //  ********************WORK SECTION****************
 
 const details = [
- 
-    {
-        id: 1,
-        title: 'Space Travellers',
-        description: '"Space Travelers" is a web application for a company that provides commercial and scientific space travel services. The application will allow users to book rockets and join selected space missions.',
-        skills: ['React', 'Redux', 'Rails'],
-        image:'./assets/spacetravel.png',
-        source_project: 'https://book-tours.netlify.app/',
-        
-      },   {
-      id: 1,
-      title: 'Tourify',
-      description: 'A daily selection of privately personalized reads; no accounts or sign-ups required.',
-      skills: ['React', 'Redux', 'Rails'],
-      image:'./assets/rails.png',
-      source_project: 'https://book-tours.netlify.app/',
-      
-    },
-      {
-        id: 1,
-        title: 'Tourify',
-        description: 'A daily selection of privately personalized reads; no accounts or sign-ups required.',
-        skills: ['React', 'Redux', 'Rails'],
-        image:'./assets/rails.png',
-        source_project: 'https://book-tours.netlify.app/',
-        
-      },    {
-        id: 1,
-        title: 'Tourify',
-        description: 'A daily selection of privately personalized reads; no accounts or sign-ups required.',
-        skills: ['React', 'Redux', 'Rails'],
-        image:'./assets/rails.png',
-        source_project: 'https://book-tours.netlify.app/',
-        
-      },
-  
-  ];
+  {
+    id: 1,
+    title: "Space Travellers",
+    description:
+      '"Space Travelers" is a web application for a company that provides commercial and scientific space travel services. The application will allow users to book rockets and join selected space missions.',
+    skills: ["React", "Redux", "Rails"],
+    image: "./assets/spacetravel.png",
+    source_project: "https://book-tours.netlify.app/",
+  },
+  {
+    id: 1,
+    title: "Tourify",
+    description:
+      "A daily selection of privately personalized reads; no accounts or sign-ups required.",
+    skills: ["React", "Redux", "Rails"],
+    image: "./assets/rails.png",
+    source_project: "https://book-tours.netlify.app/",
+  },
+  {
+    id: 1,
+    title: "Tourify",
+    description:
+      "A daily selection of privately personalized reads; no accounts or sign-ups required.",
+    skills: ["React", "Redux", "Rails"],
+    image: "./assets/rails.png",
+    source_project: "https://book-tours.netlify.app/",
+  },
+  {
+    id: 1,
+    title: "Tourify",
+    description:
+      "A daily selection of privately personalized reads; no accounts or sign-ups required.",
+    skills: ["React", "Redux", "Rails"],
+    image: "./assets/rails.png",
+    source_project: "https://book-tours.netlify.app/",
+  },
+];
 
-  const getWorkData = details.map((item, index) => {
-    const skillsList = item.skills.map((list) => `<li>${list}</li>`).join('');
-    const content = index % 2 === 0 ? `<div class="header-wrapper">
+const getWorkData = details.map((item, index) => {
+  const skillsList = item.skills.map((list) => `<li>${list}</li>`).join("");
+  const content =
+    index % 2 === 0
+      ? `<div class="header-wrapper">
       <h1><span>02.</span>My Recent Works</h1>
       <hr />
     </div>
@@ -116,7 +111,8 @@ const details = [
         <ul>${skillsList}</ul>
         <button type="button"onclick="popupDetailsFunc(${item.id})">See Project</button>
       </div>
-    </div>`: `
+    </div>`
+      : `
     <div class="single-work-wrapper">
     
       <div class="work-description">
@@ -130,17 +126,16 @@ const details = [
       </div>
       
       </div>`;
-    return content;
-  });
+  return content;
+});
 
+const popupDetailsFunc = (cardId) => {
+  if (cardId === null) return;
+  let item = details;
 
-  const popupDetailsFunc = (cardId) => {
-    if (cardId === null) return;
-    let item = details;
-    
-    item = item.shift();
-    const skillsList = item.skills.map((list) => `<li>${list}</li>`).join('');
-    const res = `
+  item = item.shift();
+  const skillsList = item.skills.map((list) => `<li>${list}</li>`).join("");
+  const res = `
     
 
     <div class="single-blog-container">
@@ -170,145 +165,149 @@ const details = [
       </div>
      </div>
     `;
-  
-    fullWork.style.display = "flex";
-    console.log('clicked')
-    fullWork.innerHTML = res;
-  };
-  
-  const closePopupFunc = (status) => {
-    if (status === null) return;
-    document.body.style.overflow = 'scroll';
-    fullWork.style.display = "none";
-  };
-  closePopupFunc(null);
-  popupDetailsFunc(null);
 
+  fullWork.style.display = "flex";
+  console.log("clicked");
+  fullWork.innerHTML = res;
+};
 
-  window.addEventListener('load', () => {
-    workContainer.innerHTML = getWorkData;
-   
-    // blogCard.innerHTML = card;
-    // return blogCard
-    // return workContainer;
-  });
+const closePopupFunc = (status) => {
+  if (status === null) return;
+  document.body.style.overflow = "scroll";
+  fullWork.style.display = "none";
+};
+closePopupFunc(null);
+popupDetailsFunc(null);
 
-  // ******************************forms********************************
+window.addEventListener("load", () => {
+  workContainer.innerHTML = getWorkData;
 
-  function login(event) {
-    event.preventDefault();
+  // blogCard.innerHTML = card;
+  // return blogCard
+  // return workContainer;
+});
 
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("pwd").value;
+// ******************************forms********************************
 
-   if(email != "divinemaina@gmail.com"){
-      const errorTag = logged.getElementsByClassName('loginEmail');
-          errorTag[0].innerHTML = 'Please insert admin email!';
-        return;
-    }
-    else if(password != "user"){
-      const passwordError = logged.getElementsByClassName('loginPassword');
-          passwordError[0].innerHTML = 'Please insert admin password!';
-        return;
-    }
-    else{
-      admin.style.display = "block";
-      logged.style.display = "none"
-    }
+function login(event) {
+  event.preventDefault();
+
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("pwd").value;
+
+  if (email != "divinemaina@gmail.com") {
+    const errorTag = logged.getElementsByClassName("loginEmail");
+    errorTag[0].innerHTML = "Please insert admin email!";
+    return;
+  } else if (password != "user") {
+    const passwordError = logged.getElementsByClassName("loginPassword");
+    passwordError[0].innerHTML = "Please insert admin password!";
+    return;
+  } else {
+    admin.style.display = "block";
+    logged.style.display = "none";
+  }
 }
-
 
 //  var editor = new FroalaEditor('#froala');
 
- contactButton.onclick = function contactButton(){
-
+contactButton.onclick = function contactButton() {
   contactForm.style.display = "block";
- 
-  console.log("clicked")
+
+  console.log("clicked");
 };
 
-closeIcon3.onclick = function closeIcon3(){
- contactForm.style.display= "none";
-  console.log("closed")
+closeIcon3.onclick = function closeIcon3() {
+  contactForm.style.display = "none";
+  console.log("closed");
 };
-// ************************contact form validation*************************
+// ************************ form validations*************************
 
 function validateForm() {
-const contactName = document.getElementById('name1')
-const contactEmail = document.getElementById('email1')
-const contactMessage = document.getElementById('contact_message')
-const error = contactForm.getElementsByClassName('small1');
-const errorMessage = contactForm.querySelector('.small2');
-const textError = contactForm.querySelector('.small3');
+  const contactName = document.getElementById("name1");
+  const contactEmail = document.getElementById("email1");
+  const contactMessage = document.getElementById("contact_message");
+  const error = contactForm.getElementsByClassName("small1");
+  const errorMessage = contactForm.querySelector(".small2");
+  const textError = contactForm.querySelector(".small3");
 
-    var x=contactName.value;
-    var nameRegex= /^[^\s]+( [^\s]+)+$/;
-    if (!x.match(nameRegex))
-     {
-  
-      error[0].innerHTML = 'Names should be sepaeted by a space';
-      return false;
-     }
-    
-     var y= contactEmail.value;
-     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!y.match(mailformat)) {
-      const errorMessage = contactForm.querySelector('.small2');
-         errorMessage.innerHTML = 'Please insert admin email and password!';
-         return false;
+  let messages =JSON.parse(localStorage.getItem('messages'))|| [];
+      const message = {
+      name: contactName.value,
+      email: contactEmail.value,
+      info: contactMessage.value
+      };
 
-    }
-    var z = contactMessage.value;
-    if(z.length <= 6 || z.length > 100){
-      
-     textError.innerHTML = 'Your message should contain between 6 and 100 leters';
-     return false;
-    }
-   contactName.value ="";
- contactEmail.value ="";
- contactMessage.value ="";
- textError.innerHTML ="";
- error[0].innerHTML ="";
- errorMessage.innerHTML="";
-
+  var x = message.name;
+  var nameRegex = /^[^\s]+( [^\s]+)+$/;
+  if (!x.match(nameRegex)) {
+    error[0].innerHTML = "Names should be sepaeted by a space";
     return false;
-    }
-    function blogForm() {
-const blogFormName = document.querySelector('.commenterName')
-const blogFormmessage = document.querySelector('.textarea')
-const blogForm = document.querySelector('.comment')
-const error = blogForm.getElementsByClassName('nameError');
-const textError = blogForm.querySelector('.messageError');
-  let x = blogFormName.value
-    var nameRegex= /^[^\s]+( [^\s]+)+$/;
-    if (!x.match(nameRegex))
-     {
-     
-      error[0].innerHTML = 'Names should be sepaeted by a space';
-      return false;
-    
-     }
+  }
 
-     var z = blogFormmessage.value;
-     if(z.length <= 6 || z.length > 100){
- 
-      textError.innerHTML = 'Your message should contain between 6 and 100 leters';
-      return false;
-     }
-     blogFormName.value="";
-     blogFormmessage.value="";
-    error[0].innerHTML="";
-    textError.innerHTML="";
+  var y = message.email;
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!y.match(mailformat)) {
+    const errorMessage = contactForm.querySelector(".small2");
+    errorMessage.innerHTML = "Please insert admin email and password!";
+    return false;
+  }
+  var z = message.info;
+  if (z.length <= 6 || z.length > 100) {
+    textError.innerHTML =
+      "Your message should contain between 6 and 100 leters";
+    return false;
+  }
+  contactName.value = "";
+  contactEmail.value = "";
+  contactMessage.value = "";
+  textError.innerHTML = "";
+  error[0].innerHTML = "";
+  errorMessage.innerHTML = "";
+  messages = [...messages,message];
+  localStorage.setItem('messages',JSON.stringify(messages));
+  return false;
+}
 
-     return false;
+
+
+
+function blogForm() {
+  const blogFormName = document.querySelector(".commenterName");
+  const blogFormmessage = document.querySelector(".textarea");
+  const blogForm = document.querySelector(".comment");
+  const error = blogForm.getElementsByClassName("nameError");
+  const textError = blogForm.querySelector(".messageError");
+
+  let comments = JSON.parse(localStorage.getItem('comments')) || [];
+  const comment ={
+    name: blogFormName.value,
+    message: blogFormmessage.value
+  }
+
+  let x = comment.name;
+  var nameRegex = /^[^\s]+( [^\s]+)+$/;
+  if (!x.match(nameRegex)) {
+    error[0].innerHTML = "Names should be sepaeted by a space";
+    return false;
+  }
+
+  var z = comment.message;
+  if (z.length <= 6 || z.length > 100) {
+    textError.innerHTML =
+      "Your message should contain between 6 and 100 leters";
+    return false;
+  }
+  blogFormName.value = "";
+  blogFormmessage.value = "";
+  error[0].innerHTML = "";
+  textError.innerHTML = "";
+comments = [...comments, comment];
+localStorage.setItem('comments',JSON.stringify(comments))
+  return false;
 }
 
 // ***********************************setting forms to local storag*************************
-
-
-
-
-
 
 // ***********************************new blog*************************
 // const blogs = [];
