@@ -785,10 +785,12 @@
       <form class="add-new-blog">
         <!-- <div></div> -->
         <label for="name">Blog Name:</label><br /><br />
-        <input type="text" id="name" name="name" /><br /><br />
+        <input type="text"  class="blog-name" id="name" name="name" /><br /><br />
+         <small class="blogNameError"></small> <br>
         <label for="description">Blog Description:</label><br /><br />
-        <textarea rows="10" maxlength="500"  name="message" ></textarea><br /><br />
-        <button type="submit">Save blog</button>
+        <textarea class="blog-description" rows="10" maxlength="500"  name="message" ></textarea><br /><br />
+        <small class="descriptionError"></small> <br>
+        <button type="submit" onclick="return createBlog()">Save blog</button>
       </form>
     </div>
   </section>

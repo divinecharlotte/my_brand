@@ -191,7 +191,7 @@ window.addEventListener("load", () => {
 
 function login(event) {
   event.preventDefault();
-
+ 
   var email = document.getElementById("email").value;
   var password = document.getElementById("pwd").value;
 
@@ -249,7 +249,7 @@ function validateForm() {
   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (!y.match(mailformat)) {
     const errorMessage = contactForm.querySelector(".small2");
-    errorMessage.innerHTML = "Please insert admin email and password!";
+    errorMessage.innerHTML = "Please insert admin email!";
     return false;
   }
   var z = message.info;
@@ -293,9 +293,9 @@ function blogForm() {
   }
 
   var z = comment.message;
-  if (z.length <= 6 || z.length > 100) {
+  if (z.length <= 4) {
     textError.innerHTML =
-      "Your message should contain between 6 and 100 leters";
+      "comment should be more than 4 leters";
     return false;
   }
   blogFormName.value = "";
@@ -304,6 +304,42 @@ function blogForm() {
   textError.innerHTML = "";
 comments = [...comments, comment];
 localStorage.setItem('comments',JSON.stringify(comments))
+  return false;
+}
+
+
+function createBlog() {
+  const blogName = document.querySelector(".blog-name");
+  const blogDescription = document.querySelector(".blog-description");
+  const createBlogForm = document.querySelector(".add-new-blog");
+  const nameError = createBlogForm.getElementsByClassName("blogNameError");
+  const descriptionError = createBlogForm.querySelector(".descriptionError");
+
+  let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+  const blog={
+    name: blogName.value,
+   description: blogDescription.value
+  }
+
+  let x = blog.name;
+  var nameRegex = /^[^\s]+( [^\s]+)+$/;
+  if (!x.match(nameRegex)) {
+    nameError[0].innerHTML = "blog title should be separeted by single space";
+    return false;
+  }
+
+  var z = blog.description;
+  if (z.length <= 20) {
+    descriptionError.innerHTML =
+      "blog description should be more than 20 letters";
+    return false;
+  }
+  blogName.value = "";
+  blogDescription.value = "";
+  nameError[0].innerHTML = "";
+  descriptionError.innerHTML = "";
+blogs = [...blogs, blog];
+localStorage.setItem('blogs',JSON.stringify(blogs))
   return false;
 }
 
