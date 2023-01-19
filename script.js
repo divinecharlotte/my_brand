@@ -6,7 +6,8 @@ const first = document.querySelector(".first");
 const second = document.querySelector(".second");
 const recentJob1 = document.querySelector(".recent-job-second-cont1");
 const recentJob2 = document.querySelector(".recent-job-second-cont2");
-const singleBlog = document.querySelector(".single-blog");
+const singleBlog = document.getElementById('single_blog');
+const fullWork = document.querySelector('.single-blog');
 const mainContainer = document.querySelector(".blog-card");
 const closeIcon2 = document.getElementById('closeIcon2');
 const closeIcon3 = document.getElementById('closeIcon3');
@@ -16,6 +17,7 @@ const logged = document.getElementById('login');
 const contactButton = document.getElementById('contactButton');
 const contactForm = document.getElementById('contactForm');
 const blogCard = document.querySelector('.blog-card');
+
 
 
 burger.onclick = function burger() {
@@ -169,15 +171,15 @@ const details = [
      </div>
     `;
   
-    singleBlog.style.display = "flex";
+    fullWork.style.display = "flex";
     console.log('clicked')
-    singleBlog.innerHTML = res;
+    fullWork.innerHTML = res;
   };
   
   const closePopupFunc = (status) => {
     if (status === null) return;
     document.body.style.overflow = 'scroll';
-   singleBlog.style.display = "none";
+    fullWork.style.display = "none";
   };
   closePopupFunc(null);
   popupDetailsFunc(null);
@@ -186,7 +188,7 @@ const details = [
   window.addEventListener('load', () => {
     workContainer.innerHTML = getWorkData;
    
-    blogCard.innerHTML = card;
+    // blogCard.innerHTML = card;
     // return blogCard
     // return workContainer;
   });
@@ -199,14 +201,19 @@ const details = [
     var email = document.getElementById("email").value;
     var password = document.getElementById("pwd").value;
 
-    if (email === "divinemaina@gmail.com" && password === "user") {
-        admin.style.display = "block";
-        logged.style.display = "none"
- 
-      } else {
-        const errorTag = logged.getElementsByTagName('small');
-        errorTag[0].innerHTML = 'Please insert admin email and password!';
-      return;
+   if(email != "divinemaina@gmail.com"){
+      const errorTag = logged.getElementsByClassName('loginEmail');
+          errorTag[0].innerHTML = 'Please insert admin email!';
+        return;
+    }
+    else if(password != "user"){
+      const passwordError = logged.getElementsByClassName('loginPassword');
+          passwordError[0].innerHTML = 'Please insert admin password!';
+        return;
+    }
+    else{
+      admin.style.display = "block";
+      logged.style.display = "none"
     }
 }
 
@@ -234,7 +241,7 @@ const error = contactForm.getElementsByClassName('small1');
 const errorMessage = contactForm.querySelector('.small2');
 const textError = contactForm.querySelector('.small3');
 
-    var x=document.forms["form1"]["name"].value;
+    var x=contactName.value;
     var nameRegex= /^[^\s]+( [^\s]+)+$/;
     if (!x.match(nameRegex))
      {
@@ -243,7 +250,7 @@ const textError = contactForm.querySelector('.small3');
       return false;
      }
     
-     var y=document.forms["form1"]["email"].value;
+     var y= contactEmail.value;
      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!y.match(mailformat)) {
       const errorMessage = contactForm.querySelector('.small2');
@@ -251,8 +258,9 @@ const textError = contactForm.querySelector('.small3');
          return false;
 
     }
-    var z = document.forms["form1"]["message"].value;
+    var z = contactMessage.value;
     if(z.length <= 6 || z.length > 100){
+      
      textError.innerHTML = 'Your message should contain between 6 and 100 leters';
      return false;
     }
@@ -265,14 +273,43 @@ const textError = contactForm.querySelector('.small3');
 
     return false;
     }
-
-
+    function blogForm() {
+const blogFormName = document.querySelector('.commenterName')
+const blogFormmessage = document.querySelector('.textarea')
+const blogForm = document.querySelector('.comment')
+const error = blogForm.getElementsByClassName('nameError');
+const textError = blogForm.querySelector('.messageError');
+  let x = blogFormName.value
+    var nameRegex= /^[^\s]+( [^\s]+)+$/;
+    if (!x.match(nameRegex))
+     {
+     
+      error[0].innerHTML = 'Names should be sepaeted by a space';
+      return false;
     
-// function checkLength(el) {
-//   if (el.value.length <= 6) {
-//     alert("length must be exactly 6 characters")
-//   }
-// }
+     }
+
+     var z = blogFormmessage.value;
+     if(z.length <= 6 || z.length > 100){
+ 
+      textError.innerHTML = 'Your message should contain between 6 and 100 leters';
+      return false;
+     }
+     blogFormName.value="";
+     blogFormmessage.value="";
+    error[0].innerHTML="";
+    textError.innerHTML="";
+
+     return false;
+}
+
+// ***********************************setting forms to local storag*************************
+
+
+
+
+
+
 // ***********************************new blog*************************
 // const blogs = [];
 
