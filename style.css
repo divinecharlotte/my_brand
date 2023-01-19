@@ -408,7 +408,7 @@ button:hover{
   box-shadow: 0 10px 30px -10px var(--navy-shadow);
   display: none;
   font-family: var(--font-sans);
-  padding: 2%;
+  padding: 4%;
   backdrop-filter: blur(5px);
   top: 20%;
   bottom: 40%;
@@ -681,11 +681,9 @@ footer {
 }
 /* ************************************************************************ *** SINGLE BLOG SECTION******************************************************** */
 .single-blog {
-
   margin-top: -1px; 
   width: 100%;
   pointer-events: auto;
-
   top: 0;
   left: 0;
   right: 0;
