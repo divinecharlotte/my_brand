@@ -719,7 +719,7 @@ margin-left: 95%;
   border-radius: 5rem;
   margin-top: 3rem;
 }
-.blog-img {
+/* .blog-img {
   margin: 5%;
   height: 74vh;
   width: 90%;
@@ -727,7 +727,7 @@ margin-left: 95%;
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: 20px;
-}
+} */
 .content-container {
   margin: 5%;
   gap: 10%;

@@ -299,40 +299,12 @@ function blogForm() {
   localStorage.setItem("comments", JSON.stringify(comments));
   return false;
 }
-let blogs = JSON.parse(localStorage.getItem("blogs")) || [{
-  id: 1,
-  image: "./assets/spacetravel.png",
-  name: "Space Travellers",
-  description:
-    '"Space Travelers" is a web application for a company that provides commercial and scientific space travel services. The application will allow users to book rockets and join selected space missions.',
-},
-{
-  id: 2,
-  image: "./assets/rails.png",
-  name: "Tourify",
-  description:
-    "A daily selection of privately personalized reads; no accounts or sign-ups required.",
-},
-{
-  id: 3,
-  image: "./assets/rails.png",
-  name: "Tourify",
-  description:
-    "A daily selection of privately personalized reads; no accounts or sign-ups required.",
-},
-{
-  id: 4,
-  image: "./assets/rails.png",
-  name: "Tourify",
-  description:
-    "A daily selection of privately personalized reads; no accounts or sign-ups required.",
-}];
+let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
-// var dataImage = localStorage.getItem('blogs');
 
-// console.log(dataImage);
+
 const blogData = blogs.map((item) => {
-  // const blogCard = document.querySelector(".blog-card");
+
   const getBlog = `
 <div class="blog-card" id ={item.index}>
       <div class="blog-icons">
@@ -341,25 +313,29 @@ const blogData = blogs.map((item) => {
           ><img src="./assets/github.png" alt="github-icon"
         /></a>
       </div>
-      <img src="" id="tableBanner" />
+  
+
       <h2>${item.name}</h2>
       <p>${item.description}</p>
       <ul>
         <li>12 likes</li>
         <li>12 comments</li>
       </ul>
-    </div> `;
-  // return getBlog;
+    </div>
+     `;
+
  
     return getBlog;
 }
 );
+
 const blogView = (cardId) => {
   
 }
 
 // ***********************************new blog*************************
 const blodImage = document.querySelector(".blog-image");
+
 let imageUrl;
 blodImage.addEventListener('change',function(){
   const fileReader = new FileReader();
@@ -369,6 +345,7 @@ blodImage.addEventListener('change',function(){
   })
   fileReader.readAsDataURL(this.files[0]);
 });
+
 const adminTable = document.getElementById('tableData')
   const blogElement = blogs.map((item)=>{
     const row = `
@@ -429,15 +406,11 @@ function createBlog() {
   descriptionError.innerHTML = "";
   blogs = [...blogs, blog];
   localStorage.setItem("blogs", JSON.stringify(blogs));
-  // getmylist();
-  
-//  let retrievedArticles=JSON.parse(localStorage.getItem('blogs'));
-  // console.log(retrievedArticles);
+
   blogSubmitted.innerHTML = "blog submitted successfully";
   return false;
 }
 
-// console.log(JSON.parse(blogs));
 window.addEventListener("load", () => {
   const messagesTable= document.querySelector('.messages-table')
   const messageElement = messages.map((item)=>{
@@ -458,7 +431,3 @@ return row
   messagesTable.innerHTML = messageElement
 });
 
-  // const updateUI = (data) => {
-  //   mylist = data;
-  //   getmylist();
-  // };
