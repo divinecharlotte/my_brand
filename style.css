@@ -631,13 +631,18 @@ footer {
   padding: 10%;
   background-color: var(--navy);
 }
-.blog-cards {
+/* .blog-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-}
+
+
+} */
 .blog-card {
   padding: 8% 2% 12% 5%;
   margin: 6% 3% 0;
+  /* width: 30%;
+  height: 30vh; */
+  /* display: flex; */
   background-color: var(--light-navy);
   border-radius: var(--border-radius);
 }
@@ -896,7 +901,14 @@ tr td button {
 .create-blog form textarea {
   height: auto;
 }
-
+#imagefile{
+  border: none;
+  height: auto;
+}
+small.message-success,
+ small.blog-submitted{
+  color: #00d9ff;
+}
 /* *************************************************************************LAPTOP SCREEN********************************************************* */
 @media only screen and (min-width: 992px) {
   .nav-elements li a {

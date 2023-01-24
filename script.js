@@ -8,7 +8,7 @@ const recentJob1 = document.querySelector(".recent-job-second-cont1");
 const recentJob2 = document.querySelector(".recent-job-second-cont2");
 const singleBlog = document.getElementById("single_blog");
 const fullWork = document.querySelector(".single-blog");
-const mainContainer = document.querySelector(".blog-card");
+const blog = document.querySelector(".blog-card");
 const closeIcon2 = document.getElementById("closeIcon2");
 const closeIcon3 = document.getElementById("closeIcon3");
 const workContainer = document.getElementById("work");
@@ -16,7 +16,7 @@ const admin = document.getElementById("adminPannel");
 const logged = document.getElementById("login");
 const contactButton = document.getElementById("contactButton");
 const contactForm = document.getElementById("contactForm");
-const blogCard = document.querySelector(".blog-card");
+const blogCards = document.querySelector(".blog-cards");
 
 burger.onclick = function burger() {
   navLinks.style.right = "0";
@@ -41,10 +41,10 @@ second.onclick = function second() {
 
 //  ********************see blog****************
 
-mainContainer.onclick = function mainContainer() {
-  singleBlog.style.display = "flex";
-  console.log("blog clicked");
-};
+// blog.onclick = function blog() {
+//   singleBlog.style.display = "flex";
+//   console.log("you clicked me");
+// };
 
 closeIcon2.onclick = function closeIcon2() {
   singleBlog.style.display = "none";
@@ -179,19 +179,11 @@ const closePopupFunc = (status) => {
 closePopupFunc(null);
 popupDetailsFunc(null);
 
-window.addEventListener("load", () => {
-  workContainer.innerHTML = getWorkData;
-
-  // blogCard.innerHTML = card;
-  // return blogCard
-  // return workContainer;
-});
-
 // ******************************forms********************************
 
 function login(event) {
   event.preventDefault();
- 
+
   var email = document.getElementById("email").value;
   var password = document.getElementById("pwd").value;
 
@@ -222,7 +214,7 @@ closeIcon3.onclick = function closeIcon3() {
   console.log("closed");
 };
 // ************************ form validations*************************
-
+let messages = JSON.parse(localStorage.getItem("messages")) || [];
 function validateForm() {
   const contactName = document.getElementById("name1");
   const contactEmail = document.getElementById("email1");
@@ -230,13 +222,16 @@ function validateForm() {
   const error = contactForm.getElementsByClassName("small1");
   const errorMessage = contactForm.querySelector(".small2");
   const textError = contactForm.querySelector(".small3");
+  const messageSuccess = contactForm.querySelector(".message-success");
 
-  let messages =JSON.parse(localStorage.getItem('messages'))|| [];
-      const message = {
-      name: contactName.value,
-      email: contactEmail.value,
-      info: contactMessage.value
-      };
+
+ 
+  const message = {
+    name: contactName.value,
+    email: contactEmail.value,
+    info: contactMessage.value,
+    index: messages.length + 1,
+  };
 
   var x = message.name;
   var nameRegex = /^[^\s]+( [^\s]+)+$/;
@@ -264,13 +259,11 @@ function validateForm() {
   textError.innerHTML = "";
   error[0].innerHTML = "";
   errorMessage.innerHTML = "";
-  messages = [...messages,message];
-  localStorage.setItem('messages',JSON.stringify(messages));
+  messages = [...messages, message];
+  localStorage.setItem("messages", JSON.stringify(messages));
+  messageSuccess.innerHTML = "message submitted successfully";
   return false;
 }
-
-
-
 
 function blogForm() {
   const blogFormName = document.querySelector(".commenterName");
@@ -279,11 +272,12 @@ function blogForm() {
   const error = blogForm.getElementsByClassName("nameError");
   const textError = blogForm.querySelector(".messageError");
 
-  let comments = JSON.parse(localStorage.getItem('comments')) || [];
-  const comment ={
+  let comments = JSON.parse(localStorage.getItem("comments")) || [];
+  const comment = {
     name: blogFormName.value,
-    message: blogFormmessage.value
-  }
+    message: blogFormmessage.value,
+    index: comments.length + 1,
+  };
 
   let x = comment.name;
   var nameRegex = /^[^\s]+( [^\s]+)+$/;
@@ -294,18 +288,102 @@ function blogForm() {
 
   var z = comment.message;
   if (z.length <= 4) {
-    textError.innerHTML =
-      "comment should be more than 4 leters";
+    textError.innerHTML = "comment should be more than 4 leters";
     return false;
   }
   blogFormName.value = "";
   blogFormmessage.value = "";
   error[0].innerHTML = "";
   textError.innerHTML = "";
-comments = [...comments, comment];
-localStorage.setItem('comments',JSON.stringify(comments))
+  comments = [...comments, comment];
+  localStorage.setItem("comments", JSON.stringify(comments));
   return false;
 }
+let blogs = JSON.parse(localStorage.getItem("blogs")) || [{
+  id: 1,
+  image: "./assets/spacetravel.png",
+  name: "Space Travellers",
+  description:
+    '"Space Travelers" is a web application for a company that provides commercial and scientific space travel services. The application will allow users to book rockets and join selected space missions.',
+},
+{
+  id: 2,
+  image: "./assets/rails.png",
+  name: "Tourify",
+  description:
+    "A daily selection of privately personalized reads; no accounts or sign-ups required.",
+},
+{
+  id: 3,
+  image: "./assets/rails.png",
+  name: "Tourify",
+  description:
+    "A daily selection of privately personalized reads; no accounts or sign-ups required.",
+},
+{
+  id: 4,
+  image: "./assets/rails.png",
+  name: "Tourify",
+  description:
+    "A daily selection of privately personalized reads; no accounts or sign-ups required.",
+}];
+
+// var dataImage = localStorage.getItem('blogs');
+
+// console.log(dataImage);
+const blogData = blogs.map((item) => {
+  // const blogCard = document.querySelector(".blog-card");
+  const getBlog = `
+<div class="blog-card" id ={item.index}>
+      <div class="blog-icons">
+        <img src="./assets/boxArrow.png" alt="box-arrow" />
+        <a href="https://github.com/divinecharlotte/metrics-webapp"
+          ><img src="./assets/github.png" alt="github-icon"
+        /></a>
+      </div>
+      <img src="" id="tableBanner" />
+      <h2>${item.name}</h2>
+      <p>${item.description}</p>
+      <ul>
+        <li>12 likes</li>
+        <li>12 comments</li>
+      </ul>
+    </div> `;
+  // return getBlog;
+ 
+    return getBlog;
+}
+);
+const blogView = (cardId) => {
+  
+}
+
+// ***********************************new blog*************************
+const blodImage = document.querySelector(".blog-image");
+let imageUrl;
+blodImage.addEventListener('change',function(){
+  const fileReader = new FileReader();
+  fileReader.addEventListener('load',()=>{
+    imageUrl =fileReader.result;
+    // blodImage.value = imageUrl
+  })
+  fileReader.readAsDataURL(this.files[0]);
+});
+const adminTable = document.getElementById('tableData')
+  const blogElement = blogs.map((item)=>{
+    const row = `
+    <tr>
+  <td>${item.name}</td>
+  <td>12 likes</td>
+  <td>20 comments</td>
+  <td><button class="table-button">delete</button></td>
+  <td><button class="table-button">edit</button></td>
+</tr>`
+
+return row
+
+}).join('');
+
 
 
 function createBlog() {
@@ -314,11 +392,19 @@ function createBlog() {
   const createBlogForm = document.querySelector(".add-new-blog");
   const nameError = createBlogForm.getElementsByClassName("blogNameError");
   const descriptionError = createBlogForm.querySelector(".descriptionError");
+  const imageError = createBlogForm.querySelector(".imageError");
+  const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
 
-  let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
-  const blog={
+  const blog = {
+    image: imageUrl,
     name: blogName.value,
-   description: blogDescription.value
+    description: blogDescription.value,
+    index: blogs.length + 1,
+  };
+  var y = blog.image;
+  if (y == "") {
+    imageError.innerHTML = "blog image is required";
+    return false;
   }
 
   let x = blog.name;
@@ -334,52 +420,45 @@ function createBlog() {
       "blog description should be more than 20 letters";
     return false;
   }
+
+  blodImage.value = "";
   blogName.value = "";
   blogDescription.value = "";
+  imageError.innerHTML = "";
   nameError[0].innerHTML = "";
   descriptionError.innerHTML = "";
-blogs = [...blogs, blog];
-localStorage.setItem('blogs',JSON.stringify(blogs))
+  blogs = [...blogs, blog];
+  localStorage.setItem("blogs", JSON.stringify(blogs));
+  // getmylist();
+  
+//  let retrievedArticles=JSON.parse(localStorage.getItem('blogs'));
+  // console.log(retrievedArticles);
+  blogSubmitted.innerHTML = "blog submitted successfully";
   return false;
 }
 
-// ***********************************setting forms to local storag*************************
+// console.log(JSON.parse(blogs));
+window.addEventListener("load", () => {
+  const messagesTable= document.querySelector('.messages-table')
+  const messageElement = messages.map((item)=>{
+    const row = `
+    <tr>
+  <td>${item.name}</td>
+  <td>${item.info}</td>
+  <td><button class="table-button">delete</button></td>
+  <td><button class="table-button">edit</button></td>
+</tr>`
 
-// ***********************************new blog*************************
-// const blogs = [];
+return row
 
-// // const newBlog = new Blog();
-// const addNewBlog = document.querySelector('.add-new-blog');
-// addNewBlog.addEventListener('submit',(e) =>{
-//   e.preventDefault();
-//   const blogName = addNewBlog.name.value;
-//   const blogDescription =addNewBlog.message.value;
-//   // newBlog.addBlog({blogName,blogDescription});
-//   addNewBlog.name.value = '';
-//   addNewBlog.message.value = '';
+}).join('');
+  workContainer.innerHTML = getWorkData;
+  blogCards.innerHTML = blogData;
+  adminTable.innerHTML = blogElement
+  messagesTable.innerHTML = messageElement
+});
 
-// });
-
-//  blogCard.innerHTML = `<div class="blog-card">
-// <div class="blog-icons">
-//   <img src="./assets/boxArrow.png" alt="box-arrow" />
-//   <a href="https://github.com/divinecharlotte/metrics-webapp"><img src="./assets/github.png"
-//       alt="github-icon" /></a>
-// </div>
-// <h2>Digital Currency</h2>
-// <p>
-//   'Digital Currency' is about working with the live data from the
-//   Blockchain API. It provides information such as trending coins, coins'
-//   prices, crypto transactions, and full crypto descriptions.
-// </p>
-// <ul>
-//   <li>12 likes</li>
-//   <li>12 comments</li>
-// </ul>
-// </div>
-// `
-// ;
-// window.addEventListener('load', () => {
-//   blogCard.innerHTML = card;
-//   return blogCard
-// });
+  // const updateUI = (data) => {
+  //   mylist = data;
+  //   getmylist();
+  // };
