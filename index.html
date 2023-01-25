@@ -48,7 +48,7 @@
       <li><a href="#work"><span>02.</span>Work</a></li>
       <li><a href="#about"><span>03.</span>About</a></li>
       <li><a href="#blogs"><span>04.</span>Blogs</a></li>
-      <li><a href="#login"><span>05.</span>Admin</a></li>
+      <li><a href="#admin"><span>05.</span>Admin</a></li>
       <!-- <li ><a href="#login"><span>06.</span>Login</a></li> -->
       <li><a href="#contact"><span>07.</span>Contact</a></li>
       <li class="resume"><button type="button">Resume</button></li>
@@ -400,7 +400,8 @@
   <section id="single_blog" class="single-blog">
     <div class="single-blog-container">
       <p id="closeIcon2"><img src="./assets/Group90.png" alt=""></p>
-      <img src="./assets/rails.PNG" alt="blog image" >
+      <div class="blog-img"></div>
+      <!-- <img src="./assets/rails.PNG" alt="blog image" > -->
       <div class="content-container">
         <div class="content">
           <h2>Bookstore</h2>
@@ -449,7 +450,7 @@
         <div class="comments-wrapper">
 
 
-          <form class="comment" id="comment" >
+          <form class="comment"  >
             <h3 class="form-title">Add your comment</h3>
             <div class="comment-form"></div>
             <input type="text" name="name" class="commenterName" placeholder="Your names :" />
@@ -459,9 +460,9 @@
             <br />
             <small class="messageError"></small> <br>
             <button type="submit" id="submit-button" onclick="return blogForm()" >Submitt</button>
-        </div>
+     
         </form>
-
+      </div>
       </div>
     </div>
 

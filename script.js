@@ -264,7 +264,7 @@ function validateForm() {
   messageSuccess.innerHTML = "message submitted successfully";
   return false;
 }
-
+let comments = JSON.parse(localStorage.getItem("comments")) || [];
 function blogForm() {
   const blogFormName = document.querySelector(".commenterName");
   const blogFormmessage = document.querySelector(".textarea");
@@ -272,7 +272,7 @@ function blogForm() {
   const error = blogForm.getElementsByClassName("nameError");
   const textError = blogForm.querySelector(".messageError");
 
-  let comments = JSON.parse(localStorage.getItem("comments")) || [];
+  
   const comment = {
     name: blogFormName.value,
     message: blogFormmessage.value,
@@ -314,13 +314,32 @@ const blogData = blogs.map((item) => {
         /></a>
       </div>
   
-
+      <img src="${item.image}"/>
       <h2>${item.name}</h2>
       <p>${item.description}</p>
       <ul>
-        <li>12 likes</li>
+      <li><p><img src="/assets/like.png" alt="likes"> 12 Likes</p></li>
         <li>12 comments</li>
       </ul>
+        <div class="comments"></div>
+      
+
+        <div class="comments-wrapper">
+
+
+          <form class="comment"  id =${item.index}>
+            <h3 class="form-title">Add your comment</h3>
+            <div class="comment-form"></div>
+            <input type="text" name="name" class="commenterName" placeholder="Your names :" />
+            <br> 
+            <small class="nameError"></small> <br>
+            <textarea class="textarea"cols="2" rows="4" placeholder="Comment :" ></textarea>
+            <br />
+            <small class="messageError"></small> <br>
+            <button type="submit" onclick="return blogForm()" >Submitt</button>
+     
+        </form>
+        </div>
     </div>
      `;
 
@@ -328,6 +347,8 @@ const blogData = blogs.map((item) => {
     return getBlog;
 }
 );
+
+
 
 const blogView = (cardId) => {
   
@@ -353,7 +374,7 @@ const adminTable = document.getElementById('tableData')
   <td>${item.name}</td>
   <td>12 likes</td>
   <td>20 comments</td>
-  <td><button class="table-button">delete</button></td>
+  <td><button class="delete-button">delete</button></td>
   <td><button class="table-button">edit</button></td>
 </tr>`
 
@@ -410,9 +431,33 @@ function createBlog() {
   blogSubmitted.innerHTML = "blog submitted successfully";
   return false;
 }
+{/* <div class="blog-card" id ={item.index}>
+//       <div class="blog-icons">
+//         <img src="./assets/boxArrow.png" alt="box-arrow" />
+//         <a href="https://github.com/divinecharlotte/metrics-webapp"
+//           ><img src="./assets/github.png" alt="github-icon"
+//         /></a>
+//       </div>
+  
 
+//       <h2>${item.name}</h2>
+//       <p>${item.description}</p>
+//       <ul>
+//         <li>12 likes</li>
+//         <li>12 comments</li>
+//       </ul>
+      
+//     </div> */}
 window.addEventListener("load", () => {
+
+
   const messagesTable= document.querySelector('.messages-table')
+  const comentsDiv = document.querySelector('.comments')
+  comments.forEach(item => {
+    const p = document.createElement('p')
+    p.textContent = `${item.message} by ${item.name}`
+    comentsDiv.appendChild(p)
+  })
   const messageElement = messages.map((item)=>{
     const row = `
     <tr>
@@ -424,10 +469,43 @@ window.addEventListener("load", () => {
 
 return row
 
-}).join('');
+}).join(''); 
+
   workContainer.innerHTML = getWorkData;
   blogCards.innerHTML = blogData;
   adminTable.innerHTML = blogElement
   messagesTable.innerHTML = messageElement
-});
+  // comentsDiv.innerHTML = commentP
+})
+// 
 
+// for (let i = 0; i < blogs.length; i++) {
+//   var deleteButton = blogs[i].querySelector('.delete-button');
+//   deleteButton.addEventListener('click', (function(index) { return function() { elements.splice(index, 1); } })(i));
+// // }
+// var indexToDelete;
+
+// // create a new array with the modified elements
+// var newElements =blogs.map(function(element, index) {
+//   if (element === selectedElement) {
+//     indexToDelete = index;
+//     return;
+//   }
+//   return element;
+// });
+
+// // remove the selected element from the original array
+// blogs.splice(indexToDelete, 1);
+const deleteBlog = (targetIndex) => {
+  const filteBlogs = blogs.filter((item) => +item.index !== +targetIndex);
+  const newBlogs = filteBlogs.map((item, index) => ({
+    image: item.image,
+    name: item.name,
+    description: item.description,
+    index:index + 1,
+  }));
+  localStorage.setItem('blogs', JSON.stringify(newBlogs));
+  blogs = newBlogs;
+  blogData();
+};
+const deleteButton = document.querySelector('.delete-button');
