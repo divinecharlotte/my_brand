@@ -46,10 +46,10 @@ second.onclick = function second() {
 //   console.log("you clicked me");
 // };
 
-closeIcon2.onclick = function closeIcon2() {
-  singleBlog.style.display = "none";
-  console.log("closed");
-};
+// closeIcon2.onclick = function closeIcon2() {
+//   singleBlog.style.display = "none";
+//   console.log("closed");
+// };
 
 //  ********************WORK SECTION****************
 
@@ -167,6 +167,7 @@ const popupDetailsFunc = (cardId) => {
     `;
 
   fullWork.style.display = "flex";
+
   console.log("clicked");
   fullWork.innerHTML = res;
 };
@@ -302,10 +303,8 @@ function blogForm() {
 let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
 
-
-const blogData = blogs.map((item) => {
-
-  const getBlog = `
+const getBlog = () =>{
+const blogData = blogs.map((item) => `
 <div class="blog-card" id ={item.index}>
       <div class="blog-icons">
         <img src="./assets/boxArrow.png" alt="box-arrow" />
@@ -341,49 +340,16 @@ const blogData = blogs.map((item) => {
         </form>
         </div>
     </div>
-     `;
+     `).join("");
 
- 
-    return getBlog;
-}
-);
-
-
-
-const blogView = (cardId) => {
-  
+     blogCards.innerHTML = blogData;
+    return blogCards;
 }
 
-// ***********************************new blog*************************
-const blodImage = document.querySelector(".blog-image");
-
-let imageUrl;
-blodImage.addEventListener('change',function(){
-  const fileReader = new FileReader();
-  fileReader.addEventListener('load',()=>{
-    imageUrl =fileReader.result;
-    // blodImage.value = imageUrl
-  })
-  fileReader.readAsDataURL(this.files[0]);
-});
-
-const adminTable = document.getElementById('tableData')
-  const blogElement = blogs.map((item)=>{
-    const row = `
-    <tr>
-  <td>${item.name}</td>
-  <td>12 likes</td>
-  <td>20 comments</td>
-  <td><button class="delete-button">delete</button></td>
-  <td><button class="table-button">edit</button></td>
-</tr>`
-
-return row
-
-}).join('');
-
-
-
+const updateUI = (data) => {
+  blogs = data;
+  getBlog();
+};
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");
@@ -429,8 +395,50 @@ function createBlog() {
   localStorage.setItem("blogs", JSON.stringify(blogs));
 
   blogSubmitted.innerHTML = "blog submitted successfully";
-  return false;
+  createBlog()
+  getBlog()
 }
+
+// const sumitBlog = document.querySelector('.submit-blog')
+// sumitBlog.addEventListener('click', () => createBlog('clicked'))
+// ***********************************new blog*************************
+const blodImage = document.querySelector(".blog-image");
+
+let imageUrl;
+blodImage.addEventListener('change',function(){
+  const fileReader = new FileReader();
+  fileReader.addEventListener('load',()=>{
+    imageUrl =fileReader.result;
+    // blodImage.value = imageUrl
+  })
+  fileReader.readAsDataURL(this.files[0]);
+});
+
+const adminTable = document.getElementById('tableData')
+
+const row = ()=>{
+  const blogElement = blogs.map((item, index)=>`
+    <tr>
+  <td>${item.name}</td>
+  <td>12 likes</td>
+  <td>20 comments</td>
+  <td><button  class="delete-button" onclick="deleteBlog(${index})">delete</button></td>
+  <td><button class="table-button">edit</button></td>
+</tr>`).join('');
+adminTable.innerHTML = blogElement
+deleteBlog()
+return adminTable
+
+
+}
+
+const deleteBlog = (index) => {
+  const allBlogs =JSON.parse(localStorage.getItem('blogs'));
+  const newBlogs = allBlogs.filter((blog, i) =>i != index);
+  localStorage.setItem('blogs', JSON.stringify(newBlogs))
+  getBlog()
+}
+
 {/* <div class="blog-card" id ={item.index}>
 //       <div class="blog-icons">
 //         <img src="./assets/boxArrow.png" alt="box-arrow" />
@@ -448,64 +456,38 @@ function createBlog() {
 //       </ul>
       
 //     </div> */}
-window.addEventListener("load", () => {
+const messagesTable= document.querySelector('.messages-table')
+const Messagerow = () =>{
+  const messageElement = messages.map((item, index)=> `
+    <tr>
+  <td>${item.name}</td>
+  <td>${item.info}</td>
+  <td><button class="table-button" onclick="deleteMessage(${index})" >delete</button></td>
+  <td><button class="table-button">edit</button></td>
+</tr>`).join(''); 
+
+messagesTable.innerHTML = messageElement
+return Messagerow
+
+}
+
+const deleteMessage = (index) => {
+  const allMessagess =JSON.parse(localStorage.getItem('messages'));
+  const newMessages = allMessagess.filter((message, i) =>i != index);
+  localStorage.setItem('messages', JSON.stringify(newMessages))
+  Messagerow()
+}
+window.addEventListener("load", () => { getBlog(); row() ; Messagerow()
 
 
-  const messagesTable= document.querySelector('.messages-table')
+ 
   const comentsDiv = document.querySelector('.comments')
   comments.forEach(item => {
     const p = document.createElement('p')
     p.textContent = `${item.message} by ${item.name}`
     comentsDiv.appendChild(p)
   })
-  const messageElement = messages.map((item)=>{
-    const row = `
-    <tr>
-  <td>${item.name}</td>
-  <td>${item.info}</td>
-  <td><button class="table-button">delete</button></td>
-  <td><button class="table-button">edit</button></td>
-</tr>`
-
-return row
-
-}).join(''); 
 
   workContainer.innerHTML = getWorkData;
-  blogCards.innerHTML = blogData;
-  adminTable.innerHTML = blogElement
-  messagesTable.innerHTML = messageElement
-  // comentsDiv.innerHTML = commentP
+
 })
-// 
-
-// for (let i = 0; i < blogs.length; i++) {
-//   var deleteButton = blogs[i].querySelector('.delete-button');
-//   deleteButton.addEventListener('click', (function(index) { return function() { elements.splice(index, 1); } })(i));
-// // }
-// var indexToDelete;
-
-// // create a new array with the modified elements
-// var newElements =blogs.map(function(element, index) {
-//   if (element === selectedElement) {
-//     indexToDelete = index;
-//     return;
-//   }
-//   return element;
-// });
-
-// // remove the selected element from the original array
-// blogs.splice(indexToDelete, 1);
-const deleteBlog = (targetIndex) => {
-  const filteBlogs = blogs.filter((item) => +item.index !== +targetIndex);
-  const newBlogs = filteBlogs.map((item, index) => ({
-    image: item.image,
-    name: item.name,
-    description: item.description,
-    index:index + 1,
-  }));
-  localStorage.setItem('blogs', JSON.stringify(newBlogs));
-  blogs = newBlogs;
-  blogData();
-};
-const deleteButton = document.querySelector('.delete-button');
