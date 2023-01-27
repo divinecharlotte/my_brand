@@ -266,9 +266,11 @@ function validateForm() {
   return false;
 }
 let comments = JSON.parse(localStorage.getItem("comments")) || [];
-function blogForm() {
-  const blogFormName = document.querySelector(".commenterName");
-  const blogFormmessage = document.querySelector(".textarea");
+function blogForm(item) {
+//  let item1 = "."+ item
+
+  const blogFormName = document.getElementById(item);
+  const blogFormmessage = document.getElementById(item);
   const blogForm = document.querySelector(".comment");
   const error = blogForm.getElementsByClassName("nameError");
   const textError = blogForm.querySelector(".messageError");
@@ -305,7 +307,7 @@ let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
 const getBlog = () =>{
 const blogData = blogs.map((item) => `
-<div class="blog-card" id ={item.index}>
+<div class="blog-card" id ="${item.index}">
       <div class="blog-icons">
         <img src="./assets/boxArrow.png" alt="box-arrow" />
         <a href="https://github.com/divinecharlotte/metrics-webapp"
@@ -326,16 +328,17 @@ const blogData = blogs.map((item) => `
         <div class="comments-wrapper">
 
 
-          <form class="comment"  id =${item.index}>
+          <form class="comment" onsubmit="return false;" id=${item.index}  >
             <h3 class="form-title">Add your comment</h3>
-            <div class="comment-form"></div>
-            <input type="text" name="name" class="commenterName" placeholder="Your names :" />
+            <div class="${item.index}"></div>
+            <input type="text" name="name" id="${item.index}" class="${item.index}" placeholder="Your names :" />
             <br> 
             <small class="nameError"></small> <br>
-            <textarea class="textarea"cols="2" rows="4" placeholder="Comment :" ></textarea>
+            <textarea class="${item.index}" id="${item.index}" cols="2" rows="4" placeholder="Comment :" ></textarea>
             <br />
             <small class="messageError"></small> <br>
-            <button type="submit" onclick="return blogForm()" >Submitt</button>
+        
+            <button type="button" onclick="return blogForm(${item.index})">Submit</button>
      
         </form>
         </div>
@@ -343,13 +346,14 @@ const blogData = blogs.map((item) => `
      `).join("");
 
      blogCards.innerHTML = blogData;
-    return blogCards;
+    // return blogCards;
 }
 
-const updateUI = (data) => {
-  blogs = data;
-  getBlog();
-};
+// const updateUI = (data) => {
+//   blogs = data;
+//   getBlog();
+// };
+
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");
@@ -395,7 +399,7 @@ function createBlog() {
   localStorage.setItem("blogs", JSON.stringify(blogs));
 
   blogSubmitted.innerHTML = "blog submitted successfully";
-  createBlog()
+  // createBlog()
   getBlog()
 }
 

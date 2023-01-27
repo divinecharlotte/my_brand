@@ -868,7 +868,7 @@ body > section:nth-child(5) > div > ul li{
   margin-top: -1px;
   padding: 10%;
   background-color: var(--light-navy);
-  /* display: none; */
+  display: none;
 }
 /* .header-wrapper p {
   color: var(--green);
