@@ -320,7 +320,7 @@ const getBlog = () => {
       <li><p><img src="/assets/like.png" alt="likes"> 12 Likes</p></li>
         <li>12 comments</li>
       </ul>
-        <div class="comments"></div>
+      <div class="comments" id="comments-${item.index}"></div>
       
 
         <div class="comments-wrapper">
@@ -345,13 +345,19 @@ const getBlog = () => {
     .join("");
 
   blogCards.innerHTML = blogData;
-  // return blogCards;
+  comments.forEach((item) => {
+    const blogIndex = item.blog;
+    const commentsDiv = document.getElementById(`comments-${blogIndex}`);
+    if(commentsDiv){
+      const p = document.createElement("p");
+      p.textContent = `${item.message} by ${item.name}`;
+      commentsDiv.appendChild(p);
+    }
+  });
+
 };
 
-// const updateUI = (data) => {
-//   blogs = data;
-//   getBlog();
-// };
+
 
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
@@ -402,8 +408,7 @@ function createBlog() {
   getBlog();
 }
 
-// const sumitBlog = document.querySelector('.submit-blog')
-// sumitBlog.addEventListener('click', () => createBlog('clicked'))
+
 // ***********************************new blog*************************
 const blodImage = document.querySelector(".blog-image");
 
@@ -437,12 +442,20 @@ const row = () => {
   return adminTable;
 };
 
+
 const deleteBlog = (index) => {
   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
+  const allComments = JSON.parse(localStorage.getItem("comments"));
+  if(allBlogs === null || allComments === null){ 
+    console.log("element not found");
+  }else{
   const newBlogs = allBlogs.filter((blog, i) => i != index);
   localStorage.setItem("blogs", JSON.stringify(newBlogs));
-  getBlog();
+  const newComments = allComments.filter((comment) => comment.blog !== index);
+  localStorage.setItem("comments", JSON.stringify(newComments));
+  getBlog();}
 };
+
 
 {
   /* <div class="blog-card" id ={item.index}>
@@ -492,12 +505,7 @@ window.addEventListener("load", () => {
   row();
   Messagerow();
 
-  const comentsDiv = document.querySelector(".comments");
-  comments.forEach((item) => {
-    const p = document.createElement("p");
-    p.textContent = `${item.message} by ${item.name}`;
-    comentsDiv.appendChild(p);
-  });
+
 
   workContainer.innerHTML = getWorkData;
 });
