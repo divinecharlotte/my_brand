@@ -734,10 +734,13 @@ margin-left: 95%;
   display: flex;
   flex-direction:column;
 }
-#\{item\.index\} > ul > li:nth-child(1) > p > img {
+#blogs > div.blog-cards > div > ul > li > button{
+  border: none;
+}
+#like {
   width: 100%;
 }
-#\{item\.index\} > ul > li:nth-child(1) > p > img{
+#like{
   width: 25px;
   background-color: var(--green);
 }

@@ -317,7 +317,8 @@ const getBlog = () => {
       <h2>${item.name}</h2>
       <p>${item.description}</p>
       <ul>
-      <li><p><img src="/assets/like.png" alt="likes"> 12 Likes</p></li>
+ <li><p><img src="/assets/like.png" id="like" alt="likes"> <span id="like-count">12</span> Likes</p></li>
+
         <li>12 comments</li>
       </ul>
       <div class="comments" id="comments-${item.index}"></div>
