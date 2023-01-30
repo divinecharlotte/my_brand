@@ -340,6 +340,7 @@ const getBlog = () => {
 
 
 };
+// const blogIcons = document.getElementsByClassName('blog-icons')
 
 const blogDetailsFunc = () => {
   const result = blogs
@@ -347,12 +348,7 @@ const blogDetailsFunc = () => {
       (item) => 
 ` <div class="blog-card">
 <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
-      <div class="blog-icons">
-        <img src="./assets/boxArrow.png" alt="box-arrow" />
-        <a href="https://github.com/divinecharlotte/metrics-webapp"
-          ><img src="./assets/github.png" alt="github-icon"
-        /></a>
-      </div>
+    
   
       <img src="${item.image}"/>
       <h2>${item.name}</h2>
@@ -384,6 +380,7 @@ const blogDetailsFunc = () => {
     </div>` )
     .join("");
     blogCards.innerHTML = result;
+   
     comments.forEach((item) => {
       const blogIndex = item.blog;
       const commentsDiv = document.getElementById(`comments-${blogIndex}`);
