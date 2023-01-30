@@ -352,7 +352,7 @@ const blogDetailsFunc = () => {
   
       <img src="${item.image}"/>
       <h2>${item.name}</h2>
-      <p>${item.description}</p>
+      <p class="edit-blog">${item.description}</p>
       <ul>
 
  <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
@@ -393,6 +393,19 @@ const blogDetailsFunc = () => {
   }
 // const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
+const editBlog = ({ index, event }) => {
+  if (event.target.value === '') return;
+  if (event.key === 'Enter') {
+    blogs[index].description = event.target.value;
+    localStorage.setItem('blogs', JSON.stringify(blogs))
+  }
+};
+
+blogCards.addEventListener('keypress', (event) => {
+  const pressedItem = event.target.classList[event.target.classList.length - 1];
+  const blog = event.target.parentElement;
+  if (pressedItem === 'edit-blog') editmylist({ index: blog.id, event });
+});
 let likes= 0
 function increment(){
     if (likes !==0 ) {
@@ -471,8 +484,8 @@ const row = () => {
       (item, index) => `
     <tr>
   <td>${item.name}</td>
-  <td>12 likes</td>
-  <td>20 comments</td>
+
+  <td>${item.description}</td>
   <td><button  class="delete-button" onclick="deleteBlog(${index})">delete</button></td>
   <td><button class="table-button">edit</button></td>
 </tr>`

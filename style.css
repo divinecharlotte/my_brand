@@ -642,7 +642,7 @@ footer {
 }
 #blogs > div.blog-cards > div > ul > li{
   display: flex;
-   gap: 3px;
+   /* gap: 0px; */
 }
 #like-btn{
   padding: 0;
@@ -650,13 +650,16 @@ footer {
  height: 1.6rem;
 }
 .blog-card {
-  padding: 8% 2% 12% 5%;
-  margin: 6% 3% 0;
+  padding: 8% 2% 0% 5%;
+  margin: 6% 3%;
   /* width: 30%;
   height: 30vh; */
   /* display: flex; */
   background-color: var(--light-navy);
   border-radius: var(--border-radius);
+}
+#\{item\.index\} > button{
+  padding: 2%;
 }
 .blog-icons {
   display: flex;
@@ -978,7 +981,9 @@ small.message-success,
   #admin th {
     font-size: 13px;
   }
-
+  #\{item\.index\} > button{
+    padding:1.5%;
+  }
   tr td button {
     margin: 0;
   }
