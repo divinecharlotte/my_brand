@@ -317,13 +317,13 @@ const getBlog = () => {
       <h2>${item.name}</h2>
       <p>${item.description}</p>
       <ul>
- <li><p><img src="/assets/like.png" id="like" alt="likes"> <span id="like-count">12</span> Likes</p></li>
 
+ <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
         <li id="current-comments-${item.index}"> comments</li>
       </ul>
       <div class="comments" id="comments-${item.index}"></div>
-      
 
+      
         <div class="comments-wrapper">
 
 
@@ -357,9 +357,15 @@ const getBlog = () => {
   });
   countBlogComments();
 };
+// const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
-
-
+let likes= 0
+function increment(){
+    if (likes !==0 ) {
+    }
+    likes++
+document.getElementById("counter").innerHTML = `${likes}likes`
+}
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");

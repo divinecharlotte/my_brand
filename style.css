@@ -637,6 +637,15 @@ footer {
 
 
 } */
+#blogs > div.blog-cards > div > ul > li{
+  display: flex;
+   gap: 3px;
+}
+#like-btn{
+  padding: 0;
+  margin: 0;
+ height: 1.6rem;
+}
 .blog-card {
   padding: 8% 2% 12% 5%;
   margin: 6% 3% 0;
