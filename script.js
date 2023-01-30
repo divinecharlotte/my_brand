@@ -300,12 +300,53 @@ function blogForm(item) {
   return false;
 }
 let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
 const getBlog = () => {
   const blogData = blogs
     .map(
       (item) => `
-<div class="blog-card">
+
+
+      
+        <div class="blog-card" id ={item.index} >
+        
+             <div class="blog-icons">
+             <img src="./assets/boxArrow.png" alt="box-arrow" />
+             <a href="https://github.com/divinecharlotte/metrics-webapp"
+               ><img src="./assets/github.png" alt="github-icon"
+             /></a>
+        </div>
+        
+      
+           <h2>${item.name}</h2>
+        <p>${item.description}</p>
+          <ul>
+          <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+          <li id="current-comments-${item.index}"> comments</li>
+        </ul>
+       
+          </ul>
+          <button type="button"onclick="blogDetailsFunc(${item.id})">full view</button>
+           </div> 
+      
+
+
+     `
+    )
+    .join("");
+
+  blogCards.innerHTML = blogData;
+
+  countBlogComments();
+
+
+};
+
+const blogDetailsFunc = () => {
+  const result = blogs
+    .map(
+      (item) => 
+` <div class="blog-card">
+<p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
       <div class="blog-icons">
         <img src="./assets/boxArrow.png" alt="box-arrow" />
         <a href="https://github.com/divinecharlotte/metrics-webapp"
@@ -340,23 +381,19 @@ const getBlog = () => {
             <button type="button" onclick="return blogForm(${item.index})">Submit</button>
         </form>
         </div>
-    </div>
-     `
-    )
+    </div>` )
     .join("");
-
-  blogCards.innerHTML = blogData;
-  comments.forEach((item) => {
-    const blogIndex = item.blog;
-    const commentsDiv = document.getElementById(`comments-${blogIndex}`);
-    if(commentsDiv){
-      const p = document.createElement("p");
-      p.textContent = `${item.message} by ${item.name}`;
-      commentsDiv.appendChild(p);
-    }
-  });
-  countBlogComments();
-};
+    blogCards.innerHTML = result;
+    comments.forEach((item) => {
+      const blogIndex = item.blog;
+      const commentsDiv = document.getElementById(`comments-${blogIndex}`);
+      if(commentsDiv){
+        const p = document.createElement("p");
+        p.textContent = `${item.message} by ${item.name}`;
+        commentsDiv.appendChild(p);
+      }
+    });
+  }
 // const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
 let likes= 0

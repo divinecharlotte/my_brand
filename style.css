@@ -637,6 +637,9 @@ footer {
 
 
 } */
+#blogs > div.blog-cards > div > img{
+  width: 90%;
+}
 #blogs > div.blog-cards > div > ul > li{
   display: flex;
    gap: 3px;
