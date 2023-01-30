@@ -268,7 +268,7 @@ console.log(comments);
 function blogForm(item) {
   const blogFormName = document.getElementById("name-" + item);
   const blogFormmessage = document.getElementById("comment-" + item);
-  const blogForm = document.querySelector(".comment");
+  // const blogForm = document.querySelector(".comment");
   const error = document.getElementById("nameError-" + item);
   const textError = document.getElementById("messageError-" + item);
 
@@ -319,7 +319,7 @@ const getBlog = () => {
       <ul>
  <li><p><img src="/assets/like.png" id="like" alt="likes"> <span id="like-count">12</span> Likes</p></li>
 
-        <li>12 comments</li>
+        <li id="current-comments-${item.index}"> comments</li>
       </ul>
       <div class="comments" id="comments-${item.index}"></div>
       
@@ -355,7 +355,7 @@ const getBlog = () => {
       commentsDiv.appendChild(p);
     }
   });
-
+  countBlogComments();
 };
 
 
@@ -510,3 +510,24 @@ window.addEventListener("load", () => {
 
   workContainer.innerHTML = getWorkData;
 });
+
+
+
+const countBlogComments = () => {
+  const comments = JSON.parse(localStorage.getItem("comments")) || [];
+  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  blogs.forEach(blog => {
+    const blogId = blog.index;
+    const commentsForBlog = comments.filter(comment => comment.blog === blogId);
+
+    const element = document.getElementById(`current-comments-${blog.index}`);
+    if (element) {
+      element.textContent = `${commentsForBlog.length} comments`;
+    }
+  });
+};
+
+
+
+
