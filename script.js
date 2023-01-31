@@ -39,18 +39,6 @@ second.onclick = function second() {
   recentJob2.style.display = "flex";
 };
 
-//  ********************see blog****************
-
-// blog.onclick = function blog() {
-//   singleBlog.style.display = "flex";
-//   console.log("you clicked me");
-// };
-
-// closeIcon2.onclick = function closeIcon2() {
-//   singleBlog.style.display = "none";
-//   console.log("closed");
-// };
-
 //  ********************WORK SECTION****************
 
 const details = [
@@ -268,7 +256,6 @@ console.log(comments);
 function blogForm(item) {
   const blogFormName = document.getElementById("name-" + item);
   const blogFormmessage = document.getElementById("comment-" + item);
-  const blogForm = document.querySelector(".comment");
   const error = document.getElementById("nameError-" + item);
   const textError = document.getElementById("messageError-" + item);
 
@@ -300,30 +287,67 @@ function blogForm(item) {
   return false;
 }
 let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
 const getBlog = () => {
   const blogData = blogs
     .map(
       (item) => `
-<div class="blog-card">
-      <div class="blog-icons">
-        <img src="./assets/boxArrow.png" alt="box-arrow" />
-        <a href="https://github.com/divinecharlotte/metrics-webapp"
-          ><img src="./assets/github.png" alt="github-icon"
-        /></a>
-      </div>
+
+
+      
+        <div class="blog-card" id ={item.index} >
+        
+             <div class="blog-icons">
+             <img src="./assets/boxArrow.png" alt="box-arrow" />
+             <a href="https://github.com/divinecharlotte/metrics-webapp"
+               ><img src="./assets/github.png" alt="github-icon"
+             /></a>
+        </div>
+        
+      
+           <h2>${item.name}</h2>
+        <p>${item.description}</p>
+          <ul>
+          <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+          <li id="current-comments-${item.index}"> comments</li>
+        </ul>
+       
+          </ul>
+          <button type="button"onclick="blogDetailsFunc(${item.id})">full view</button>
+           </div> 
+      
+
+
+     `
+    )
+    .join("");
+
+  blogCards.innerHTML = blogData;
+
+  countBlogComments();
+
+
+};
+
+
+const blogDetailsFunc = () => {
+  const result = blogs
+    .map(
+      (item) => 
+` <div class="blog-card">
+<p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
+    
   
       <img src="${item.image}"/>
       <h2>${item.name}</h2>
-      <p>${item.description}</p>
+      <p >${item.description}</p>
       <ul>
- <li><p><img src="/assets/like.png" id="like" alt="likes"> <span id="like-count">12</span> Likes</p></li>
 
-        <li>12 comments</li>
+ <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+        <li id="current-comments-${item.index}"> comments</li>
       </ul>
       <div class="comments" id="comments-${item.index}"></div>
-      
 
+      
         <div class="comments-wrapper">
 
 
@@ -340,26 +364,29 @@ const getBlog = () => {
             <button type="button" onclick="return blogForm(${item.index})">Submit</button>
         </form>
         </div>
-    </div>
-     `
-    )
+    </div>` )
     .join("");
+    blogCards.innerHTML = result;
+   
+    comments.forEach((item) => {
+      const blogIndex = item.blog;
+      const commentsDiv = document.getElementById(`comments-${blogIndex}`);
+      if(commentsDiv){
+        const p = document.createElement("p");
+        p.textContent = `${item.message} by ${item.name}`;
+        commentsDiv.appendChild(p);
+      }
+    });
+  }
 
-  blogCards.innerHTML = blogData;
-  comments.forEach((item) => {
-    const blogIndex = item.blog;
-    const commentsDiv = document.getElementById(`comments-${blogIndex}`);
-    if(commentsDiv){
-      const p = document.createElement("p");
-      p.textContent = `${item.message} by ${item.name}`;
-      commentsDiv.appendChild(p);
+
+let likes= 0
+function increment(){
+    if (likes !==0 ) {
     }
-  });
-
-};
-
-
-
+    likes++
+document.getElementById("counter").innerHTML = `${likes}likes`
+}
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");
@@ -405,7 +432,6 @@ function createBlog() {
   localStorage.setItem("blogs", JSON.stringify(blogs));
 
   blogSubmitted.innerHTML = "blog submitted successfully";
-  // createBlog()
   getBlog();
 }
 
@@ -418,7 +444,7 @@ blodImage.addEventListener("change", function () {
   const fileReader = new FileReader();
   fileReader.addEventListener("load", () => {
     imageUrl = fileReader.result;
-    // blodImage.value = imageUrl
+
   });
   fileReader.readAsDataURL(this.files[0]);
 });
@@ -429,12 +455,12 @@ const row = () => {
   const blogElement = blogs
     .map(
       (item, index) => `
-    <tr>
+    <tr class="edit-blog">
   <td>${item.name}</td>
-  <td>12 likes</td>
-  <td>20 comments</td>
-  <td><button  class="delete-button" onclick="deleteBlog(${index})">delete</button></td>
-  <td><button class="table-button">edit</button></td>
+
+  <td>${item.description}</td>
+  <td><button  class="delete-button-${item.index}" onclick="deleteBlog(${index})">delete</button></td>
+  <td><button class="table-button-${item.index}" >edit</button></td>
 </tr>`
     )
     .join("");
@@ -443,6 +469,16 @@ const row = () => {
   return adminTable;
 };
 
+
+
+const editBlog = ({ event }) => {
+  if (event.target.value === '') return;
+  if (event.key === 'Enter') {
+   a= event.target.value;
+    localStorage.setItem('blogs', JSON.stringify(blogs))
+    console.log(amclicked);
+  }
+};
 
 const deleteBlog = (index) => {
   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
@@ -457,26 +493,6 @@ const deleteBlog = (index) => {
   getBlog();}
 };
 
-
-{
-  /* <div class="blog-card" id ={item.index}>
-//       <div class="blog-icons">
-//         <img src="./assets/boxArrow.png" alt="box-arrow" />
-//         <a href="https://github.com/divinecharlotte/metrics-webapp"
-//           ><img src="./assets/github.png" alt="github-icon"
-//         /></a>
-//       </div>
-  
-
-//       <h2>${item.name}</h2>
-//       <p>${item.description}</p>
-//       <ul>
-//         <li>12 likes</li>
-//         <li>12 comments</li>
-//       </ul>
-      
-//     </div> */
-}
 const messagesTable = document.querySelector(".messages-table");
 const Messagerow = () => {
   const messageElement = messages
@@ -510,3 +526,24 @@ window.addEventListener("load", () => {
 
   workContainer.innerHTML = getWorkData;
 });
+
+
+
+const countBlogComments = () => {
+  const comments = JSON.parse(localStorage.getItem("comments")) || [];
+  const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+  blogs.forEach(blog => {
+    const blogId = blog.index;
+    const commentsForBlog = comments.filter(comment => comment.blog === blogId);
+
+    const element = document.getElementById(`current-comments-${blog.index}`);
+    if (element) {
+      element.textContent = `${commentsForBlog.length} comments`;
+    }
+  });
+};
+
+
+
+

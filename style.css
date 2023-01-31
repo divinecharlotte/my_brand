@@ -69,9 +69,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--poppins);
- /* background-color: var(--navy); */
 }
-div{
+div {
   animation: section 2s ease-in-out 1;
 }
 @keyframes section {
@@ -112,7 +111,7 @@ nav {
 .nav-elements-mode img {
   margin-top: 4px;
 }
-.close-humburger{
+.close-humburger {
   display: none;
 }
 .nav-elements {
@@ -132,7 +131,7 @@ nav {
   text-decoration: none;
   font-weight: 600;
 }
-.nav-elements li a:hover{
+.nav-elements li a:hover {
   color: var(--green);
 }
 .nav-elements li a span {
@@ -179,7 +178,7 @@ button {
   transition: var(--transition);
 }
 .blogs button:hover,
-button:hover{
+button:hover {
   background-color: var(--slate);
 }
 /************************************************************************* ***INTRO SECTION******************************************************** */
@@ -212,9 +211,9 @@ button:hover{
   justify-content: space-between;
   height: 25%;
 }
-#froala{
+#froala {
   color: red;
-  }
+}
 .social-icons hr {
   width: 1px;
   height: 48vh;
@@ -267,7 +266,7 @@ button:hover{
   padding: 6rem 0 8rem 0;
 }
 
-.header{
+.header {
   color: var(--green);
   font-weight: 700;
   font-size: 30px;
@@ -400,7 +399,7 @@ button:hover{
   width: 500px;
   line-height: 2;
 }
-.contact-form{
+.contact-form {
   width: 60%;
   min-height: 60%;
   background-color: rgb(17, 34, 64, 0.9);
@@ -415,67 +414,66 @@ button:hover{
   position: fixed;
   z-index: 999;
 }
-.side1 h1{
+.side1 h1 {
   font-size: 38px;
 }
-.sides{
+.sides {
   display: flex;
   align-items: center;
   gap: 10%;
 }
-.contact-form input{
+.contact-form input {
   border: none;
   width: 90%;
   border-bottom: 1px solid var(--lightest-navy);
   background-color: transparent;
   color: var(--slate);
 }
-.side1{
+.side1 {
   width: 40%;
 }
-.side2{
+.side2 {
   width: 50%;
 }
-#contactForm > form > div > hr{
+#contactForm > form > div > hr {
   width: 2px;
   height: 20rem;
   border: none;
-  background-color:  var(--lightest-navy);
+  background-color: var(--lightest-navy);
 }
-.side2 textarea{
+.side2 textarea {
   background-color: transparent;
   border: none;
   width: 90%;
-
 }
- .side1 > hr{
+.side1 > hr {
   width: 30%;
   margin-bottom: 10px;
   height: 2px;
   border: none;
   background-color: #00d9ff;
- }
- #sendMessage{
- 
+}
+#sendMessage {
   position: relative;
   z-index: 1;
   transition: var(--transition);
   cursor: pointer;
-  /* font-weight: 800; */
   font-family: var(--font-mono);
   font-size: var(--fz-sm);
   width: 100%;
-  background-image: linear-gradient(to left, var(--lightest-slate)0.3%, transparent 100%);
-  /* text-align: center; */
+  background-image: linear-gradient(
+    to left,
+    var(--lightest-slate) 0.3%,
+    transparent 100%
+  );
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
- border: none;
- 
- }
- 
- #sendMessage p{
+  border: none;
+}
+
+#sendMessage p {
   color: var(--lightest-slate);
 }
 /************************************************************************* ***LOGIN SECTION******************************************************** */
@@ -483,7 +481,7 @@ button:hover{
   background-color: var(--navy);
   padding: 7rem;
 }
-small{
+small {
   color: red;
   font-family: var(--font-mono);
 }
@@ -562,7 +560,7 @@ footer {
 #experience {
   background-color: var(--lightest-navy);
 }
-.recent-job-second-cont2{
+.recent-job-second-cont2 {
   display: none;
 }
 .recent-job-cont {
@@ -631,20 +629,26 @@ footer {
   padding: 10%;
   background-color: var(--navy);
 }
-/* .blog-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
 
-
-} */
+#blogs > div.blog-cards > div > img {
+  width: 90%;
+}
+#blogs > div.blog-cards > div > ul > li {
+  display: flex;
+}
+#like-btn {
+  padding: 0;
+  margin: 0;
+  height: 1.6rem;
+}
 .blog-card {
-  padding: 8% 2% 12% 5%;
-  margin: 6% 3% 0;
-  /* width: 30%;
-  height: 30vh; */
-  /* display: flex; */
+  padding: 8% 2% 0% 5%;
+  margin: 6% 3%;
   background-color: var(--light-navy);
   border-radius: var(--border-radius);
+}
+#\{item\.index\} > button {
+  padding: 2%;
 }
 .blog-icons {
   display: flex;
@@ -686,26 +690,25 @@ footer {
 }
 /* ************************************************************************ *** SINGLE BLOG SECTION******************************************************** */
 .single-blog {
-  margin-top: -1px; 
+  margin-top: -1px;
   width: 100%;
   pointer-events: auto;
   top: 0;
   left: 0;
   right: 0;
-  overflow-y:scroll;
+  overflow-y: scroll;
   max-height: 100%;
-  position:fixed;
-z-index: 999;
+  position: fixed;
+  z-index: 999;
   border: 1px solid #efe1e6;
   background: rgba(87, 233, 233, 0.3);
-  /* display: none; */
 }
-#closeIcon2{
+#closeIcon2 {
   margin-left: 80%;
 }
-#closeIcon3 > img{
-display: flex;
-margin-left: 95%;
+#closeIcon3 > img {
+  display: flex;
+  margin-left: 95%;
 }
 .single-blog.show {
   opacity: 1;
@@ -719,28 +722,20 @@ margin-left: 95%;
   border-radius: 5rem;
   margin-top: 3rem;
 }
-/* .blog-img {
-  margin: 5%;
-  height: 74vh;
-  width: 90%;
-  background-image: url(./assets/boks.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  border-radius: 20px;
-} */
+
 .content-container {
   margin: 5%;
   gap: 10%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
-#blogs > div.blog-cards > div > ul > li > button{
+#blogs > div.blog-cards > div > ul > li > button {
   border: none;
 }
 #like {
   width: 100%;
 }
-#like{
+#like {
   width: 25px;
   background-color: var(--green);
 }
@@ -758,8 +753,8 @@ margin-left: 95%;
   flex-direction: column;
   justify-content: space-between;
 }
-  div.comments-wrapper > form > textarea,
- div.comments-wrapper > form > input {
+div.comments-wrapper > form > textarea,
+div.comments-wrapper > form > input {
   width: 80%;
   border-radius: 8px;
   background-color: transparent;
@@ -790,7 +785,7 @@ margin-left: 95%;
   border-radius: 24px;
   background-color: var(--lightest-navy);
 }
-#work > div.work-wrapper > div.header-wrapper{
+#work > div.work-wrapper > div.header-wrapper {
   display: none;
 }
 .single-work-wrapper h2 {
@@ -806,19 +801,11 @@ margin-left: 95%;
   line-height: 24px;
 }
 .work-place-img {
-  /* background-image: url(./assets/rails.PNG); */
   background-size: contain;
   width: 70%;
   margin-left: 5rem;
-  /* height: 30vh; */
-  /* padding: 10%; */
-  /* height: 20vh; */
   border-radius: 1rem;
-  /* border: red 1px solid; */
-  /* object-fit: cover; */
   background-repeat: no-repeat;
-  /* width: 100%; */
-  /* height: 100%; */
   transition: 0.5s ease-in-out;
 }
 .work-description {
@@ -827,10 +814,8 @@ margin-left: 95%;
   padding: 24px 0;
   gap: 20px;
 }
-/* body > section:nth-child(5) {
-  padding-left: 5rem;
-} */
-body > section:nth-child(5) > div > div.content-container > div > div{
+
+body > section:nth-child(5) > div > div.content-container > div > div {
   display: flex;
   gap: 5rem;
   color: #00d9ff;
@@ -842,7 +827,7 @@ body > section:nth-child(5) > div > ul,
 .work-description ul {
   display: flex;
 }
-body > section:nth-child(5) > div > ul li{
+body > section:nth-child(5) > div > ul li {
   margin: 3rem 6rem;
   background-color: var(--dark-blue);
   padding: 4px 12px;
@@ -850,7 +835,6 @@ body > section:nth-child(5) > div > ul li{
   font-weight: 500;
   font-size: var(--xx-small-size);
   color: var(--light-slate);
-  /* margin: 0 10px 10px 0; */
 }
 .work-description ul li {
   background-color: var(--light-navy);
@@ -873,13 +857,7 @@ body > section:nth-child(5) > div > ul li{
   background-color: var(--light-navy);
   display: none;
 }
-/* .header-wrapper p {
-  color: var(--green);
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 30px;
-  margin-left: 2%;
-} */
+
 #admin {
   border-collapse: collapse;
   width: 100%;
@@ -918,12 +896,12 @@ tr td button {
 .create-blog form textarea {
   height: auto;
 }
-#imagefile{
+#imagefile {
   border: none;
   height: auto;
 }
 small.message-success,
- small.blog-submitted{
+small.blog-submitted {
   color: #00d9ff;
 }
 /* *************************************************************************LAPTOP SCREEN********************************************************* */
@@ -966,7 +944,9 @@ small.message-success,
   #admin th {
     font-size: 13px;
   }
-
+  #\{item\.index\} > button {
+    padding: 1.5%;
+  }
   tr td button {
     margin: 0;
   }
@@ -1058,13 +1038,12 @@ small.message-success,
   .exp-hr {
     display: none;
   }
-  .close-humburger{
+  .close-humburger {
     display: flex;
     margin: 0.3rem 2rem 0 12rem;
-
   }
-  .nav-elements{
-    flex-direction:column;
+  .nav-elements {
+    flex-direction: column;
     height: 93vh;
     background: #112240;
     opacity: 0.97;
@@ -1088,12 +1067,11 @@ small.message-success,
     border: 1px solid transparent;
     border-radius: var(--border-radius);
     cursor: pointer;
-
   }
-  .humbuger{
+  .humbuger {
     z-index: -1;
   }
-  nav ul.closeHumbuger{
+  nav ul.closeHumbuger {
     border: 1px dashed;
   }
   .closeHumbuger li,
@@ -1106,8 +1084,7 @@ small.message-success,
     width: 80%;
   }
 
-
-.humbuger > li.line3 {
+  .humbuger > li.line3 {
     width: 60%;
   }
 
@@ -1152,12 +1129,10 @@ small.message-success,
   .header-wrapper {
     margin-bottom: 20%;
   }
-  .work-place-img{
+  .work-place-img {
     border-radius: 15px;
   }
-  /* .work-image {
-    height: 20vh;
-  } */
+
   .single-work-wrapper {
     height: auto;
   }
@@ -1178,13 +1153,13 @@ small.message-success,
   .blog-cards {
     grid-template-columns: 1fr;
   }
-  
-.single-blog-container{
-  border-radius: 2rem;
-  margin-top: 1rem;
-  width: 90%;
-  padding-top: 9%;
-}
+
+  .single-blog-container {
+    border-radius: 2rem;
+    margin-top: 1rem;
+    width: 90%;
+    padding-top: 9%;
+  }
   .blogs button {
     margin: 5% 30%;
     padding: 10px 15px;
@@ -1201,7 +1176,7 @@ small.message-success,
   .blog-img {
     height: 24vh;
   }
-  
+
   .comment button {
     margin-left: 55%;
   }
