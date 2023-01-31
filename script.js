@@ -39,18 +39,6 @@ second.onclick = function second() {
   recentJob2.style.display = "flex";
 };
 
-//  ********************see blog****************
-
-// blog.onclick = function blog() {
-//   singleBlog.style.display = "flex";
-//   console.log("you clicked me");
-// };
-
-// closeIcon2.onclick = function closeIcon2() {
-//   singleBlog.style.display = "none";
-//   console.log("closed");
-// };
-
 //  ********************WORK SECTION****************
 
 const details = [
@@ -268,7 +256,6 @@ console.log(comments);
 function blogForm(item) {
   const blogFormName = document.getElementById("name-" + item);
   const blogFormmessage = document.getElementById("comment-" + item);
-  // const blogForm = document.querySelector(".comment");
   const error = document.getElementById("nameError-" + item);
   const textError = document.getElementById("messageError-" + item);
 
@@ -340,7 +327,7 @@ const getBlog = () => {
 
 
 };
-// const blogIcons = document.getElementsByClassName('blog-icons')
+
 
 const blogDetailsFunc = () => {
   const result = blogs
@@ -352,7 +339,7 @@ const blogDetailsFunc = () => {
   
       <img src="${item.image}"/>
       <h2>${item.name}</h2>
-      <p class="edit-blog">${item.description}</p>
+      <p >${item.description}</p>
       <ul>
 
  <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
@@ -391,21 +378,8 @@ const blogDetailsFunc = () => {
       }
     });
   }
-// const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
-const editBlog = ({ index, event }) => {
-  if (event.target.value === '') return;
-  if (event.key === 'Enter') {
-    blogs[index].description = event.target.value;
-    localStorage.setItem('blogs', JSON.stringify(blogs))
-  }
-};
 
-blogCards.addEventListener('keypress', (event) => {
-  const pressedItem = event.target.classList[event.target.classList.length - 1];
-  const blog = event.target.parentElement;
-  if (pressedItem === 'edit-blog') editmylist({ index: blog.id, event });
-});
 let likes= 0
 function increment(){
     if (likes !==0 ) {
@@ -458,7 +432,6 @@ function createBlog() {
   localStorage.setItem("blogs", JSON.stringify(blogs));
 
   blogSubmitted.innerHTML = "blog submitted successfully";
-  // createBlog()
   getBlog();
 }
 
@@ -471,7 +444,7 @@ blodImage.addEventListener("change", function () {
   const fileReader = new FileReader();
   fileReader.addEventListener("load", () => {
     imageUrl = fileReader.result;
-    // blodImage.value = imageUrl
+
   });
   fileReader.readAsDataURL(this.files[0]);
 });
@@ -482,12 +455,12 @@ const row = () => {
   const blogElement = blogs
     .map(
       (item, index) => `
-    <tr>
+    <tr class="edit-blog">
   <td>${item.name}</td>
 
   <td>${item.description}</td>
-  <td><button  class="delete-button" onclick="deleteBlog(${index})">delete</button></td>
-  <td><button class="table-button">edit</button></td>
+  <td><button  class="delete-button-${item.index}" onclick="deleteBlog(${index})">delete</button></td>
+  <td><button class="table-button-${item.index}" >edit</button></td>
 </tr>`
     )
     .join("");
@@ -496,6 +469,16 @@ const row = () => {
   return adminTable;
 };
 
+
+
+const editBlog = ({ event }) => {
+  if (event.target.value === '') return;
+  if (event.key === 'Enter') {
+   a= event.target.value;
+    localStorage.setItem('blogs', JSON.stringify(blogs))
+    console.log(amclicked);
+  }
+};
 
 const deleteBlog = (index) => {
   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
@@ -510,26 +493,6 @@ const deleteBlog = (index) => {
   getBlog();}
 };
 
-
-{
-  /* <div class="blog-card" id ={item.index}>
-//       <div class="blog-icons">
-//         <img src="./assets/boxArrow.png" alt="box-arrow" />
-//         <a href="https://github.com/divinecharlotte/metrics-webapp"
-//           ><img src="./assets/github.png" alt="github-icon"
-//         /></a>
-//       </div>
-  
-
-//       <h2>${item.name}</h2>
-//       <p>${item.description}</p>
-//       <ul>
-//         <li>12 likes</li>
-//         <li>12 comments</li>
-//       </ul>
-      
-//     </div> */
-}
 const messagesTable = document.querySelector(".messages-table");
 const Messagerow = () => {
   const messageElement = messages
