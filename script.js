@@ -252,7 +252,7 @@ function validateForm() {
   return false;
 }
 let comments = JSON.parse(localStorage.getItem("comments")) || [];
-console.log(comments);
+
 function blogForm(item) {
   const blogFormName = document.getElementById("name-" + item);
   const blogFormmessage = document.getElementById("comment-" + item);
@@ -286,107 +286,192 @@ function blogForm(item) {
   localStorage.setItem("comments", JSON.stringify(comments));
   return false;
 }
-let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-const getBlog = () => {
-  const blogData = blogs
-    .map(
-      (item) => `
 
+const apiUrl = "http://localhost:5000/api/blogs";
 
-      
-        <div class="blog-card" id ={item.index} >
-        
-             <div class="blog-icons">
-             <img src="./assets/boxArrow.png" alt="box-arrow" />
-             <a href="https://github.com/divinecharlotte/metrics-webapp"
-               ><img src="./assets/github.png" alt="github-icon"
-             /></a>
-        </div>
-        
-      
-           <h2>${item.name}</h2>
-        <p>${item.description}</p>
+const getBlog = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    const blogs = await response.json();
+    // console.log(blogs);
+    
+    const blogData = blogs
+      .map((item) => `
+        <div class="blog-card" id="${item.index}">
+          <div class="blog-icons">
+            <img src="./assets/boxArrow.png" alt="box-arrow" />
+            <a href="https://github.com/divinecharlotte/metrics-webapp">
+              <img src="./assets/github.png" alt="github-icon" />
+            </a>
+          </div>
+          <h2>${item.title}</h2>
+          <p>${item.content.substring(0,10)}</p>
           <ul>
-          <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-          <li id="current-comments-${item.index}"> comments</li>
-        </ul>
-       
+            <li>
+              <button id="like-btn" type="button" onclick="increment()">
+                <img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes">
+              </button>
+              <p id="counter"> 0 Likes</p>
+            </li>
+            <li id="current-comments-${item.index}">comments</li>
           </ul>
-          <button type="button"onclick="blogDetailsFunc(${item.id})">full view</button>
-           </div> 
+          <button type="button" onclick="blogDetailsFunc(${item.id})">full view</button>
+
+        </div>
+      `)
+      .join("");
+
+    blogCards.innerHTML = blogData;
+
+    countBlogComments();
+  } catch (error) {
+    console.error("Error fetching blogs", error);
+  }
+};
+
+// let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+// const getBlog = () => {
+//   const blogData = blogs
+//     .map(
+//       (item) => `
+
+
+      
+//         <div class="blog-card" id ={item.index} >
+        
+//              <div class="blog-icons">
+//              <img src="./assets/boxArrow.png" alt="box-arrow" />
+//              <a href="https://github.com/divinecharlotte/metrics-webapp"
+//                ><img src="./assets/github.png" alt="github-icon"
+//              /></a>
+//         </div>
+        
+      
+//            <h2>${item.name}</h2>
+//         <p>${item.description}</p>
+//           <ul>
+//           <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+//           <li id="current-comments-${item.index}"> comments</li>
+//         </ul>
+       
+//           </ul>
+//           <button type="button"onclick="blogDetailsFunc(${item.id})">full view</button>
+//            </div> 
       
 
 
-     `
-    )
-    .join("");
+//      `
+//     )
+//     .join("");
 
-  blogCards.innerHTML = blogData;
+//   blogCards.innerHTML = blogData;
 
-  countBlogComments();
+//   countBlogComments();
 
 
+// };
+
+const blogDetailsFunc = async (id) => {
+  const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+  const blog = await response.json();
+  const result = `
+    <div class="blog-card">
+      <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
+      <img src="${blog.image}"/>
+      <h2>${blog.title}</h2>
+      <p >${blog.content}</p>
+      <ul>
+        <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+        <li id="current-comments-${blog.index}"> comments</li>
+      </ul>
+      <div class="comments" id="comments-${blog.index}"></div>
+      <div class="comments-wrapper">
+        <form class="comment" onsubmit="return false;" id="${blog.index}">
+          <h3 class="form-title">Add your comment</h3>
+          <div class="${blog.index}"></div>
+          <input type="text" name="name" id="name-${blog.index}" class="${blog.index}" placeholder="Your names :" />
+          <br> 
+          <small class="nameError" id="nameError-${blog.index}"></small> <br>
+          <textarea class="${blog.index}" id="comment-${blog.index}" cols="2" rows="4" placeholder="Comment :" ></textarea>
+          <br />
+          <small class="messageError" id="messageError-${blog.index}"></small> <br>
+          <button type="button" onclick="return blogForm(${blog.index})">Submit</button>
+        </form>
+      </div>
+    </div>
+  `;
+  blogCards.innerHTML = result;
+  comments.forEach((item) => {
+    const blogIndex = item.blog;
+    const commentsDiv = document.getElementById(`comments-${blogIndex}`);
+    if(commentsDiv){
+      const p = document.createElement("p");
+      p.textContent = `${item.message} by ${item.name}`;
+      commentsDiv.appendChild(p);
+    }
+  });
 };
 
 
-const blogDetailsFunc = () => {
-  const result = blogs
-    .map(
-      (item) => 
-` <div class="blog-card">
-<p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
+
+// const blogDetailsFunc = () => {
+//   const result = blogs
+//     .map(
+//       (item) => 
+// ` <div class="blog-card">
+// <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
     
   
-      <img src="${item.image}"/>
-      <h2>${item.name}</h2>
-      <p >${item.description}</p>
-      <ul>
+//       <img src="${item.image}"/>
+//       <h2>${item.name}</h2>
+//       <p >${item.description}</p>
+//       <ul>
 
- <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-        <li id="current-comments-${item.index}"> comments</li>
-      </ul>
-      <div class="comments" id="comments-${item.index}"></div>
+//  <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+//         <li id="current-comments-${item.index}"> comments</li>
+//       </ul>
+//       <div class="comments" id="comments-${item.index}"></div>
 
       
-        <div class="comments-wrapper">
+//         <div class="comments-wrapper">
 
 
-          <form class="comment" onsubmit="return false;" id="${item.index}" >
-            <h3 class="form-title">Add your comment</h3>
-            <div class="${item.index}"></div>
-            <input type="text" name="name" id="name-${item.index}" class="${item.index}" placeholder="Your names :" />
-            <br> 
-            <small class="nameError" id="nameError-${item.index}"></small> <br>
-            <textarea class="${item.index}" id="comment-${item.index}" cols="2" rows="4" placeholder="Comment :" ></textarea>
-            <br />
-            <small class="messageError" id="messageError-${item.index}"></small> <br>
+//           <form class="comment" onsubmit="return false;" id="${item.index}" >
+//             <h3 class="form-title">Add your comment</h3>
+//             <div class="${item.index}"></div>
+//             <input type="text" name="name" id="name-${item.index}" class="${item.index}" placeholder="Your names :" />
+//             <br> 
+//             <small class="nameError" id="nameError-${item.index}"></small> <br>
+//             <textarea class="${item.index}" id="comment-${item.index}" cols="2" rows="4" placeholder="Comment :" ></textarea>
+//             <br />
+//             <small class="messageError" id="messageError-${item.index}"></small> <br>
         
-            <button type="button" onclick="return blogForm(${item.index})">Submit</button>
-        </form>
-        </div>
-    </div>` )
-    .join("");
-    blogCards.innerHTML = result;
+//             <button type="button" onclick="return blogForm(${item.index})">Submit</button>
+//         </form>
+//         </div>
+//     </div>` )
+//     .join("");
+//     blogCards.innerHTML = result;
    
-    comments.forEach((item) => {
-      const blogIndex = item.blog;
-      const commentsDiv = document.getElementById(`comments-${blogIndex}`);
-      if(commentsDiv){
-        const p = document.createElement("p");
-        p.textContent = `${item.message} by ${item.name}`;
-        commentsDiv.appendChild(p);
-      }
-    });
-  }
+//     comments.forEach((item) => {
+//       const blogIndex = item.blog;
+//       const commentsDiv = document.getElementById(`comments-${blogIndex}`);
+//       if(commentsDiv){
+//         const p = document.createElement("p");
+//         p.textContent = `${item.message} by ${item.name}`;
+//         commentsDiv.appendChild(p);
+//       }
+//     });
+//   }
 
 
-let likes= 0
-function increment(){
-    if (likes !==0 ) {
-    }
-    likes++
-document.getElementById("counter").innerHTML = `${likes}likes`
-}
+// let likes= 0
+// function increment(){
+//     if (likes !==0 ) {
+//     }
+//     likes++
+// document.getElementById("counter").innerHTML = `${likes}likes`
+// }
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");
@@ -451,47 +536,95 @@ blodImage.addEventListener("change", function () {
 
 const adminTable = document.getElementById("tableData");
 
-const row = () => {
-  const blogElement = blogs
-    .map(
+
+const row = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    const blogs = await response.json();
+    const blogElement = blogs.map(
       (item, index) => `
-    <tr class="edit-blog">
-  <td>${item.name}</td>
-
-  <td>${item.description}</td>
-  <td><button  class="delete-button-${item.index}" onclick="deleteBlog(${index})">delete</button></td>
-  <td><button class="table-button-${item.index}" >edit</button></td>
-</tr>`
-    )
-    .join("");
-  adminTable.innerHTML = blogElement;
-  deleteBlog();
-  return adminTable;
-};
-
-
-
-const editBlog = ({ event }) => {
-  if (event.target.value === '') return;
-  if (event.key === 'Enter') {
-   a= event.target.value;
-    localStorage.setItem('blogs', JSON.stringify(blogs))
-    console.log(amclicked);
+        <tr class="edit-blog">
+          <td>${item.title}</td>
+          <td>${item.content}</td>
+          <td><button class="delete-button-${index}" onclick="deleteBlog(${index})">delete</button></td>
+          <td><button class="table-button-${index}" onclick="editBlog(event, id)">edit</button></td>
+        </tr>`
+    ).join("");
+    adminTable.innerHTML = blogElement;
+    // deleteBlog();
+    return adminTable;
+  } catch (error) {
+    console.error(error);
   }
 };
 
-const deleteBlog = (index) => {
-  const allBlogs = JSON.parse(localStorage.getItem("blogs"));
-  const allComments = JSON.parse(localStorage.getItem("comments"));
-  if(allBlogs === null || allComments === null){ 
-    console.log("element not found");
-  }else{
-  const newBlogs = allBlogs.filter((blog, i) => i != index);
-  localStorage.setItem("blogs", JSON.stringify(newBlogs));
-  const newComments = allComments.filter((comment) => comment.blog !== index);
-  localStorage.setItem("comments", JSON.stringify(newComments));
-  getBlog();}
-};
+
+// const row = () => {
+//   const blogElement = blogs
+//     .map(
+//       (item, index) => `
+//     <tr class="edit-blog">
+//   <td>${item.name}</td>
+
+//   <td>${item.description}</td>
+//   <td><button  class="delete-button-${item.index}" onclick="deleteBlog(${index})">delete</button></td>
+//   <td><button class="table-button-${item.index}" >edit</button></td>
+// </tr>`
+//     )
+//     .join("");
+//   adminTable.innerHTML = blogElement;
+//   deleteBlog();
+//   return adminTable;
+// };
+
+
+
+// const editBlog = ({ event, id }) => {
+//   if (event.target.value === '') return;
+//   if (event.key === 'Enter') {
+//     const updatedBlog = {
+//       name: event.target.value,
+//       description: '',
+//     };
+//     fetch(`http://localhost:5000/api/blogs/${id}`, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(updatedBlog),
+//     })
+//       .then(response => response.json())
+//       .then(data => {
+//         console.log(`Blog with id ${data.id} has been updated`);
+//       })
+//       .catch(error => {
+//         console.error(error);
+//       });
+//   }
+// };
+
+
+// const editBlog = ({ event }) => {
+//   if (event.target.value === '') return;
+//   if (event.key === 'Enter') {
+//    a= event.target.value;
+//     localStorage.setItem('blogs', JSON.stringify(blogs))
+//     console.log(amclicked);
+//   }
+// };
+
+// const deleteBlog = (index) => {
+//   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
+//   const allComments = JSON.parse(localStorage.getItem("comments"));
+//   if(allBlogs === null || allComments === null){ 
+//     console.log("element not found");
+//   }else{
+//   const newBlogs = allBlogs.filter((blog, i) => i != index);
+//   localStorage.setItem("blogs", JSON.stringify(newBlogs));
+//   const newComments = allComments.filter((comment) => comment.blog !== index);
+//   localStorage.setItem("comments", JSON.stringify(newComments));
+//   getBlog();}
+// };
 
 const messagesTable = document.querySelector(".messages-table");
 const Messagerow = () => {
