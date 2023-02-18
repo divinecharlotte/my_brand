@@ -315,7 +315,8 @@ const getBlog = async () => {
             </li>
             <li id="current-comments-${item.index}">comments</li>
           </ul>
-          <button type="button" onclick="blogDetailsFunc(${item.id})">full view</button>
+      <button type="button" >
+          <a  href="./blogDetail.html?${item._id}" onclick="blogDetailsFunc()">Read More...</a></button>
 
         </div>
       `)
@@ -371,35 +372,12 @@ const getBlog = async () => {
 
 // };
 
-const blogDetailsFunc = async (id) => {
+const blogDetailsFunc = async () => {
+  let id = window.location.search.substr(1).split("?")
+  id = id[0];
+console.log("divine");
   const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
   const blog = await response.json();
-  const result = `
-    <div class="blog-card">
-      <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
-      <img src="${blog.image}"/>
-      <h2>${blog.title}</h2>
-      <p >${blog.content}</p>
-      <ul>
-        <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-        <li id="current-comments-${blog.index}"> comments</li>
-      </ul>
-      <div class="comments" id="comments-${blog.index}"></div>
-      <div class="comments-wrapper">
-        <form class="comment" onsubmit="return false;" id="${blog.index}">
-          <h3 class="form-title">Add your comment</h3>
-          <div class="${blog.index}"></div>
-          <input type="text" name="name" id="name-${blog.index}" class="${blog.index}" placeholder="Your names :" />
-          <br> 
-          <small class="nameError" id="nameError-${blog.index}"></small> <br>
-          <textarea class="${blog.index}" id="comment-${blog.index}" cols="2" rows="4" placeholder="Comment :" ></textarea>
-          <br />
-          <small class="messageError" id="messageError-${blog.index}"></small> <br>
-          <button type="button" onclick="return blogForm(${blog.index})">Submit</button>
-        </form>
-      </div>
-    </div>
-  `;
   blogCards.innerHTML = result;
   comments.forEach((item) => {
     const blogIndex = item.blog;
@@ -472,6 +450,10 @@ const blogDetailsFunc = async (id) => {
 //     likes++
 // document.getElementById("counter").innerHTML = `${likes}likes`
 // }
+
+
+
+
 function createBlog() {
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");
@@ -481,26 +463,25 @@ function createBlog() {
   const imageError = createBlogForm.querySelector(".imageError");
   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
 
-  const blog = {
-    image: imageUrl,
-    name: blogName.value,
-    description: blogDescription.value,
-    index: blogs.length + 1,
-  };
-  var y = blog.image;
+  const formData = new FormData();
+  formData.append("image", imageUrl);
+  formData.append("name", blogName.value);
+  formData.append("description", blogDescription.value);
+
+  var y = imageUrl;
   if (y == "") {
     imageError.innerHTML = "blog image is required";
     return false;
   }
 
-  let x = blog.name;
+  let x = blogName.value;
   var nameRegex = /^[^\s]+( [^\s]+)+$/;
   if (!x.match(nameRegex)) {
-    nameError[0].innerHTML = "blog title should be separeted by single space";
+    nameError[0].innerHTML = "blog title should be separated by single space";
     return false;
   }
 
-  var z = blog.description;
+  var z = blogDescription.value;
   if (z.length <= 20) {
     descriptionError.innerHTML =
       "blog description should be more than 20 letters";
@@ -513,12 +494,75 @@ function createBlog() {
   imageError.innerHTML = "";
   nameError[0].innerHTML = "";
   descriptionError.innerHTML = "";
-  blogs = [...blogs, blog];
-  localStorage.setItem("blogs", JSON.stringify(blogs));
 
-  blogSubmitted.innerHTML = "blog submitted successfully";
-  getBlog();
+  fetch("http://localhost:5000/api/blogs", {
+    method: "POST",
+    body: formData,
+    headers: {
+      "Content-Type": "application/form-data"
+    }
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      blogSubmitted.innerHTML = "blog submitted successfully";
+      getBlog();
+    })
+    .catch((error) => {
+      console.error("Error submitting blog:", error);
+    });
 }
+
+
+
+// function createBlog() {
+//   const blogName = document.querySelector(".blog-name");
+//   const blogDescription = document.querySelector(".blog-description");
+//   const createBlogForm = document.querySelector(".add-new-blog");
+//   const nameError = createBlogForm.getElementsByClassName("blogNameError");
+//   const descriptionError = createBlogForm.querySelector(".descriptionError");
+//   const imageError = createBlogForm.querySelector(".imageError");
+//   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
+
+//   const blog = {
+//     image: imageUrl,
+//     name: blogName.value,
+//     description: blogDescription.value,
+//     index: blogs.length + 1,
+//   };
+//   var y = blog.image;
+//   if (y == "") {
+//     imageError.innerHTML = "blog image is required";
+//     return false;
+//   }
+
+//   let x = blog.name;
+//   var nameRegex = /^[^\s]+( [^\s]+)+$/;
+//   if (!x.match(nameRegex)) {
+//     nameError[0].innerHTML = "blog title should be separeted by single space";
+//     return false;
+//   }
+
+//   var z = blog.description;
+//   if (z.length <= 20) {
+//     descriptionError.innerHTML =
+//       "blog description should be more than 20 letters";
+//     return false;
+//   }
+
+//   blodImage.value = "";
+//   blogName.value = "";
+//   blogDescription.value = "";
+//   imageError.innerHTML = "";
+//   nameError[0].innerHTML = "";
+//   descriptionError.innerHTML = "";
+//   blogs = [...blogs, blog];
+//   localStorage.setItem("blogs", JSON.stringify(blogs));
+
+//   blogSubmitted.innerHTML = "blog submitted successfully";
+//   getBlog();
+// }
 
 
 // ***********************************new blog*************************
@@ -545,7 +589,7 @@ const row = async () => {
       (item, index) => `
         <tr class="edit-blog">
           <td>${item.title}</td>
-          <td>${item.content}</td>
+          <td>${item.content.substring(0,10)}</td>
           <td><button class="delete-button-${index}" onclick="deleteBlog(${index})">delete</button></td>
           <td><button class="table-button-${index}" onclick="editBlog(event, id)">edit</button></td>
         </tr>`
@@ -627,13 +671,21 @@ const row = async () => {
 // };
 
 const messagesTable = document.querySelector(".messages-table");
-const Messagerow = () => {
+// const Messagerow = () => {
+  const messagesUrl = "http://localhost:5000/api/messages";
+
+const Messagerow = async () => {
+  try {
+    const response = await fetch(messagesUrl);
+    const messages = await response.json();
+    // console.log(messages);
+    
   const messageElement = messages
     .map(
       (item, index) => `
     <tr>
   <td>${item.name}</td>
-  <td>${item.info}</td>
+  <td>${typeof item.message === 'string' ? item.message.slice(0, 20) : item.message}</td>
   <td><button class="table-button" onclick="deleteMessage(${index})" >delete</button></td>
   <td><button class="table-button">edit</button></td>
 </tr>`
@@ -642,6 +694,9 @@ const Messagerow = () => {
 
   messagesTable.innerHTML = messageElement;
   return Messagerow;
+} catch (error) {
+  console.error("Error fetching messages", error);
+}
 };
 
 const deleteMessage = (index) => {
@@ -654,7 +709,7 @@ window.addEventListener("load", () => {
   getBlog();
   row();
   Messagerow();
-
+  // blogDetailsFunc()
 
 
   workContainer.innerHTML = getWorkData;
