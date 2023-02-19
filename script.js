@@ -169,25 +169,50 @@ closePopupFunc(null);
 popupDetailsFunc(null);
 
 // ******************************forms********************************
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("pwd");
 
-function login(event) {
+const login = async (event) => {
   event.preventDefault();
-
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("pwd").value;
-
-  if (email != "divinemaina@gmail.com") {
-    const errorTag = logged.getElementsByClassName("loginEmail");
-    errorTag[0].innerHTML = "Please insert admin email!";
-    return;
-  } else if (password != "user") {
-    const passwordError = logged.getElementsByClassName("loginPassword");
-    passwordError[0].innerHTML = "Please insert admin password!";
-    return;
-  } else {
-    admin.style.display = "block";
-    logged.style.display = "none";
+  const admin= {
+    email: emailInput.value,
+    password:passwordInput.value
   }
+
+  // console.log("Me admin:", admin);
+
+  const settings = {
+    method: 'POST',
+    // headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    // }
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify(admin),
+};
+try {
+    const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
+    const data = await fetchResponse.json();
+    console.log("Response:", data);
+    return data;
+} catch (e) {
+    return e;
+}    
+  // const { messages } = comments
+  // if (email != "divinemaina@gmail.com") {
+  //   const errorTag = logged.getElementsByClassName("loginEmail");
+  //   errorTag[0].innerHTML = "Please insert admin email!";
+  //   return;
+  // } else if (password != "user") {
+  //   const passwordError = logged.getElementsByClassName("loginPassword");
+  //   passwordError[0].innerHTML = "Please insert admin password!";
+  //   return;
+  // } else {
+  //   admin.style.display = "block";
+  //   logged.style.display = "none";
+  // }
 }
 
 //  var editor = new FroalaEditor('#froala');
@@ -251,8 +276,21 @@ function validateForm() {
   messageSuccess.innerHTML = "message submitted successfully";
   return false;
 }
-let comments = JSON.parse(localStorage.getItem("comments")) || [];
-
+const blogComments = async (id) => {
+  const response = await fetch(`http://localhost:5000/api/blogs/${id}/comments`);
+  const comments = await response.json();
+  const { messages } = comments
+ 
+messagesCount = messages.length
+  messages.forEach((item) => {
+    const commentsDiv = document.getElementById(`comments-${id}`);
+    if(commentsDiv){
+      const p = document.createElement("p");
+      p.textContent = `${item}`;
+      commentsDiv.appendChild(p);
+    }
+  });
+}
 function blogForm(item) {
   const blogFormName = document.getElementById("name-" + item);
   const blogFormmessage = document.getElementById("comment-" + item);
@@ -371,6 +409,33 @@ const getBlog = async () => {
 
 // };
 
+
+const blogLikes= async (id) => {
+  const response = await fetch(`http://localhost:5000/api/blogs/${id}/likes`);
+  const likes = await response.json();
+  // const { messages } = comments
+ 
+// messagesCount = messages.length
+  likes.forEach((item) => {
+    const likesDiv = document.getElementById(`like-btn-${id}`);
+    if(likesDiv){
+      const li = document.createElement("li");
+      li.textContent = `${item}`;
+      likesDiv.appendChild(li);
+    }
+  });
+}
+
+
+
+let likes= 0
+function increment(){
+    if (likes !==0 ) {
+    }
+    likes++
+document.getElementById("counter").innerHTML = `${likes}likes`
+}
+
 const blogDetailsFunc = async (id) => {
   const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
   const blog = await response.json();
@@ -381,10 +446,10 @@ const blogDetailsFunc = async (id) => {
       <h2>${blog.title}</h2>
       <p >${blog.content}</p>
       <ul>
-        <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+        <li><button id="like-btn-${id}" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
         <li id="current-comments-${blog.index}"> comments</li>
       </ul>
-      <div class="comments" id="comments-${blog.index}"></div>
+      <div class="comments" id="comments-${id}"></div>
       <div class="comments-wrapper">
         <form class="comment" onsubmit="return false;" id="${blog.index}">
           <h3 class="form-title">Add your comment</h3>
@@ -401,15 +466,9 @@ const blogDetailsFunc = async (id) => {
     </div>
   `;
   blogCards.innerHTML = result;
-  comments.forEach((item) => {
-    const blogIndex = item.blog;
-    const commentsDiv = document.getElementById(`comments-${blogIndex}`);
-    if(commentsDiv){
-      const p = document.createElement("p");
-      p.textContent = `${item.message} by ${item.name}`;
-      commentsDiv.appendChild(p);
-    }
-  });
+  blogComments(id);
+
+  
 };
 
 
