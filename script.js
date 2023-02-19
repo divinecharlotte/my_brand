@@ -295,8 +295,10 @@ const getBlog = async () => {
     const blogs = await response.json();
     // console.log(blogs);
     
-    const blogData = blogs
-      .map((item) => `
+    const blogData = blogs.map((item) => {
+      const id = item._id;
+      console.log(id);
+      return `
         <div class="blog-card" id="${item.index}">
           <div class="blog-icons">
             <img src="./assets/boxArrow.png" alt="box-arrow" />
@@ -315,20 +317,18 @@ const getBlog = async () => {
             </li>
             <li id="current-comments-${item.index}">comments</li>
           </ul>
-          <button type="button" onclick="blogDetailsFunc(${item.id})">full view</button>
-
+          <button type="button" onclick="blogDetailsFunc('${id}')">full view</button>
         </div>
-      `)
-      .join("");
-
+      `;
+    }).join("");
+    
     blogCards.innerHTML = blogData;
-
+    
     countBlogComments();
   } catch (error) {
     console.error("Error fetching blogs", error);
   }
 };
-
 // let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 // const getBlog = () => {
 //   const blogData = blogs
