@@ -372,23 +372,23 @@ const getBlog = async () => {
 
 // };
 
-const blogDetailsFunc = async () => {
-  let id = window.location.search.substr(1).split("?")
-  id = id[0];
-console.log("divine");
-  const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
-  const blog = await response.json();
-  blogCards.innerHTML = result;
-  comments.forEach((item) => {
-    const blogIndex = item.blog;
-    const commentsDiv = document.getElementById(`comments-${blogIndex}`);
-    if(commentsDiv){
-      const p = document.createElement("p");
-      p.textContent = `${item.message} by ${item.name}`;
-      commentsDiv.appendChild(p);
-    }
-  });
-};
+// const blogDetailsFunc = async () => {
+//   let id = window.location.search.substr(1).split("?")
+//   id = id[0];
+// console.log("divine");
+//   const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+//   const blog = await response.json();
+//   blogCards.innerHTML = result;
+//   comments.forEach((item) => {
+//     const blogIndex = item.blog;
+//     const commentsDiv = document.getElementById(`comments-${blogIndex}`);
+//     if(commentsDiv){
+//       const p = document.createElement("p");
+//       p.textContent = `${item.message} by ${item.name}`;
+//       commentsDiv.appendChild(p);
+//     }
+//   });
+// };
 
 
 
