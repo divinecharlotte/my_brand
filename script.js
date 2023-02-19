@@ -12,7 +12,7 @@ const blog = document.querySelector(".blog-card");
 const closeIcon2 = document.getElementById("closeIcon2");
 const closeIcon3 = document.getElementById("closeIcon3");
 const workContainer = document.getElementById("work");
-const admin = document.getElementById("adminPannel");
+const adminSection = document.getElementById("adminPannel");
 const logged = document.getElementById("login");
 const contactButton = document.getElementById("contactButton");
 const contactForm = document.getElementById("contactForm");
@@ -171,6 +171,7 @@ popupDetailsFunc(null);
 // ******************************forms********************************
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("pwd");
+    const passwordError = logged.getElementsByClassName("loginPassword");
 
 const login = async (event) => {
   event.preventDefault();
@@ -183,39 +184,42 @@ const login = async (event) => {
 
   const settings = {
     method: 'POST',
-    // headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    // }
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
     body: JSON.stringify(admin),
-};
-try {
-    const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
-    const data = await fetchResponse.json();
-    console.log("Response:", data);
-    return data;
-} catch (e) {
-    return e;
-}    
-  // const { messages } = comments
-  // if (email != "divinemaina@gmail.com") {
-  //   const errorTag = logged.getElementsByClassName("loginEmail");
-  //   errorTag[0].innerHTML = "Please insert admin email!";
-  //   return;
-  // } else if (password != "user") {
-  //   const passwordError = logged.getElementsByClassName("loginPassword");
-  //   passwordError[0].innerHTML = "Please insert admin password!";
-  //   return;
-  // } else {
-  //   admin.style.display = "block";
-  //   logged.style.display = "none";
-  // }
+  };
+  try {
+      const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
+      const data = await fetchResponse.json();
+      const { token } = data;
+      const { user } = data;
+      console.log("Response:", data);
+      console.log(adminSection, logged);
+
+      adminSection.style.display = "block";
+      logged.style.display = "none";
+
+      return data;
+  } catch (e) {
+      passwordError[0].innerHTML = "Please insert right admin credentials!";
+      return e;
+  }    
 }
 
 //  var editor = new FroalaEditor('#froala');
+      // if (user.email != "divinemaina@gmail.com") {
+      //   const errorTag = logged.getElementsByClassName("loginEmail");
+      //   errorTag[0].innerHTML = "Please insert admin email!";
+      //   return;
+      // } else if (password != "user") {
+      //   const passwordError = logged.getElementsByClassName("loginPassword");
+      //   passwordError[0].innerHTML = "Please insert admin password!";
+      //   return;
+      // } else {
+      //   admin.style.display = "block";
+      //   logged.style.display = "none";
+      // }
 
 contactButton.onclick = function contactButton() {
   contactForm.style.display = "block";
