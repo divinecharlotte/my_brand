@@ -356,7 +356,7 @@
        
       </table>
     </div>
-    <div class="create-blog">
+    <div class="create-blog" id="createBLOGG">
       <p>Create a <span>Blog.</span></p>
       <form class="add-new-blog">
       
@@ -369,7 +369,8 @@
         <label for="description">Blog Description:</label><br /><br />
         <textarea class="blog-description" rows="10" maxlength="500"  name="message" ></textarea><br /><br />
         <small class="descriptionError"></small> <br>
-        <button type="submit" onclick="return createBlog(event)">Save blog</button> <br>
+        <button type="submit" onclick="return createBlog(event)">Save blog</button> <br> <br>
+        <button type="submit" class="editbutton" >edit blog</button> <br>
         <small class="blog-submitted"></small> <br>
       </form>
     </div>

@@ -901,17 +901,17 @@ async function blogForm(id) {
 
 
 
+const blogName = document.querySelector(".blog-name");
+const blogDescription = document.querySelector(".blog-description");
+const blodImage = document.querySelector(".blog-image");
 
 const createBlog = async (e) => {
   e.preventDefault();
-  const blogName = document.querySelector(".blog-name");
-  const blogDescription = document.querySelector(".blog-description");
   const createBlogForm = document.querySelector(".add-new-blog");
   const nameError = createBlogForm.querySelector(".blogNameError");
   const descriptionError = createBlogForm.querySelector(".descriptionError");
   const imageError = createBlogForm.querySelector(".imageError");
   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
-  const blodImage = document.querySelector(".blog-image");
   // const blodImage = document.querySelector(".blog-image");
 
   let imageUrl;
@@ -986,17 +986,45 @@ const row = async () => {
           <td>${item.title}</td>
           <td>${item.content.substring(0,10)}</td>
           <td><button class="delete-button-${index}" onclick="deleteBlog('${item._id}')">delete</button></td>
-          <td><button class="table-button-${index}" onclick="editBlog(event, id)">edit</button></td>
+          <td><button class="table-button-${index}" onclick="editBlog('${item._id}')">edit</button></td>
         </tr>`
     ).join("");
     adminTable.innerHTML = blogElement;
-    // deleteBlog();
     return adminTable;
   } catch (error) {
     console.error(error);
   }
 };
 
+const editBlog = async (id) => {
+  window.location ="#createBLOGG"
+  const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+  const blog = await response.json();
+  blogName.value= blog.title
+  blogDescription.value =blog.content
+  document.querySelector('.editbutton').addEventListener('click', async (e)=>{
+    e.preventDefault();
+    console.log("divineeeee");
+    // blodImage.files[0] = blog.image
+    const formData = new FormData();
+      formData.append('title', blogName.value)
+      formData.append('content', blogDescription.value)
+      formData.append('image', blodImage.files[0])
+    const getToken = JSON.parse(localStorage.getItem("TOKEN"));
+    const settings = {
+      method: "PATCH",
+      headers: {
+        'auth-token': getToken,
+      },
+      body: formData,
+    };
+    // fetch(`http://localhost:5000/api/blogs/${id}`)
+    const updateBlog = await fetch(`http://localhost:5000/api/blogs/${id}`, settings);
+    const data = await updateBlog.json();
+    console.log('data fetchs', data);
+   
+  })
+ }
 
 // const row = () => {
 //   const blogElement = blogs
