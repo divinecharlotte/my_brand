@@ -171,7 +171,7 @@ popupDetailsFunc(null);
 // ******************************forms********************************
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("pwd");
-    const passwordError = logged.getElementsByClassName("loginPassword");
+const passwordError = logged.getElementsByClassName("loginPassword");
 
 const login = async (event) => {
   event.preventDefault();
@@ -199,7 +199,7 @@ const login = async (event) => {
 
       adminSection.style.display = "block";
       logged.style.display = "none";
-
+      localStorage.setItem("TOKEN", JSON.stringify(token));
       return data;
   } catch (e) {
       passwordError[0].innerHTML = "Please insert right admin credentials!";
@@ -232,7 +232,7 @@ closeIcon3.onclick = function closeIcon3() {
   console.log("closed");
 };
 // ************************ form validations*************************
-let messages = JSON.parse(localStorage.getItem("messages")) || [];
+// let messages = JSON.parse(localStorage.getItem("messages")) || [];
 function validateForm() {
   const contactName = document.getElementById("name1");
   const contactEmail = document.getElementById("email1");
@@ -280,6 +280,10 @@ function validateForm() {
   messageSuccess.innerHTML = "message submitted successfully";
   return false;
 }
+
+
+
+
 const blogComments = async (id) => {
   const response = await fetch(`http://localhost:5000/api/blogs/${id}/comments`);
   const comments = await response.json();
@@ -339,7 +343,7 @@ const getBlog = async () => {
     
     const blogData = blogs.map((item) => {
       const id = item._id;
-      console.log(id);
+      // console.log(id);
       return `
         <div class="blog-card" id="${item.index}">
           <div class="blog-icons">
@@ -535,67 +539,151 @@ const blogDetailsFunc = async (id) => {
 //     likes++
 // document.getElementById("counter").innerHTML = `${likes}likes`
 // }
-function createBlog() {
+// const createBlog = async () => {
+//   const blogName = document.querySelector(".blog-name");
+//   const blogDescription = document.querySelector(".blog-description");
+//   const createBlogForm = document.querySelector(".add-new-blog");
+//   const nameError = createBlogForm.getElementsByClassName("blogNameError");
+//   const descriptionError = createBlogForm.querySelector(".descriptionError");
+//   const imageError = createBlogForm.querySelector(".imageError");
+//   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
+
+//   const blog = {
+//     image: imageUrl,
+//     name: blogName.value,
+//     description: blogDescription.value,
+//     // index: blogs.length + 1,
+//   };
+
+//   var y = blog.image;
+//   if (y == "") {
+//     imageError.innerHTML = "blog image is required";
+//     return false;
+//   }
+
+//   let x = blog.name;
+//   var nameRegex = /^[^\s]+( [^\s]+)+$/;
+//   if (!x.match(nameRegex)) {
+//     nameError[0].innerHTML = "blog title should be separeted by single space";
+//     return false;
+//   }
+
+//   var z = blog.description;
+//   if (z.length <= 20) {
+//     descriptionError.innerHTML =
+//       "blog description should be more than 20 letters";
+//     return false;
+//   }
+//   const getToken = JSON.parse(localStorage.getItem("TOKEN"));
+//   const settings = {
+//     method: 'POST',
+//     headers: {
+//       'Content-type': 'application/json; charset=UTF-8',
+//       'auth-token': getToken,
+//     },
+//     body: JSON.stringify(blog),
+//   };
+//   try {
+//       const postBlog = await fetch(`http://localhost:5000/api/blogs`, settings);
+//       const data = await postBlog.json();
+    
+//       const blog = data;
+//       console.log("Response:", blog);
+     
+
+
+//       return data;
+//   } catch (e) {
+   
+//       return e;
+//   }    
+
+//   blodImage.value = "";
+//   blogName.value = "";
+//   blogDescription.value = "";
+//   imageError.innerHTML = "";
+//   nameError[0].innerHTML = "";
+//   descriptionError.innerHTML = "";
+//   // blogs = [...blogs, blog];
+//   // localStorage.setItem("blogs", JSON.stringify(blogs));
+
+//   blogSubmitted.innerHTML = "blog submitted successfully";
+//   getBlog();
+// }
+
+
+
+
+const createBlog = async (e) => {
+  e.preventDefault();
   const blogName = document.querySelector(".blog-name");
   const blogDescription = document.querySelector(".blog-description");
   const createBlogForm = document.querySelector(".add-new-blog");
-  const nameError = createBlogForm.getElementsByClassName("blogNameError");
+  const nameError = createBlogForm.querySelector(".blogNameError");
   const descriptionError = createBlogForm.querySelector(".descriptionError");
   const imageError = createBlogForm.querySelector(".imageError");
   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
+  const blodImage = document.querySelector(".blog-image");
+  // const blodImage = document.querySelector(".blog-image");
 
-  const blog = {
-    image: imageUrl,
-    name: blogName.value,
-    description: blogDescription.value,
-    index: blogs.length + 1,
+  let imageUrl;
+  blodImage.addEventListener("change", function () {
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", () => {
+      imageUrl = fileReader.result;
+  
+    });
+    fileReader.readAsDataURL(this.files[0]);
+  });
+  // const imageUrl = blodImage.value;
+  console.log('POST NEW BLOG', blog);
+
+const formData = new FormData();
+    formData.append('title', blogName.value)
+    formData.append('content', blogDescription.value)
+    formData.append('image', blodImage.files[0])
+  const getToken = JSON.parse(localStorage.getItem("TOKEN"));
+  console.log('my token:', getToken);
+  const settings = {
+    method: "POST",
+    headers: {
+      'auth-token': getToken,
+    },
+    body: formData,
   };
-  var y = blog.image;
-  if (y == "") {
-    imageError.innerHTML = "blog image is required";
-    return false;
+  try {
+    const postBlog = await fetch("http://localhost:5000/api/blogs", settings);
+    const data = await postBlog.json();
+    console.log('data fetchs', data);
+
+    // blogSubmitted.innerHTML = "Blog submitted successfully";
+    // blodImage.value = "";
+    // blogName.value = "";
+    // blogDescription.value = "";
+    // imageError.innerHTML = "";
+    // nameError.innerHTML = "";
+    // descriptionError.innerHTML = "";
+
+    return data;
+  } catch (e) {
+    // console.log(e);
+    return e;
   }
-
-  let x = blog.name;
-  var nameRegex = /^[^\s]+( [^\s]+)+$/;
-  if (!x.match(nameRegex)) {
-    nameError[0].innerHTML = "blog title should be separeted by single space";
-    return false;
-  }
-
-  var z = blog.description;
-  if (z.length <= 20) {
-    descriptionError.innerHTML =
-      "blog description should be more than 20 letters";
-    return false;
-  }
-
-  blodImage.value = "";
-  blogName.value = "";
-  blogDescription.value = "";
-  imageError.innerHTML = "";
-  nameError[0].innerHTML = "";
-  descriptionError.innerHTML = "";
-  blogs = [...blogs, blog];
-  localStorage.setItem("blogs", JSON.stringify(blogs));
-
-  blogSubmitted.innerHTML = "blog submitted successfully";
-  getBlog();
-}
+};
 
 
 // ***********************************new blog*************************
-const blodImage = document.querySelector(".blog-image");
+// const blodImage = document.querySelector(".blog-image");
 
-let imageUrl;
-blodImage.addEventListener("change", function () {
-  const fileReader = new FileReader();
-  fileReader.addEventListener("load", () => {
-    imageUrl = fileReader.result;
+// let imageUrl;
+// blodImage.addEventListener("change", function () {
+//   const fileReader = new FileReader();
+//   fileReader.addEventListener("load", () => {
+//     imageUrl = fileReader.result;
 
-  });
-  fileReader.readAsDataURL(this.files[0]);
-});
+//   });
+//   fileReader.readAsDataURL(this.files[0]);
+// });
 
 const adminTable = document.getElementById("tableData");
 
@@ -608,7 +696,7 @@ const row = async () => {
       (item, index) => `
         <tr class="edit-blog">
           <td>${item.title}</td>
-          <td>${item.content}</td>
+          <td>${item.content.substring(0,20)}</td>
           <td><button class="delete-button-${index}" onclick="deleteBlog(${index})">delete</button></td>
           <td><button class="table-button-${index}" onclick="editBlog(event, id)">edit</button></td>
         </tr>`
@@ -675,6 +763,22 @@ const row = async () => {
 //     console.log(amclicked);
 //   }
 // };
+const deleteBlog = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/blogs/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': 'your-auth-token-here'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+    getBlog();
+  } catch (error) {
+    console.error("Error deleting blog", error);
+  }
+}
 
 // const deleteBlog = (index) => {
 //   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
@@ -688,11 +792,14 @@ const row = async () => {
 //   localStorage.setItem("comments", JSON.stringify(newComments));
 //   getBlog();}
 // };
-
+const messageUrl = "http://localhost:5000/api/messages"
 const messagesTable = document.querySelector(".messages-table");
-const Messagerow = () => {
-  const messageElement = messages
-    .map(
+const Messagerow = async () => {
+  try {
+    const response = await fetch(messageUrl);
+    const messages = await response.json();
+    // console.log("messages:",messages);
+    const messageElement = messages.map(
       (item, index) => `
     <tr>
   <td>${item.name}</td>
@@ -705,6 +812,9 @@ const Messagerow = () => {
 
   messagesTable.innerHTML = messageElement;
   return Messagerow;
+} catch (error) {
+  console.error(error);
+}
 };
 
 const deleteMessage = (index) => {

@@ -369,7 +369,7 @@
         <label for="description">Blog Description:</label><br /><br />
         <textarea class="blog-description" rows="10" maxlength="500"  name="message" ></textarea><br /><br />
         <small class="descriptionError"></small> <br>
-        <button type="submit" onclick="return createBlog()">Save blog</button> <br>
+        <button type="submit" onclick="return createBlog(event)">Save blog</button> <br>
         <small class="blog-submitted"></small> <br>
       </form>
     </div>
@@ -433,7 +433,7 @@
             <textarea rows="10" maxlength="500" name="message" id="contact_message"  placeholder="Write message......"
                rows="4" cols="1" maxlength="50"></textarea><br /><br />
               <small class="small3" ></small> <br> <br>
-            <button id="sendMessage" type="submit"  onclick="return validateForm()">
+            <button id="sendMessage" type="submit"  onclick=" validateForm(e)">
               <p> SEND MESSAGE</p>
             </button> <br>
             <small class="message-success"></small>
