@@ -192,7 +192,7 @@ const login = async (event) => {
   try {
       const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
       const data = await fetchResponse.json();
-      const { token } = data.token;
+      const { token } = data;
       const { user } = data;
       console.log("Response:", data);
       console.log(adminSection, logged);
@@ -206,6 +206,38 @@ const login = async (event) => {
       return e;
   }    
 }
+
+
+// const login = async (event) => {
+//   event.preventDefault();
+// 	@@ -183,39 +184,42 @@ const login = async (event) => {
+
+//   const settings = {
+//     method: 'POST',
+//     headers: {
+//       'Content-type': 'application/json; charset=UTF-8',
+//     },
+//     body: JSON.stringify(admin),
+//   };
+//   try {
+//       const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
+//       const data = await fetchResponse.json();
+//       const { token } = data;
+//       const { user } = data;
+//       console.log("Response:", data);
+//       console.log(adminSection, logged);
+
+//       adminSection.style.display = "block";
+//       logged.style.display = "none";
+
+//       return data;
+//   } catch (e) {
+//       passwordError[0].innerHTML = "Please insert right admin credentials!";
+//       return e;
+//   }    
+
+
+
 
 //  var editor = new FroalaEditor('#froala');
       // if (user.email != "divinemaina@gmail.com") {
@@ -953,7 +985,7 @@ const row = async () => {
         <tr class="edit-blog">
           <td>${item.title}</td>
           <td>${item.content.substring(0,10)}</td>
-          <td><button class="delete-button-${index}" onclick="deleteBlog(${index})">delete</button></td>
+          <td><button class="delete-button-${index}" onclick="deleteBlog('${item._id}')">delete</button></td>
           <td><button class="table-button-${index}" onclick="editBlog(event, id)">edit</button></td>
         </tr>`
     ).join("");
@@ -1023,17 +1055,18 @@ const deleteBlog = async (id) => {
   const getToken = JSON.parse(localStorage.getItem("TOKEN"));
 console.log("delete blog");
   const settings = {
-    method: "POST",
+    method: "DELETE",
     headers: {
       'auth-token': getToken,
     },
     body: {},
   };
   try {
-  const deleteBlog = await fetch("http://localhost:5000/api/blogs/${id}", settings);
+  const deleteBlog = await fetch(`http://localhost:5000/api/blogs/${id}`, settings);
     const data = await deleteBlog.json();
     console.log(data);
     getBlog();
+    window.location.reload()
   } catch (error) {
     console.error("Error deleting blog", error);
   }
