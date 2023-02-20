@@ -481,11 +481,50 @@ function increment(){
 document.getElementById("counter").innerHTML = `${likes}likes`
 }
 
+// const blogDetailsFunc = async (id) => {
+//   console.log("blogDetailsFunc :",id);
+
+//   const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+//   const blog = await response.json();
+//   const result = `
+//     <div class="blog-card">
+//       <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
+//       <img src="${blog.image}"/>
+//       <h2>${blog.title}</h2>
+//       <p >${blog.content}</p>
+//       <ul>
+//         <li><button id="like-btn-${id}" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+//         <li id="current-comments-${blog.index}"> ${countComments(blog.id)} comments</li>
+//       </ul>
+//       <div class="comments" id="comments-${id}"></div>
+//       <div class="comments-wrapper">
+//         <form class="comment" onsubmit="return false;" id="${blog.index}">
+//           <h3 class="form-title">Add your comment</h3>
+//           <div class="${blog.index}"></div>
+//           <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
+//           <br> 
+//           <small class="nameError" id="nameError-${blog.index}"></small> <br>
+//           <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
+//           <br />
+//           <small class="messageError" id="messageError-${blog.index}"></small> <br>
+//           <button type="button" onclick="return blogForm('${id}')">Submit</button>
+//         </form>
+//       </div>
+//     </div>
+//   `;
+//   blogCards.innerHTML = result;
+//   blogComments(id);
+
+  
+// };
+
+
 const blogDetailsFunc = async (id) => {
   console.log("blogDetailsFunc :",id);
 
   const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
   const blog = await response.json();
+  // const commentCount = await countComments(blog.id); // Count number of comments for blog
   const result = `
     <div class="blog-card">
       <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
@@ -494,7 +533,7 @@ const blogDetailsFunc = async (id) => {
       <p >${blog.content}</p>
       <ul>
         <li><button id="like-btn-${id}" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-        <li id="current-comments-${blog.index}"> comments</li>
+        <li id="current-comments-${id}">comments</li> 
       </ul>
       <div class="comments" id="comments-${id}"></div>
       <div class="comments-wrapper">
@@ -514,15 +553,17 @@ const blogDetailsFunc = async (id) => {
   `;
   blogCards.innerHTML = result;
   blogComments(id);
-
-  
 };
 
+
+
+let messagesCount = 0;
 const blogComments = async (id) => {
   const response = await fetch(`http://localhost:5000/api/blogs/${id}/comments`);
   const comments = await response.json();
   const { messages } = comments
- 
+  // const commentsNumber = messages.length
+//  console.log("lengthcomments:",messages.length);
 messagesCount = messages.length
   messages.forEach((item) => {
     const commentsDiv = document.getElementById(`comments-${id}`);
@@ -531,8 +572,25 @@ messagesCount = messages.length
       p.textContent = `${item}`;
       commentsDiv.appendChild(p);
     }
+    const commentsLi = document.getElementById(`current-comments-${id}`);
+    if (commentsLi) {
+      commentsLi.textContent = `${messagesCount} comments`;
+    }
   });
 }
+
+// function countComments(blogId) {
+//   let count = 0;
+//   comments.forEach(comment => {
+//     if (comment.blog === blogId) {
+//       count++;
+//     }
+//   });
+//   return count;
+// }
+
+
+
 // async function blogForm(id) {
 //   // e.preventDefault()
 //   const blogFormName = document.getElementById("name-" + id);
