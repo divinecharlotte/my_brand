@@ -233,39 +233,119 @@ closeIcon3.onclick = function closeIcon3() {
 };
 // ************************ form validations*************************
 // let messages = JSON.parse(localStorage.getItem("messages")) || [];
-function validateForm() {
-  const contactName = document.getElementById("name1");
-  const contactEmail = document.getElementById("email1");
-  const contactMessage = document.getElementById("contact_message");
-  const error = contactForm.getElementsByClassName("small1");
-  const errorMessage = contactForm.querySelector(".small2");
-  const textError = contactForm.querySelector(".small3");
+// function validateForm() {
+//   const contactName = document.getElementById("name1");
+//   const contactEmail = document.getElementById("email1");
+//   const contactMessage = document.getElementById("contact_message");
+//   const error = contactForm.getElementsByClassName("small1");
+//   const errorMessage = contactForm.querySelector(".small2");
+//   const textError = contactForm.querySelector(".small3");
+//   const messageSuccess = contactForm.querySelector(".message-success");
+
+//   const message = {
+//     name: contactName.value,
+//     email: contactEmail.value,
+//     info: contactMessage.value,
+//     // index: messages.length + 1,
+//   };
+
+//   // // fetch(`http://localhost:5000/api/messages`)
+//   // submitMessage.addEventListener('click',async(e)=>{
+  //   // e.preventDefault()
+  
+  //   // try{
+    //   // const result = await fetch('http://localhost:5000/api/messages', {
+    
+      //   //       method: "POST",
+      //   //       headers: {
+//   //         "Content-Type" : "application/json"
+//   //       },
+//   //       body: JSON.stringify({
+//   //                         name: contactName.value,
+//   //                         email: contactEmail.value,
+//   //                         message: contactMessage.value
+  
+//   //       })})
+//   //       const data =  await result.json()
+//   //       console.log("data:",data);
+
+//   var x = message.name;
+//   var nameRegex = /^[^\s]+( [^\s]+)+$/;
+//   if (!x.match(nameRegex)) {
+//     error[0].innerHTML = "Names should be sepaeted by a space";
+//     return false;
+//   }
+
+//   var y = message.email;
+//   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//   if (!y.match(mailformat)) {
+  //     const errorMessage = contactForm.querySelector(".small2");
+  //     errorMessage.innerHTML = "Please insert admin email!";
+  //     return false;
+  //   }
+  //   var z = message.info;
+  //   if (z.length <= 6 || z.length > 100) {
+    //     textError.innerHTML =
+//       "Your message should contain between 6 and 100 leters";
+//     return false;
+//   }
+//   contactName.value = "";
+//   contactEmail.value = "";
+//   contactMessage.value = "";
+//   textError.innerHTML = "";
+//   error[0].innerHTML = "";
+//   errorMessage.innerHTML = "";
+//   messages = [...messages, message];
+//   localStorage.setItem("messages", JSON.stringify(messages));
+//   messageSuccess.innerHTML = "message submitted successfully";
+//   return false;
+// }
+
+
+const submitMessage = document.getElementById('sendMessage')
+const contactName = document.getElementById("name1");
+const contactEmail = document.getElementById("email1");
+const contactMessage = document.getElementById("contact_message");
+const error = contactForm.getElementsByClassName("small1");
+const errorMessage = contactForm.querySelector(".small2");
+const textError = contactForm.querySelector(".small3");
   const messageSuccess = contactForm.querySelector(".message-success");
+  
+  submitMessage.addEventListener('click',async(e)=>{
+  e.preventDefault();
+  try{
+      const result = await fetch('http://localhost:5000/api/messages', {
+              method: "POST",
+              headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+                          name: contactName.value,
+                          email: contactEmail.value,
+                          message: contactMessage.value
+  
+        })})
+// const data= await result.json()
+// console.log(data);
 
-  const message = {
-    name: contactName.value,
-    email: contactEmail.value,
-    info: contactMessage.value,
-    index: messages.length + 1,
-  };
 
-  var x = message.name;
+  var x = contactName.value;
   var nameRegex = /^[^\s]+( [^\s]+)+$/;
   if (!x.match(nameRegex)) {
     error[0].innerHTML = "Names should be sepaeted by a space";
     return false;
   }
 
-  var y = message.email;
+  var y = contactEmail.value;
   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (!y.match(mailformat)) {
-    const errorMessage = contactForm.querySelector(".small2");
-    errorMessage.innerHTML = "Please insert admin email!";
-    return false;
-  }
-  var z = message.info;
-  if (z.length <= 6 || z.length > 100) {
-    textError.innerHTML =
+      const errorMessage = contactForm.querySelector(".small2");
+      errorMessage.innerHTML = "Please insert admin email!";
+      return false;
+    }
+    var z = contactMessage.value;
+    if (z.length <= 6 || z.length > 100) {
+        textError.innerHTML =
       "Your message should contain between 6 and 100 leters";
     return false;
   }
@@ -275,14 +355,15 @@ function validateForm() {
   textError.innerHTML = "";
   error[0].innerHTML = "";
   errorMessage.innerHTML = "";
-  messages = [...messages, message];
-  localStorage.setItem("messages", JSON.stringify(messages));
+
+
   messageSuccess.innerHTML = "message submitted successfully";
-  return false;
-}
 
-
-
+  }catch(e){
+console.log(e);
+  }
+  
+})
 
 const blogComments = async (id) => {
   const response = await fetch(`http://localhost:5000/api/blogs/${id}/comments`);
@@ -696,7 +777,7 @@ const row = async () => {
       (item, index) => `
         <tr class="edit-blog">
           <td>${item.title}</td>
-          <td>${item.content.substring(0,20)}</td>
+          <td>${item.content.substring(0,10)}</td>
           <td><button class="delete-button-${index}" onclick="deleteBlog(${index})">delete</button></td>
           <td><button class="table-button-${index}" onclick="editBlog(event, id)">edit</button></td>
         </tr>`
@@ -803,7 +884,7 @@ const Messagerow = async () => {
       (item, index) => `
     <tr>
   <td>${item.name}</td>
-  <td>${item.info}</td>
+  <td>${item.message.substring(0,10)}</td>
   <td><button class="table-button" onclick="deleteMessage(${index})" >delete</button></td>
   <td><button class="table-button">edit</button></td>
 </tr>`
