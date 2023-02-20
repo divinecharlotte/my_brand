@@ -1100,6 +1100,28 @@ console.log("delete blog");
   }
 }
 
+
+const deleteMessage = async (id) => {
+  const getToken = JSON.parse(localStorage.getItem("TOKEN"));
+console.log("delete message");
+  const settings = {
+    method: "DELETE",
+    headers: {
+      'auth-token': getToken,
+    },
+    body: {},
+  };
+  try {
+   await fetch(`http://localhost:5000/api/messages/${id}`, settings);
+    window.location.reload()
+  } catch (error) {
+    console.error("Error deleting blog", error);
+  }
+}
+
+
+
+
 // const deleteBlog = (index) => {
 //   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
 //   const allComments = JSON.parse(localStorage.getItem("comments"));
@@ -1124,7 +1146,7 @@ const Messagerow = async () => {
     <tr>
   <td>${item.name}</td>
   <td>${item.message.substring(0,10)}</td>
-  <td><button class="table-button" onclick="deleteMessage(${index})" >delete</button></td>
+  <td><button class="table-button" onclick="deleteMessage('${item._id}')" >delete</button></td>
 
 </tr>`
     )
@@ -1137,12 +1159,12 @@ const Messagerow = async () => {
 }
 };
 
-const deleteMessage = (index) => {
-  const allMessagess = JSON.parse(localStorage.getItem("messages"));
-  const newMessages = allMessagess.filter((message, i) => i != index);
-  localStorage.setItem("messages", JSON.stringify(newMessages));
-  Messagerow();
-};
+// const deleteMessage = (index) => {
+//   const allMessagess = JSON.parse(localStorage.getItem("messages"));
+//   const newMessages = allMessagess.filter((message, i) => i != index);
+//   localStorage.setItem("messages", JSON.stringify(newMessages));
+//   Messagerow();
+// };
 window.addEventListener("load", () => {
   getBlog();
   row();
