@@ -192,7 +192,7 @@ const login = async (event) => {
   try {
       const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
       const data = await fetchResponse.json();
-      const { token } = data;
+      const { token } = data.token;
       const { user } = data;
       console.log("Response:", data);
       console.log(adminSection, logged);
@@ -455,31 +455,31 @@ const getBlog = async () => {
 // };
 
 
-const blogLikes= async (id) => {
-  const response = await fetch(`http://localhost:5000/api/blogs/${id}/likes`);
-  const likes = await response.json();
-  // const { messages } = comments
+// const blogLikes= async (id) => {
+//   const response = await fetch(`http://localhost:5000/api/blogs/${id}/likes`);
+//   const likes = await response.json();
+//   // const { messages } = comments
  
-// messagesCount = messages.length
-  likes.forEach((item) => {
-    const likesDiv = document.getElementById(`like-btn-${id}`);
-    if(likesDiv){
-      const li = document.createElement("li");
-      li.textContent = `${item}`;
-      likesDiv.appendChild(li);
-    }
-  });
-}
+// // messagesCount = messages.length
+//   likes.forEach((item) => {
+//     const likesDiv = document.getElementById(`like-btn-${id}`);
+//     if(likesDiv){
+//       const li = document.createElement("li");
+//       li.textContent = `${item}`;
+//       likesDiv.appendChild(li);
+//     }
+//   });
+// }
 
 
 
-let likes= 0
-function increment(){
-    if (likes !==0 ) {
-    }
-    likes++
-document.getElementById("counter").innerHTML = `${likes}likes`
-}
+// let likes= 0
+// function increment(){
+//     if (likes !==0 ) {
+//     }
+//     likes++
+// document.getElementById("counter").innerHTML = `${likes}likes`
+// }
 
 // const blogDetailsFunc = async (id) => {
 //   console.log("blogDetailsFunc :",id);
@@ -532,7 +532,8 @@ const blogDetailsFunc = async (id) => {
       <h2>${blog.title}</h2>
       <p >${blog.content}</p>
       <ul>
-        <li><button id="like-btn-${id}" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
+      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button>
+        <li id="like-btn-${id}"></li>
         <li id="current-comments-${id}">comments</li> 
       </ul>
       <div class="comments" id="comments-${id}"></div>
@@ -553,6 +554,7 @@ const blogDetailsFunc = async (id) => {
   `;
   blogCards.innerHTML = result;
   blogComments(id);
+  blogLikes(id)
 };
 
 
@@ -578,6 +580,26 @@ messagesCount = messages.length
     }
   });
 }
+
+
+let likesCount = 0;
+const blogLikes = async (id) => {
+  const response = await fetch(`http://localhost:5000/api/blogs/${id}/likes`);
+  const likes = await response.json();
+  console.log(likes);
+
+    const likesLi = document.getElementById(`like-btn-${id}`);
+    if (likesLi) {
+      const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
+      likesLi.textContent = `${likesNumber} likes`;
+    }else{
+      likesLi.textContent = `0 likes`
+    }
+
+}
+
+
+
 
 // function countComments(blogId) {
 //   let count = 0;
@@ -640,6 +662,33 @@ messagesCount = messages.length
 //   console.log(e);
 //     }
 //   }
+
+const increment = async (id) =>{
+  try {
+    const result = await fetch(`http://localhost:5000/api/blogs/${id}/likes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+      })
+    });
+    const likes = await result.json()  
+    console.log("und:",likes);
+    const likesLi = document.getElementById(`like-btn-${id}`);
+    if (likesLi) {
+      const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
+      likesLi.textContent = `${likesNumber} likes`;
+    }else{
+      likesLi.textContent = `0 likes`
+    }
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+
+
 async function blogForm(id) {
   console.log('id:', id);
   const blogFormName = document.getElementById("name-" + id);
@@ -680,6 +729,8 @@ async function blogForm(id) {
     // error.innerHTML = "";
     // textError.innerHTML = "";
     blogComments(id);
+    blogLikes(id)
+    // increment(id)
   } catch(e) {
     console.log(e);
   }
@@ -848,7 +899,7 @@ const formData = new FormData();
     formData.append('content', blogDescription.value)
     formData.append('image', blodImage.files[0])
   const getToken = JSON.parse(localStorage.getItem("TOKEN"));
-  console.log('my token:', getToken);
+  // console.log('my token:', getToken);
   const settings = {
     method: "POST",
     headers: {
@@ -969,15 +1020,18 @@ const row = async () => {
 //   }
 // };
 const deleteBlog = async (id) => {
+  const getToken = JSON.parse(localStorage.getItem("TOKEN"));
+console.log("delete blog");
+  const settings = {
+    method: "POST",
+    headers: {
+      'auth-token': getToken,
+    },
+    body: {},
+  };
   try {
-    const response = await fetch(`http://localhost:5000/api/blogs/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': 'your-auth-token-here'
-      }
-    });
-    const data = await response.json();
+  const deleteBlog = await fetch("http://localhost:5000/api/blogs/${id}", settings);
+    const data = await deleteBlog.json();
     console.log(data);
     getBlog();
   } catch (error) {
