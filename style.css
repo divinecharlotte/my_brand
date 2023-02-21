@@ -89,6 +89,7 @@ div {
     opacity: 1;
   }
 }
+
 nav {
   display: flex;
   flex-direction: row;
@@ -108,7 +109,10 @@ nav {
   color: var(--light-slate);
   z-index: 30;
 }
-
+.single-blog-card{
+  display: grid;
+  grid-template-columns: 1fr;
+}
 .blog-cards{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
