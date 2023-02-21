@@ -608,29 +608,84 @@ const blogDetailsFunc = async (id) => {
 };
 
 
+// **************************************************************************************get and post blogComments****************************************************************************************
+
+async function blogForm(id) {
+  console.log('id:', id);
+  const blogFormName = document.getElementById("name-" + id);
+  const blogFormmessage = document.getElementById("comment-" + id);
+  const error = document.getElementById("nameError-" + id);
+  const textError = document.getElementById("messageError-" + id);
+
+  try {
+    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: blogFormName.value,
+        message: blogFormmessage.value
+      })
+    });
+    
+    const data = await result.json();
+    console.log(data);
+
+    let x = blogFormName.value;
+    var nameRegex = /^[^\s]+( [^\s]+)+$/;
+    if (!x.match(nameRegex)) {
+      error.innerHTML = "Names should be separated by a space";
+      return false;
+    }
+
+    var z = blogFormmessage.value;
+    if (z.length <= 4) {
+      textError.innerHTML = "Comment should be more than 4 letters";
+      return false;
+    }
+
+    blogFormName.value = "";
+    blogFormmessage.value = "";
+    error.innerHTML = "";
+    textError.innerHTML = "";
+    blogComments(id);
+    blogLikes(id)
+    // increment(id)
+  } catch(e) {
+    console.log(e);
+  }
+}
+
 
 let messagesCount = 0;
 const blogComments = async (id) => {
   const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`);
   const comments = await response.json();
-  const { messages } = comments
-  // const commentsNumber = messages.length
-//  console.log("lengthcomments:",messages.length);
-messagesCount = messages.length
+  const { messages } = comments;
+  const commentsDiv = document.getElementById(`comments-${id}`);
+  const commentsLi = document.getElementById(`current-comments-${id}`);
+  
+  // Remove existing comments
+  while (commentsDiv.firstChild) {
+    commentsDiv.removeChild(commentsDiv.firstChild);
+  }
+  
+  messagesCount = messages.length;
+  
+  // Render new comments
   messages.forEach((item) => {
-    const commentsDiv = document.getElementById(`comments-${id}`);
-    if(commentsDiv){
-      const p = document.createElement("p");
-      p.textContent = `${item}`;
-      commentsDiv.appendChild(p);
-    }
-    const commentsLi = document.getElementById(`current-comments-${id}`);
-    if (commentsLi) {
-      commentsLi.textContent = `${messagesCount} comments`;
-    }
+    const p = document.createElement("p");
+    p.textContent = `${item}`;
+    commentsDiv.appendChild(p);
   });
-}
+  
+  if (commentsLi) {
+    commentsLi.textContent = `${messagesCount} comments`;
+  }
+};
 
+// **************************************************************************************GET and POST blogLikes****************************************************************************************
 
 let likesCount = 0;
 const blogLikes = async (id) => {
@@ -644,7 +699,7 @@ const blogLikes = async (id) => {
       console.log("here it is:",likes.count);
       likesLi.textContent = `${likes.count} likes`;
     }else{
-      likesLi.textContent = `0 likes`
+      // likesLi.textContent = `0 likes`
     }
 
 }
@@ -714,79 +769,79 @@ const blogLikes = async (id) => {
 //     }
 //   }
 
-const increment = async (id) =>{
-  try {
-    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-      })
-    });
-    const likes = await result.json()  
-    console.log("und:",likes);
-    const likesLi = document.getElementById(`like-btn-${id}`);
-    if (likesLi) {
-      // const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
-      likesLi.textContent = `${likes.count} likes`;
-    }else{
-      likesLi.textContent = `0 likes`
-    }
-    window.location.reload()
-  } catch(e) {
-    console.log(e);
-  }
-}
+// const increment = async (id) =>{
+//   try {
+//     const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({
+//       })
+//     });
+//     const likes = await result.json()  
+//     console.log("und:",likes);
+//     const likesLi = document.getElementById(`like-btn-${id}`);
+//     if (likesLi) {
+//       // const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
+//       likesLi.textContent = `${likes.count} likes`;
+//     }else{
+//       likesLi.textContent = `0 likes`
+//     }
+//     window.location.reload()
+//   } catch(e) {
+//     console.log(e);
+//   }
+// }
 
 
 
-async function blogForm(id) {
-  console.log('id:', id);
-  const blogFormName = document.getElementById("name-" + id);
-  const blogFormmessage = document.getElementById("comment-" + id);
-  const error = document.getElementById("nameError-" + id);
-  const textError = document.getElementById("messageError-" + id);
+// async function blogForm(id) {
+//   console.log('id:', id);
+//   const blogFormName = document.getElementById("name-" + id);
+//   const blogFormmessage = document.getElementById("comment-" + id);
+//   const error = document.getElementById("nameError-" + id);
+//   const textError = document.getElementById("messageError-" + id);
 
-  try {
-    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: blogFormName.value,
-        message: blogFormmessage.value
-      })
-    });
+//   try {
+//     const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({
+//         name: blogFormName.value,
+//         message: blogFormmessage.value
+//       })
+//     });
     
-    const data = await result.json();
-    console.log(data);
+//     const data = await result.json();
+//     console.log(data);
 
-    let x = blogFormName.value;
-    var nameRegex = /^[^\s]+( [^\s]+)+$/;
-    if (!x.match(nameRegex)) {
-      error.innerHTML = "Names should be separated by a space";
-      return false;
-    }
+//     let x = blogFormName.value;
+//     var nameRegex = /^[^\s]+( [^\s]+)+$/;
+//     if (!x.match(nameRegex)) {
+//       error.innerHTML = "Names should be separated by a space";
+//       return false;
+//     }
 
-    var z = blogFormmessage.value;
-    if (z.length <= 4) {
-      textError.innerHTML = "Comment should be more than 4 letters";
-      return false;
-    }
+//     var z = blogFormmessage.value;
+//     if (z.length <= 4) {
+//       textError.innerHTML = "Comment should be more than 4 letters";
+//       return false;
+//     }
 
-    blogFormName.value = "";
-    blogFormmessage.value = "";
-    error.innerHTML = "";
-    textError.innerHTML = "";
-    blogComments(id);
-    blogLikes(id)
-    // increment(id)
-  } catch(e) {
-    console.log(e);
-  }
-}
+//     blogFormName.value = "";
+//     blogFormmessage.value = "";
+//     error.innerHTML = "";
+//     textError.innerHTML = "";
+//     blogComments(id);
+//     blogLikes(id)
+//     // increment(id)
+//   } catch(e) {
+//     console.log(e);
+//   }
+// }
 
 
 // const blogDetailsFunc = () => {
