@@ -17,7 +17,14 @@ const logged = document.getElementById("login");
 const contactButton = document.getElementById("contactButton");
 const contactForm = document.getElementById("contactForm");
 const blogCards = document.querySelector(".blog-cards");
-
+const signOut = document.querySelector('.sign-out')
+// const login =document.querySelectorAll('.login')
+signOut.onclick = function signOut() {
+  adminSection.style.display = "none";
+  logged.style.display = "flex"
+  logged.style.flexDirection= "column"
+  localStorage.setItem("TOKEN", JSON.stringify({}))
+};
 burger.onclick = function burger() {
   navLinks.style.right = "0";
 };
@@ -175,6 +182,22 @@ const passwordError = logged.getElementsByClassName("loginPassword");
 
 const login = async (event) => {
   event.preventDefault();
+  
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("pwd").value;
+
+  if (email != "divinemaina@gmail.com") {
+    const errorTag = logged.getElementsByClassName("loginEmail");
+    errorTag[0].innerHTML = "Please insert admin email!";
+    return;
+  } else if (password != "user") {
+    const passwordError = logged.getElementsByClassName("loginPassword");
+    passwordError[0].innerHTML = "Please insert admin password!";
+    return;
+  } else {
+    // admin.style.display = "block";
+    // logged.style.display = "none";
+  }
   const admin= {
     email: emailInput.value,
     password:passwordInput.value
@@ -200,9 +223,13 @@ const login = async (event) => {
       adminSection.style.display = "block";
       logged.style.display = "none";
       localStorage.setItem("TOKEN", JSON.stringify(token));
+      emailInput.value = ""
+      passwordInput.value =""
+      errorTag[0].innerHTML =""
+      passwordError[0].innerHTML = ""
       return data;
   } catch (e) {
-      passwordError[0].innerHTML = "Please insert right admin credentials!";
+      // passwordError[0].innerHTML = "Please insert right admin credentials!";
       return e;
   }    
 }
@@ -1145,7 +1172,7 @@ const Messagerow = async () => {
     const messages = await response.json();
     // console.log("messages:",messages);
     const messageElement = messages.map(
-      (item, index) => `
+      (item) => `
     <tr>
   <td>${item.name}</td>
   <td>${item.message.substring(0,10)}</td>
