@@ -213,7 +213,7 @@ const login = async (event) => {
     body: JSON.stringify(admin),
   };
   try {
-      const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
+      const fetchResponse = await fetch(`https://my-brand-api-mi4x.onrender.com/api/auth/login`, settings);
       const data = await fetchResponse.json();
       const { token } = data;
       const { user } = data;
@@ -373,7 +373,7 @@ const textError = contactForm.querySelector(".small3");
   submitMessage.addEventListener('click',async(e)=>{
   e.preventDefault();
   try{
-      const result = await fetch('http://localhost:5000/api/messages', {
+      const result = await fetch('https://my-brand-api-mi4x.onrender.com/api/messages', {
               method: "POST",
               headers: {
           "Content-Type" : "application/json"
@@ -742,6 +742,7 @@ const increment = async (id) =>{
     }else{
       likesLi.textContent = `0 likes`
     }
+    window.location.reload()
   } catch(e) {
     console.log(e);
   }
