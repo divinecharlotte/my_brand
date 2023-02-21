@@ -450,15 +450,6 @@ const getBlog = async () => {
           </div>
           <h2>${item.title}</h2>
           <p>${item.content.substring(0,10)}</p>
-          <ul>
-            <li>
-              <button id="like-btn" type="button" onclick="increment()">
-                <img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes">
-              </button>
-              <p id="counter"> 0 Likes</p>
-            </li>
-            <li id="current-comments-${item.index}">comments</li>
-          </ul>
           <button type="button" onclick="blogDetailsFunc('${id}')">full view</button>
         </div>
       `;
