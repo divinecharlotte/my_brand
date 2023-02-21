@@ -108,6 +108,11 @@ nav {
   color: var(--light-slate);
   z-index: 30;
 }
+
+.blog-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .nav-elements-mode img {
   margin-top: 4px;
 }
@@ -1035,6 +1040,22 @@ small.blog-submitted {
 }
 /* *************************************************************************MOBILE SCREEN********************************************************* */
 @media only screen and (max-width: 600px) {
+  #contactForm > form > div > div.side1 > h1,
+  /* .contact-me p:first-child, */
+  #contactForm > form > div > div.side1 > label,
+  #contactForm > form > div > div.side2 > label{
+    font-size: 15px;
+    margin: 0;
+    /* padding: 0; */
+  }
+ .contact-form{
+padding: 11%;
+  }
+
+ 
+  #contactForm > form > div > hr{
+    height: 6rem;
+  }
   .exp-hr {
     display: none;
   }
