@@ -402,7 +402,7 @@ console.log(e);
 
 
 
-const apiUrl = "http://localhost:5000/api/blogs";
+const apiUrl = "https://my-brand-api-mi4x.onrender.com/api/blogs";
 
 const getBlog = async () => {
   try {
@@ -554,7 +554,7 @@ const getBlog = async () => {
 const blogDetailsFunc = async (id) => {
   console.log("blogDetailsFunc :",id);
 
-  const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
   const blog = await response.json();
   // const commentCount = await countComments(blog.id); // Count number of comments for blog
   const result = `
@@ -575,10 +575,10 @@ const blogDetailsFunc = async (id) => {
           <div class="${blog.index}"></div>
           <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
           <br> 
-          <small class="nameError" id="nameError-${blog.index}"></small> <br>
+          <small class="nameError" id="nameError-${id}"></small> <br>
           <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
           <br />
-          <small class="messageError" id="messageError-${blog.index}"></small> <br>
+          <small class="messageError" id="messageError-${id}"></small> <br>
           <button type="button" onclick="return blogForm('${id}')">Submit</button>
         </form>
       </div>
@@ -593,7 +593,7 @@ const blogDetailsFunc = async (id) => {
 
 let messagesCount = 0;
 const blogComments = async (id) => {
-  const response = await fetch(`http://localhost:5000/api/blogs/${id}/comments`);
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`);
   const comments = await response.json();
   const { messages } = comments
   // const commentsNumber = messages.length
@@ -616,14 +616,15 @@ messagesCount = messages.length
 
 let likesCount = 0;
 const blogLikes = async (id) => {
-  const response = await fetch(`http://localhost:5000/api/blogs/${id}/likes`);
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`);
   const likes = await response.json();
   console.log(likes);
 
     const likesLi = document.getElementById(`like-btn-${id}`);
     if (likesLi) {
-      const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
-      likesLi.textContent = `${likesNumber} likes`;
+      // const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
+      console.log("here it is:",likes.count);
+      likesLi.textContent = `${likes.count} likes`;
     }else{
       likesLi.textContent = `0 likes`
     }
@@ -697,7 +698,7 @@ const blogLikes = async (id) => {
 
 const increment = async (id) =>{
   try {
-    const result = await fetch(`http://localhost:5000/api/blogs/${id}/likes`, {
+    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -709,8 +710,8 @@ const increment = async (id) =>{
     console.log("und:",likes);
     const likesLi = document.getElementById(`like-btn-${id}`);
     if (likesLi) {
-      const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
-      likesLi.textContent = `${likesNumber} likes`;
+      // const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
+      likesLi.textContent = `${likes.count} likes`;
     }else{
       likesLi.textContent = `0 likes`
     }
@@ -729,7 +730,7 @@ async function blogForm(id) {
   const textError = document.getElementById("messageError-" + id);
 
   try {
-    const result = await fetch(`http://localhost:5000/api/blogs/${id}/comments`, {
+    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -758,8 +759,8 @@ async function blogForm(id) {
 
     blogFormName.value = "";
     blogFormmessage.value = "";
-    // error.innerHTML = "";
-    // textError.innerHTML = "";
+    error.innerHTML = "";
+    textError.innerHTML = "";
     blogComments(id);
     blogLikes(id)
     // increment(id)
@@ -940,7 +941,7 @@ const formData = new FormData();
     body: formData,
   };
   try {
-    const postBlog = await fetch("http://localhost:5000/api/blogs", settings);
+    const postBlog = await fetch("https://my-brand-api-mi4x.onrender.com/api/blogs", settings);
     const data = await postBlog.json();
     console.log('data fetchs', data);
 
@@ -998,7 +999,7 @@ const row = async () => {
 
 const editBlog = async (id) => {
   window.location ="#createBLOGG"
-  const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
   const blog = await response.json();
   blogName.value= blog.title
   blogDescription.value =blog.content
@@ -1019,10 +1020,12 @@ const editBlog = async (id) => {
       body: formData,
     };
     // fetch(`http://localhost:5000/api/blogs/${id}`)
-    const updateBlog = await fetch(`http://localhost:5000/api/blogs/${id}`, settings);
+    const updateBlog = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`, settings);
     const data = await updateBlog.json();
     console.log('data fetchs', data);
-   
+    blogName.value= ""
+    blogDescription.value = ""
+     blodImage.files[0] = ""
   })
  }
 
@@ -1090,7 +1093,7 @@ console.log("delete blog");
     body: {},
   };
   try {
-  const deleteBlog = await fetch(`http://localhost:5000/api/blogs/${id}`, settings);
+  const deleteBlog = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`, settings);
     const data = await deleteBlog.json();
     console.log(data);
     getBlog();
@@ -1112,7 +1115,7 @@ console.log("delete message");
     body: {},
   };
   try {
-   await fetch(`http://localhost:5000/api/messages/${id}`, settings);
+   await fetch(`https://my-brand-api-mi4x.onrender.com/api/messages/${id}`, settings);
     window.location.reload()
   } catch (error) {
     console.error("Error deleting blog", error);
@@ -1134,7 +1137,7 @@ console.log("delete message");
 //   localStorage.setItem("comments", JSON.stringify(newComments));
 //   getBlog();}
 // };
-const messageUrl = "http://localhost:5000/api/messages"
+const messageUrl = "https://my-brand-api-mi4x.onrender.com/api/messages"
 const messagesTable = document.querySelector(".messages-table");
 const Messagerow = async () => {
   try {
@@ -1169,7 +1172,7 @@ window.addEventListener("load", () => {
   getBlog();
   row();
   Messagerow();
-
+  blogLikes()
 
 
   workContainer.innerHTML = getWorkData;
