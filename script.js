@@ -18,12 +18,12 @@ const contactButton = document.getElementById("contactButton");
 const contactForm = document.getElementById("contactForm");
 const blogCards = document.querySelector(".blog-cards");
 const signOut = document.querySelector('.sign-out')
-// const login =document.querySelectorAll('.login')
 signOut.onclick = function signOut() {
   adminSection.style.display = "none";
   logged.style.display = "flex"
   logged.style.flexDirection= "column"
-  localStorage.setItem("TOKEN", JSON.stringify({}))
+
+  localStorage.removeItem("TOKEN");
 };
 burger.onclick = function burger() {
   navLinks.style.right = "0";
@@ -35,7 +35,10 @@ hideMenu.onclick = function hideMenu() {
 navItem.onclick = function navItem() {
   navLinks.style.right = "-100%";
 };
-
+// const closeBLOG = document.getElementById('clseBLOG')
+// closeBLOG.onclick = function clseBLOG() {
+//   blogCards.style.gridTemplateColumns = "1fr 1fr 1fr";
+// };
 first.onclick = function first() {
   recentJob2.style.display = "none";
   recentJob1.style.display = "flex";
@@ -171,6 +174,7 @@ const closePopupFunc = (status) => {
   if (status === null) return;
   document.body.style.overflow = "scroll";
   fullWork.style.display = "none";
+  blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
 };
 closePopupFunc(null);
 popupDetailsFunc(null);
@@ -235,50 +239,41 @@ const login = async (event) => {
 }
 
 
-// const login = async (event) => {
-//   event.preventDefault();
-// 	@@ -183,39 +184,42 @@ const login = async (event) => {
-
-//   const settings = {
-//     method: 'POST',
-//     headers: {
-//       'Content-type': 'application/json; charset=UTF-8',
-//     },
-//     body: JSON.stringify(admin),
-//   };
-//   try {
-//       const fetchResponse = await fetch(`http://localhost:5000/api/auth/login`, settings);
-//       const data = await fetchResponse.json();
-//       const { token } = data;
-//       const { user } = data;
-//       console.log("Response:", data);
-//       console.log(adminSection, logged);
-
-//       adminSection.style.display = "block";
-//       logged.style.display = "none";
-
-//       return data;
-//   } catch (e) {
-//       passwordError[0].innerHTML = "Please insert right admin credentials!";
-//       return e;
-//   }    
 
 
+const email= document.querySelector("#newEmail");
+    	const password = document.querySelector("#newPwd");
+		const submitBtn = document.querySelector(".signUPbtn")
+		submitBtn.addEventListener("click",(e)=>{
+			e.preventDefault()
+			var loginData = {
+				email: email.value,
+    			password: password.value
+			}
+			const newData = {
+				method:'POST',
+   				headers:{
+      				'Content-Type':"application/json"
+    				},
+    			body: JSON.stringify(loginData)
+			}
+			console.log(newData);
+			fetch('https://my-brand-api-mi4x.onrender.com/api/register',newData)
+			.then(async (n)=>{
+				const res = await n.json()
+				console.log(res);
+			})
+       email.value = ""
+      password.value =""
+		})
 
 
-//  var editor = new FroalaEditor('#froala');
-      // if (user.email != "divinemaina@gmail.com") {
-      //   const errorTag = logged.getElementsByClassName("loginEmail");
-      //   errorTag[0].innerHTML = "Please insert admin email!";
-      //   return;
-      // } else if (password != "user") {
-      //   const passwordError = logged.getElementsByClassName("loginPassword");
-      //   passwordError[0].innerHTML = "Please insert admin password!";
-      //   return;
-      // } else {
-      //   admin.style.display = "block";
-      //   logged.style.display = "none";
-      // }
+
+
+
+
+
+
 
 contactButton.onclick = function contactButton() {
   contactForm.style.display = "block";
@@ -290,75 +285,6 @@ closeIcon3.onclick = function closeIcon3() {
   contactForm.style.display = "none";
   console.log("closed");
 };
-// ************************ form validations*************************
-// let messages = JSON.parse(localStorage.getItem("messages")) || [];
-// function validateForm() {
-//   const contactName = document.getElementById("name1");
-//   const contactEmail = document.getElementById("email1");
-//   const contactMessage = document.getElementById("contact_message");
-//   const error = contactForm.getElementsByClassName("small1");
-//   const errorMessage = contactForm.querySelector(".small2");
-//   const textError = contactForm.querySelector(".small3");
-//   const messageSuccess = contactForm.querySelector(".message-success");
-
-//   const message = {
-//     name: contactName.value,
-//     email: contactEmail.value,
-//     info: contactMessage.value,
-//     // index: messages.length + 1,
-//   };
-
-//   // // fetch(`http://localhost:5000/api/messages`)
-//   // submitMessage.addEventListener('click',async(e)=>{
-  //   // e.preventDefault()
-  
-  //   // try{
-    //   // const result = await fetch('http://localhost:5000/api/messages', {
-    
-      //   //       method: "POST",
-      //   //       headers: {
-//   //         "Content-Type" : "application/json"
-//   //       },
-//   //       body: JSON.stringify({
-//   //                         name: contactName.value,
-//   //                         email: contactEmail.value,
-//   //                         message: contactMessage.value
-  
-//   //       })})
-//   //       const data =  await result.json()
-//   //       console.log("data:",data);
-
-//   var x = message.name;
-//   var nameRegex = /^[^\s]+( [^\s]+)+$/;
-//   if (!x.match(nameRegex)) {
-//     error[0].innerHTML = "Names should be sepaeted by a space";
-//     return false;
-//   }
-
-//   var y = message.email;
-//   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-//   if (!y.match(mailformat)) {
-  //     const errorMessage = contactForm.querySelector(".small2");
-  //     errorMessage.innerHTML = "Please insert admin email!";
-  //     return false;
-  //   }
-  //   var z = message.info;
-  //   if (z.length <= 6 || z.length > 100) {
-    //     textError.innerHTML =
-//       "Your message should contain between 6 and 100 leters";
-//     return false;
-//   }
-//   contactName.value = "";
-//   contactEmail.value = "";
-//   contactMessage.value = "";
-//   textError.innerHTML = "";
-//   error[0].innerHTML = "";
-//   errorMessage.innerHTML = "";
-//   messages = [...messages, message];
-//   localStorage.setItem("messages", JSON.stringify(messages));
-//   messageSuccess.innerHTML = "message submitted successfully";
-//   return false;
-// }
 
 
 const submitMessage = document.getElementById('sendMessage')
@@ -456,128 +382,25 @@ const getBlog = async () => {
     }).join("");
     
     blogCards.innerHTML = blogData;
-    
+    blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
     countBlogComments();
   } catch (error) {
     console.error("Error fetching blogs", error);
   }
 };
-// let blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-// const getBlog = () => {
-//   const blogData = blogs
-//     .map(
-//       (item) => `
 
-
-      
-//         <div class="blog-card" id ={item.index} >
-        
-//              <div class="blog-icons">
-//              <img src="./assets/boxArrow.png" alt="box-arrow" />
-//              <a href="https://github.com/divinecharlotte/metrics-webapp"
-//                ><img src="./assets/github.png" alt="github-icon"
-//              /></a>
-//         </div>
-        
-      
-//            <h2>${item.name}</h2>
-//         <p>${item.description}</p>
-//           <ul>
-//           <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-//           <li id="current-comments-${item.index}"> comments</li>
-//         </ul>
-       
-//           </ul>
-//           <button type="button"onclick="blogDetailsFunc(${item.id})">full view</button>
-//            </div> 
-      
-
-
-//      `
-//     )
-//     .join("");
-
-//   blogCards.innerHTML = blogData;
-
-//   countBlogComments();
-
-
-// };
-
-
-// const blogLikes= async (id) => {
-//   const response = await fetch(`http://localhost:5000/api/blogs/${id}/likes`);
-//   const likes = await response.json();
-//   // const { messages } = comments
- 
-// // messagesCount = messages.length
-//   likes.forEach((item) => {
-//     const likesDiv = document.getElementById(`like-btn-${id}`);
-//     if(likesDiv){
-//       const li = document.createElement("li");
-//       li.textContent = `${item}`;
-//       likesDiv.appendChild(li);
-//     }
-//   });
-// }
-
-
-
-// let likes= 0
-// function increment(){
-//     if (likes !==0 ) {
-//     }
-//     likes++
-// document.getElementById("counter").innerHTML = `${likes}likes`
-// }
-
-// const blogDetailsFunc = async (id) => {
-//   console.log("blogDetailsFunc :",id);
-
-//   const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
-//   const blog = await response.json();
-//   const result = `
-//     <div class="blog-card">
-//       <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
-//       <img src="${blog.image}"/>
-//       <h2>${blog.title}</h2>
-//       <p >${blog.content}</p>
-//       <ul>
-//         <li><button id="like-btn-${id}" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-//         <li id="current-comments-${blog.index}"> ${countComments(blog.id)} comments</li>
-//       </ul>
-//       <div class="comments" id="comments-${id}"></div>
-//       <div class="comments-wrapper">
-//         <form class="comment" onsubmit="return false;" id="${blog.index}">
-//           <h3 class="form-title">Add your comment</h3>
-//           <div class="${blog.index}"></div>
-//           <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
-//           <br> 
-//           <small class="nameError" id="nameError-${blog.index}"></small> <br>
-//           <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
-//           <br />
-//           <small class="messageError" id="messageError-${blog.index}"></small> <br>
-//           <button type="button" onclick="return blogForm('${id}')">Submit</button>
-//         </form>
-//       </div>
-//     </div>
-//   `;
-//   blogCards.innerHTML = result;
-//   blogComments(id);
-
-  
-// };
 
 
 const blogDetailsFunc = async (id) => {
-  console.log("blogDetailsFunc :",id);
-
+  // console.log("blogDetailsFunc :",id);
+blogCards.style.display = "grid";
+blogCards.style.gridTemplateColumns = "1fr"
   const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
   const blog = await response.json();
   // const commentCount = await countComments(blog.id); // Count number of comments for blog
   const result = `
     <div class="blog-card">
-      <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
+      <p onclick="getBlog()"><img src="./assets/Group90.png" alt=""  id="clseBLOG"></p>
       <img src="${blog.image}"/>
       <h2>${blog.title}</h2>
       <p >${blog.content}</p>
@@ -603,143 +426,16 @@ const blogDetailsFunc = async (id) => {
     </div>
   `;
   blogCards.innerHTML = result;
+
   blogComments(id);
-  blogLikes(id)
+  blogLikes(id);
 };
 
-
-
-let messagesCount = 0;
-const blogComments = async (id) => {
-  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`);
-  const comments = await response.json();
-  const { messages } = comments
-  // const commentsNumber = messages.length
-//  console.log("lengthcomments:",messages.length);
-messagesCount = messages.length
-  messages.forEach((item) => {
-    const commentsDiv = document.getElementById(`comments-${id}`);
-    if(commentsDiv){
-      const p = document.createElement("p");
-      p.textContent = `${item}`;
-      commentsDiv.appendChild(p);
-    }
-    const commentsLi = document.getElementById(`current-comments-${id}`);
-    if (commentsLi) {
-      commentsLi.textContent = `${messagesCount} comments`;
-    }
-  });
-}
-
-
-let likesCount = 0;
-const blogLikes = async (id) => {
-  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`);
-  const likes = await response.json();
-  console.log(likes);
-
-    const likesLi = document.getElementById(`like-btn-${id}`);
-    if (likesLi) {
-      // const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
-      console.log("here it is:",likes.count);
-      likesLi.textContent = `${likes.count} likes`;
-    }else{
-      likesLi.textContent = `0 likes`
-    }
-
-}
-
-
-
-
-// function countComments(blogId) {
-//   let count = 0;
-//   comments.forEach(comment => {
-//     if (comment.blog === blogId) {
-//       count++;
-//     }
-//   });
-//   return count;
-// }
-
-
-
-// async function blogForm(id) {
-//   // e.preventDefault()
-//   const blogFormName = document.getElementById("name-" + id);
-//   const blogFormmessage = document.getElementById("comment-" + id);
-//   const error = document.getElementById("nameError-" + id);
-//   const textError = document.getElementById("messageError-" + id);
-
-//   try{
-//     const result = await fetch(`http://localhost:5000/api/blogs/{id}/comments`, {
-//             method: "POST",
-//             headers: {
-//         "Content-Type" : "application/json"
-//       },
-//       body: JSON.stringify({
-//                         name: blogFormName.value,
-//                         message: blogFormmessage.value
-
-//       })})
-// const data= await result.json()
-// console.log(data);
-//   // const comment = {
-//   //   name: blogFormName.value,
-//   //   message: blogFormmessage.value,
-//   //   index: comments.length + 1,
-//   //   blog: item,
-//   // };
-
-//   let x = blogFormName.value;
-//   var nameRegex = /^[^\s]+( [^\s]+)+$/;
-//   if (!x.match(nameRegex)) {
-//     error.innerHTML = "Names should be sepaeted by a space";
-//     return false;
-//   }
-
-//   var z = blogFormmessage.value;
-//   if (z.length <= 4) {
-//     textError.innerHTML = "comment should be more than 4 leters";
-//     return false;
-//   }
-//   blogFormName.value = "";
-//   blogFormmessage.value = "";
-//   error.innerHTML = "";
-//   textError.innerHTML = "";
-// return false
-
-// }catch(e){
-//   console.log(e);
-//     }
-//   }
-
-const increment = async (id) =>{
-  try {
-    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-      })
-    });
-    const likes = await result.json()  
-    console.log("und:",likes);
-    const likesLi = document.getElementById(`like-btn-${id}`);
-    if (likesLi) {
-      // const likesNumber = JSON.parse(JSON.stringify(likes)).likes;
-      likesLi.textContent = `${likes.count} likes`;
-    }else{
-      likesLi.textContent = `0 likes`
-    }
-    window.location.reload()
-  } catch(e) {
-    console.log(e);
-  }
-}
-
-
+// const closeBLOG = document.getElementById('clseBLOG')
+// closeBLOG.onclick = function clseBLOG() {
+//   blogCards.style.gridTemplateColumns = "1fr 1fr 1fr";
+// };
+// **************************************************************************************get and post blogComments****************************************************************************************
 
 async function blogForm(id) {
   console.log('id:', id);
@@ -789,137 +485,73 @@ async function blogForm(id) {
 }
 
 
-// const blogDetailsFunc = () => {
-//   const result = blogs
-//     .map(
-//       (item) => 
-// ` <div class="blog-card">
-// <p id="closeIcon2" onclick="getBlog()"><img src="./assets/Group90.png" alt=""></p>
-    
+let messagesCount = 0;
+const blogComments = async (id) => {
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/comments`);
+  const comments = await response.json();
+  const { messages } = comments;
+  const commentsDiv = document.getElementById(`comments-${id}`);
+  const commentsLi = document.getElementById(`current-comments-${id}`);
   
-//       <img src="${item.image}"/>
-//       <h2>${item.name}</h2>
-//       <p >${item.description}</p>
-//       <ul>
+  // Remove existing comments
+  while (commentsDiv.firstChild) {
+    commentsDiv.removeChild(commentsDiv.firstChild);
+  }
+  
+  messagesCount = messages.length;
+  
+  // Render new comments
+  messages.forEach((item) => {
+    const p = document.createElement("p");
+    p.textContent = `${item}`;
+    commentsDiv.appendChild(p);
+  });
+  
+  if (commentsLi) {
+    commentsLi.textContent = `${messagesCount} comments`;
+  }
+};
 
-//  <li><button id="like-btn" type="button" onclick="increment()"><img src="/assets/like.png" id="like" class="like-count-${item.index}" alt="likes"></button><p id="counter"> 0 Likes</p></li>
-//         <li id="current-comments-${item.index}"> comments</li>
-//       </ul>
-//       <div class="comments" id="comments-${item.index}"></div>
+// **************************************************************************************GET and POST blogLikes****************************************************************************************
 
-      
-//         <div class="comments-wrapper">
+const increment = async (id) => {
+  try {
+    const result = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({})
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
+let likesCount = 0;
+const blogLikes = async (id) => {
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`);
+  const likes = await response.json();
+  const data = likes.count
+  console.log(data);
+  const likesLi = document.getElementById(`like-btn-${id}`);
+  
+  // Remove existing like count
+  while (likesLi.firstChild) {
+    likesLi.removeChild(likesLi.firstChild);
+  }
+  
+  likesCount = likes.count.length;
+  console.log("COUNTLIKES:", likesCount);
+  
+  // Create a new li element to display the updated like count
+  const newLi = document.createElement("li");
+  newLi.textContent = `${likes.count} likes`;
+  likesLi.appendChild(newLi);
+  
+};
 
-//           <form class="comment" onsubmit="return false;" id="${item.index}" >
-//             <h3 class="form-title">Add your comment</h3>
-//             <div class="${item.index}"></div>
-//             <input type="text" name="name" id="name-${item.index}" class="${item.index}" placeholder="Your names :" />
-//             <br> 
-//             <small class="nameError" id="nameError-${item.index}"></small> <br>
-//             <textarea class="${item.index}" id="comment-${item.index}" cols="2" rows="4" placeholder="Comment :" ></textarea>
-//             <br />
-//             <small class="messageError" id="messageError-${item.index}"></small> <br>
-        
-//             <button type="button" onclick="return blogForm(${item.index})">Submit</button>
-//         </form>
-//         </div>
-//     </div>` )
-//     .join("");
-//     blogCards.innerHTML = result;
-   
-//     comments.forEach((item) => {
-//       const blogIndex = item.blog;
-//       const commentsDiv = document.getElementById(`comments-${blogIndex}`);
-//       if(commentsDiv){
-//         const p = document.createElement("p");
-//         p.textContent = `${item.message} by ${item.name}`;
-//         commentsDiv.appendChild(p);
-//       }
-//     });
-//   }
-
-
-// let likes= 0
-// function increment(){
-//     if (likes !==0 ) {
-//     }
-//     likes++
-// document.getElementById("counter").innerHTML = `${likes}likes`
-// }
-// const createBlog = async () => {
-//   const blogName = document.querySelector(".blog-name");
-//   const blogDescription = document.querySelector(".blog-description");
-//   const createBlogForm = document.querySelector(".add-new-blog");
-//   const nameError = createBlogForm.getElementsByClassName("blogNameError");
-//   const descriptionError = createBlogForm.querySelector(".descriptionError");
-//   const imageError = createBlogForm.querySelector(".imageError");
-//   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
-
-//   const blog = {
-//     image: imageUrl,
-//     name: blogName.value,
-//     description: blogDescription.value,
-//     // index: blogs.length + 1,
-//   };
-
-//   var y = blog.image;
-//   if (y == "") {
-//     imageError.innerHTML = "blog image is required";
-//     return false;
-//   }
-
-//   let x = blog.name;
-//   var nameRegex = /^[^\s]+( [^\s]+)+$/;
-//   if (!x.match(nameRegex)) {
-//     nameError[0].innerHTML = "blog title should be separeted by single space";
-//     return false;
-//   }
-
-//   var z = blog.description;
-//   if (z.length <= 20) {
-//     descriptionError.innerHTML =
-//       "blog description should be more than 20 letters";
-//     return false;
-//   }
-//   const getToken = JSON.parse(localStorage.getItem("TOKEN"));
-//   const settings = {
-//     method: 'POST',
-//     headers: {
-//       'Content-type': 'application/json; charset=UTF-8',
-//       'auth-token': getToken,
-//     },
-//     body: JSON.stringify(blog),
-//   };
-//   try {
-//       const postBlog = await fetch(`http://localhost:5000/api/blogs`, settings);
-//       const data = await postBlog.json();
-    
-//       const blog = data;
-//       console.log("Response:", blog);
-     
-
-
-//       return data;
-//   } catch (e) {
-   
-//       return e;
-//   }    
-
-//   blodImage.value = "";
-//   blogName.value = "";
-//   blogDescription.value = "";
-//   imageError.innerHTML = "";
-//   nameError[0].innerHTML = "";
-//   descriptionError.innerHTML = "";
-//   // blogs = [...blogs, blog];
-//   // localStorage.setItem("blogs", JSON.stringify(blogs));
-
-//   blogSubmitted.innerHTML = "blog submitted successfully";
-//   getBlog();
-// }
-
-
+// **************************************************************************************GET and POST blogs**************************************************************************************
 
 const blogName = document.querySelector(".blog-name");
 const blogDescription = document.querySelector(".blog-description");
@@ -932,7 +564,7 @@ const createBlog = async (e) => {
   const descriptionError = createBlogForm.querySelector(".descriptionError");
   const imageError = createBlogForm.querySelector(".imageError");
   const blogSubmitted = createBlogForm.querySelector(".blog-submitted");
-  // const blodImage = document.querySelector(".blog-image");
+  const blodImage = document.querySelector(".blog-image");
 
   let imageUrl;
   blodImage.addEventListener("change", function () {
@@ -964,13 +596,33 @@ const formData = new FormData();
     const data = await postBlog.json();
     console.log('data fetchs', data);
 
-    // blogSubmitted.innerHTML = "Blog submitted successfully";
-    // blodImage.value = "";
-    // blogName.value = "";
-    // blogDescription.value = "";
-    // imageError.innerHTML = "";
-    // nameError.innerHTML = "";
-    // descriptionError.innerHTML = "";
+    var y = blodImage.files[0];
+    if (y == "") {
+      imageError.innerHTML = "blog image is required";
+      return false;
+    }
+  
+    let x = blogName.value;
+    var nameRegex = /^[^\s]+( [^\s]+)+$/;
+    if (!x.match(nameRegex)) {
+      nameError[0].innerHTML = "blog title should be separeted by single space";
+      return false;
+    }
+  
+    var z = blogDescription.value;
+    if (z.length <= 20) {
+      descriptionError.innerHTML =
+        "blog description should be more than 20 letters";
+      return false;
+    }
+
+    blogSubmitted.innerHTML = "Blog submitted successfully";
+    blodImage.value = "";
+    blogName.value = "";
+    blogDescription.value = "";
+    imageError.innerHTML = "";
+    nameError.innerHTML = "";
+    descriptionError.innerHTML = "";
 
     return data;
   } catch (e) {
@@ -980,18 +632,6 @@ const formData = new FormData();
 };
 
 
-// ***********************************new blog*************************
-// const blodImage = document.querySelector(".blog-image");
-
-// let imageUrl;
-// blodImage.addEventListener("change", function () {
-//   const fileReader = new FileReader();
-//   fileReader.addEventListener("load", () => {
-//     imageUrl = fileReader.result;
-
-//   });
-//   fileReader.readAsDataURL(this.files[0]);
-// });
 
 const adminTable = document.getElementById("tableData");
 
@@ -1191,7 +831,7 @@ window.addEventListener("load", () => {
   getBlog();
   row();
   Messagerow();
-  blogLikes()
+  // blogLikes()
 
 
   workContainer.innerHTML = getWorkData;
