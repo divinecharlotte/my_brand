@@ -12,12 +12,14 @@ To get a local copy up and running follow these simple example steps.
 ## Live Demo
 [MY-BRAND](https://divinecharlotte.netlify.app/)
 
+## Link to the backend repo
+[My-brand-API](https://github.com/divinecharlotte/learn-express)
 ### Setup 
 clone the project to ypour local environment.
 
 to clone it do as below
 
-git clone https://github.com/divinecharlotte/my_brand.git
+`git clone https://github.com/divinecharlotte/my_brand.git`
 
 
 ## Authors
