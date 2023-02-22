@@ -174,7 +174,7 @@ const closePopupFunc = (status) => {
   if (status === null) return;
   document.body.style.overflow = "scroll";
   fullWork.style.display = "none";
-  blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
+  // blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
 };
 closePopupFunc(null);
 popupDetailsFunc(null);
@@ -382,7 +382,7 @@ const getBlog = async () => {
     }).join("");
     
     blogCards.innerHTML = blogData;
-    blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
+    // blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
     countBlogComments();
   } catch (error) {
     console.error("Error fetching blogs", error);
@@ -404,9 +404,9 @@ blogCards.style.gridTemplateColumns = "1fr"
       <img src="${blog.image}"/>
       <h2>${blog.title}</h2>
       <p >${blog.content}</p>
-      <ul>
-      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"></button>
-        <li id="like-btn-${id}"></li>
+      <ul><li>
+      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}"></p></li></button>
+        
         <li id="current-comments-${id}">comments</li> 
       </ul>
       <div class="comments" id="comments-${id}"></div>
