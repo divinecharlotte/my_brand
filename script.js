@@ -18,12 +18,12 @@ const contactButton = document.getElementById("contactButton");
 const contactForm = document.getElementById("contactForm");
 const blogCards = document.querySelector(".blog-cards");
 const signOut = document.querySelector('.sign-out')
-// const login =document.querySelectorAll('.login')
 signOut.onclick = function signOut() {
   adminSection.style.display = "none";
   logged.style.display = "flex"
   logged.style.flexDirection= "column"
-  localStorage.setItem("TOKEN", JSON.stringify({}))
+
+  localStorage.removeItem("TOKEN");
 };
 burger.onclick = function burger() {
   navLinks.style.right = "0";
@@ -237,6 +237,41 @@ const login = async (event) => {
       return e;
   }    
 }
+
+
+
+
+const email= document.querySelector("#newEmail");
+    	const password = document.querySelector("#newPwd");
+		const submitBtn = document.querySelector(".signUPbtn")
+		submitBtn.addEventListener("click",(e)=>{
+			e.preventDefault()
+			var loginData = {
+				email: email.value,
+    			password: password.value
+			}
+			const newData = {
+				method:'POST',
+   				headers:{
+      				'Content-Type':"application/json"
+    				},
+    			body: JSON.stringify(loginData)
+			}
+			console.log(newData);
+			fetch('https://my-brand-api-mi4x.onrender.com/api/register',newData)
+			.then(async (n)=>{
+				const res = await n.json()
+				console.log(res);
+			})
+       email.value = ""
+      password.value =""
+		})
+
+
+
+
+
+
 
 
 
