@@ -73,6 +73,9 @@ body {
 div {
   animation: section 2s ease-in-out 1;
 }
+.blog-cards div {
+  animation: none;
+}
 @keyframes section {
   0% {
     transform: translateX(-100%);
@@ -186,9 +189,13 @@ button {
   cursor: pointer;
   transition: var(--transition);
 }
-.blogs button:hover,
+/* .blogs button:hover, */
 button:hover {
   background-color: var(--slate);
+}
+#blogs > div.blog-cards > div > ul > button{
+  border: none;
+  background-color:transparent;
 }
 /************************************************************************* ***INTRO SECTION******************************************************** */
 .whole-intro {
@@ -688,10 +695,11 @@ footer {
   color: var(--md-slate);
 }
 .blogs button {
-  margin: 5% 44%;
+  width: 40%;
+  margin: 5% 30%;
   outline: none;
   border: 1px solid var(--green);
-  padding: 15px 18px;
+  padding: 6px 3px;
   background-color: transparent;
   color: var(--green);
   border-radius: var(--border-radius);
@@ -741,6 +749,7 @@ footer {
 #blogs > div.blog-cards > div > ul > li > button {
   border: none;
 }
+
 #like {
   width: 100%;
 }
@@ -1186,10 +1195,10 @@ padding: 11%;
     padding-top: 9%;
   }
   .blogs button {
-    margin: 5% 30%;
+    margin: 5% 20%;
     padding: 10px 15px;
     font-size: 12px;
-    width: 40%;
+    width: 50%;
   }
   .content-container {
     flex-direction: column;
