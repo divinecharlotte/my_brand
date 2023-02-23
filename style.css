@@ -496,6 +496,7 @@ button:hover {
 .login {
   background-color: var(--navy);
   padding: 7rem;
+  display: none;
 }
 small {
   color: red;
