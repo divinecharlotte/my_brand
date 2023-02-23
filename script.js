@@ -18,6 +18,11 @@ const contactButton = document.getElementById("contactButton");
 const contactForm = document.getElementById("contactForm");
 const blogCards = document.querySelector(".blog-cards");
 const signOut = document.querySelector('.sign-out')
+const adminLiA = document.getElementById('adminLiA')
+adminLiA.onclick = function adminLiA(){
+  logged.style.display = "flex"
+  logged.style.flexDirection= "column"
+}
 signOut.onclick = function signOut() {
   adminSection.style.display = "none";
   logged.style.display = "flex"
@@ -199,8 +204,8 @@ const login = async (event) => {
     passwordError[0].innerHTML = "Please insert admin password!";
     return;
   } else {
-    // admin.style.display = "block";
-    // logged.style.display = "none";
+    adminSection.style.display = "block";
+    logged.style.display = "none";
   }
   const admin= {
     email: emailInput.value,
@@ -355,81 +360,6 @@ console.log(e);
 
 
 
-const apiUrl = "https://my-brand-api-mi4x.onrender.com/api/blogs";
-
-const getBlog = async () => {
-  try {
-    const response = await fetch(apiUrl);
-    const blogs = await response.json();
-    // console.log(blogs);
-    
-    const blogData = blogs.map((item) => {
-      const id = item._id;
-      // console.log(id);
-      return `
-        <div class="blog-card" id="${item.index}">
-          <div class="blog-icons">
-            <img src="./assets/boxArrow.png" alt="box-arrow" />
-            <a href="https://github.com/divinecharlotte/metrics-webapp">
-              <img src="./assets/github.png" alt="github-icon" />
-            </a>
-          </div>
-          <h2>${item.title}</h2>
-          <p>${item.content.substring(0,10)}</p>
-          <button type="button" onclick="blogDetailsFunc('${id}')">full view</button>
-        </div>
-      `;
-    }).join("");
-    
-    blogCards.innerHTML = blogData;
-    // blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
-    countBlogComments();
-  } catch (error) {
-    console.error("Error fetching blogs", error);
-  }
-};
-
-
-
-const blogDetailsFunc = async (id) => {
-  // console.log("blogDetailsFunc :",id);
-blogCards.style.display = "grid";
-blogCards.style.gridTemplateColumns = "1fr"
-  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
-  const blog = await response.json();
-  // const commentCount = await countComments(blog.id); // Count number of comments for blog
-  const result = `
-    <div class="blog-card">
-      <p onclick="getBlog()"><img src="./assets/Group90.png" alt=""  id="clseBLOG"></p>
-      <img src="${blog.image}"/>
-      <h2>${blog.title}</h2>
-      <p >${blog.content}</p>
-      <ul><li>
-      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}"></p></li></button>
-        
-        <li id="current-comments-${id}">comments</li> 
-      </ul>
-      <div class="comments" id="comments-${id}"></div>
-      <div class="comments-wrapper">
-        <form class="comment" onsubmit="return false;" id="${blog.index}">
-          <h3 class="form-title">Add your comment</h3>
-          <div class="${blog.index}"></div>
-          <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
-          <br> 
-          <small class="nameError" id="nameError-${id}"></small> <br>
-          <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
-          <br />
-          <small class="messageError" id="messageError-${id}"></small> <br>
-          <button type="button" onclick="return blogForm('${id}')">Submit</button>
-        </form>
-      </div>
-    </div>
-  `;
-  blogCards.innerHTML = result;
-
-  blogComments(id);
-  blogLikes(id);
-};
 
 // const closeBLOG = document.getElementById('clseBLOG')
 // closeBLOG.onclick = function clseBLOG() {
@@ -522,6 +452,7 @@ const increment = async (id) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({})
+      // window.location.reload()
     });
   } catch (e) {
     console.log(e);
@@ -636,16 +567,18 @@ const formData = new FormData();
 const adminTable = document.getElementById("tableData");
 
 
+
+
 const row = async () => {
   try {
     const response = await fetch(apiUrl);
     const blogs = await response.json();
     const blogElement = blogs.map(
       (item, index) => `
-        <tr class="edit-blog">
+        <tr class="edit-blog" id="blogsTable">
           <td>${item.title}</td>
           <td>${item.content.substring(0,10)}</td>
-          <td><button class="delete-button-${index}" onclick="deleteBlog('${item._id}')">delete</button></td>
+          <td><button class="delete-button" data-blog-id="${item._id}">delete</button></td>
           <td><button class="table-button-${index}" onclick="editBlog('${item._id}')">edit</button></td>
         </tr>`
     ).join("");
@@ -655,6 +588,21 @@ const row = async () => {
     console.error(error);
   }
 };
+
+
+adminTable.addEventListener('click', async (event) => {
+  if (event.target.classList.contains('delete-button')) {
+    event.preventDefault();
+    const blogId = event.target.dataset.blogId;
+    const scrollPosition = window.scrollY;
+    const tableRow = event.target.closest('tr'); 
+    tableRow.remove();
+    await deleteBlog(blogId);
+    window.scrollTo(0, scrollPosition);
+
+  }
+});
+
 
 const editBlog = async (id) => {
   window.location ="#createBLOGG"
@@ -688,59 +636,6 @@ const editBlog = async (id) => {
   })
  }
 
-// const row = () => {
-//   const blogElement = blogs
-//     .map(
-//       (item, index) => `
-//     <tr class="edit-blog">
-//   <td>${item.name}</td>
-
-//   <td>${item.description}</td>
-//   <td><button  class="delete-button-${item.index}" onclick="deleteBlog(${index})">delete</button></td>
-//   <td><button class="table-button-${item.index}" >edit</button></td>
-// </tr>`
-//     )
-//     .join("");
-//   adminTable.innerHTML = blogElement;
-//   deleteBlog();
-//   return adminTable;
-// };
-
-
-
-// const editBlog = ({ event, id }) => {
-//   if (event.target.value === '') return;
-//   if (event.key === 'Enter') {
-//     const updatedBlog = {
-//       name: event.target.value,
-//       description: '',
-//     };
-//     fetch(`http://localhost:5000/api/blogs/${id}`, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(updatedBlog),
-//     })
-//       .then(response => response.json())
-//       .then(data => {
-//         console.log(`Blog with id ${data.id} has been updated`);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//       });
-//   }
-// };
-
-
-// const editBlog = ({ event }) => {
-//   if (event.target.value === '') return;
-//   if (event.key === 'Enter') {
-//    a= event.target.value;
-//     localStorage.setItem('blogs', JSON.stringify(blogs))
-//     console.log(amclicked);
-//   }
-// };
 const deleteBlog = async (id) => {
   const getToken = JSON.parse(localStorage.getItem("TOKEN"));
 console.log("delete blog");
@@ -756,31 +651,141 @@ console.log("delete blog");
     const data = await deleteBlog.json();
     console.log(data);
     getBlog();
-    window.location.reload()
+    // window.location.reload()
   } catch (error) {
     console.error("Error deleting blog", error);
   }
 }
 
 
+const apiUrl = "https://my-brand-api-mi4x.onrender.com/api/blogs";
+
+const getBlog = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    const blogs = await response.json();
+    // console.log(blogs);
+    
+    const blogData = blogs.map((item) => {
+      const id = item._id;
+      // console.log(id);
+      return `
+        <div class="blog-card" id="${item.index}">
+          <div class="blog-icons">
+            <img src="./assets/boxArrow.png" alt="box-arrow" />
+            <a href="https://github.com/divinecharlotte/metrics-webapp">
+              <img src="./assets/github.png" alt="github-icon" />
+            </a>
+          </div>
+          <h2>${item.title}</h2>
+          <p>${item.content.substring(0,50)}</p>
+          <button type="button" onclick="blogDetailsFunc('${id}')">full view</button>
+        </div>
+      `;
+    }).join("");
+    
+    blogCards.innerHTML = blogData;
+    // blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
+    countBlogComments();
+  } catch (error) {
+    console.error("Error fetching blogs", error);
+  }
+};
+
+
+
+const blogDetailsFunc = async (id) => {
+  // console.log("blogDetailsFunc :",id);
+blogCards.style.display = "grid";
+blogCards.style.gridTemplateColumns = "1fr"
+  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
+  const blog = await response.json();
+  // const commentCount = await countComments(blog.id); // Count number of comments for blog
+  const result = `
+    <div class="blog-card">
+      <p onclick="getBlog()"><img src="./assets/Group90.png" alt=""  id="clseBLOG"></p>
+      <img src="${blog.image}"/>
+      <h2>${blog.title}</h2>
+      <p >${blog.content}</p>
+      <ul><li>
+      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}" onclick="return blogLikes('${id}')></p></button></li>
+        
+        <li id="current-comments-${id}">comments</li> 
+      </ul>
+      <div class="comments" id="comments-${id}"></div>
+      <div class="comments-wrapper">
+        <form class="comment" onsubmit="return false;" id="${blog.index}">
+          <h3 class="form-title">Add your comment</h3>
+          <div class="${blog.index}"></div>
+          <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
+          <br> 
+          <small class="nameError" id="nameError-${id}"></small> <br>
+          <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
+          <br />
+          <small class="messageError" id="messageError-${id}"></small> <br>
+          <button type="button" onclick="return blogForm('${id}')">Submit</button>
+        </form>
+      </div>
+    </div>
+  `;
+  blogCards.innerHTML = result;
+
+  blogComments(id);
+  blogLikes(id);
+};
+
+
 const deleteMessage = async (id) => {
-  const getToken = JSON.parse(localStorage.getItem("TOKEN"));
-console.log("delete message");
+  const getToken = JSON.parse(localStorage.getItem('TOKEN'));
+
   const settings = {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
       'auth-token': getToken,
     },
     body: {},
   };
-  try {
-   await fetch(`https://my-brand-api-mi4x.onrender.com/api/messages/${id}`, settings);
-    window.location.reload()
-  } catch (error) {
-    console.error("Error deleting blog", error);
-  }
-}
 
+  try {
+    const response = await fetch(
+      `https://my-brand-api-mi4x.onrender.com/api/messages/${id}`,
+      settings
+    );
+
+    // If the response status is not in the 200-299 range, throw an error
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error('Error deleting message', error);
+    throw error;
+  }
+};
+
+// Get all delete buttons
+const deleteBtns = document.querySelectorAll('.table-button');
+
+// Loop through the delete buttons and add a click event listener to each one
+deleteBtns.forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    // Get the message ID from the data attribute
+    const messageId = btn.getAttribute('data-message-id');
+
+    try {
+      // Call the deleteMessage function with the message ID
+      const response = await deleteMessage(messageId);
+
+      // Render the response
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+});
 
 
 
@@ -808,7 +813,7 @@ const Messagerow = async () => {
     <tr>
   <td>${item.name}</td>
   <td>${item.message.substring(0,10)}</td>
-  <td><button class="table-button" onclick="deleteMessage('${item._id}')" >delete</button></td>
+  <td><button class="table-button" data-message-id="${item._id}" onclick="deleteMessage('${item._id}')">delete</button></td>
 
 </tr>`
     )
@@ -820,13 +825,19 @@ const Messagerow = async () => {
   console.error(error);
 }
 };
+messagesTable.addEventListener('click', async (event) => {
+  if (event.target.classList.contains('table-button')) {
+    event.preventDefault();
+    const messageId = event.target.dataset.messageId;
+    const scrollPosition = window.scrollY;
+    const tableRow = event.target.closest('tr'); 
+    tableRow.remove();
+    await deleteBlog(messageId);
+    window.scrollTo(0, scrollPosition);
 
-// const deleteMessage = (index) => {
-//   const allMessagess = JSON.parse(localStorage.getItem("messages"));
-//   const newMessages = allMessagess.filter((message, i) => i != index);
-//   localStorage.setItem("messages", JSON.stringify(newMessages));
-//   Messagerow();
-// };
+  }
+});
+
 window.addEventListener("load", () => {
   getBlog();
   row();
