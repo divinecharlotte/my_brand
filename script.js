@@ -617,7 +617,7 @@ const editBlog = async (id) => {
     const formData = new FormData();
       formData.append('title', blogName.value)
       formData.append('content', blogDescription.value)
-      formData.append('image', blodImage.files[0])
+      // formData.append('image', blodImage.files[0])
     const getToken = JSON.parse(localStorage.getItem("TOKEN"));
     const settings = {
       method: "PATCH",
@@ -708,8 +708,7 @@ blogCards.style.gridTemplateColumns = "1fr"
       <h2>${blog.title}</h2>
       <p >${blog.content}</p>
       <ul><li>
-      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}" onclick="return blogLikes('${id}')></p></button></li>
-        
+      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}"></p></li></button>
         <li id="current-comments-${id}">comments</li> 
       </ul>
       <div class="comments" id="comments-${id}"></div>
