@@ -579,7 +579,7 @@ const row = async () => {
           <td>${item.title}</td>
           <td>${item.content.substring(0,10)}</td>
           <td><button class="delete-button" data-blog-id="${item._id}">delete</button></td>
-          <td><button class="table-button" >edit</button></td>
+          <td><button class="table-button-${index}" onclick="editBlog('${item._id}')">edit</button></td>
         </tr>`
     ).join("");
     adminTable.innerHTML = blogElement;
