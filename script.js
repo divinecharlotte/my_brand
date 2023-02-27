@@ -179,7 +179,7 @@ const closePopupFunc = (status) => {
   if (status === null) return;
   document.body.style.overflow = "scroll";
   fullWork.style.display = "none";
-  // blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
+
 };
 closePopupFunc(null);
 popupDetailsFunc(null);
@@ -212,7 +212,7 @@ const login = async (event) => {
     password:passwordInput.value
   }
 
-  // console.log("Me admin:", admin);
+
 
   const settings = {
     method: 'POST',
@@ -315,8 +315,7 @@ const textError = contactForm.querySelector(".small3");
                           message: contactMessage.value
   
         })})
-// const data= await result.json()
-// console.log(data);
+
 
 
   var x = contactName.value;
@@ -361,10 +360,7 @@ console.log(e);
 
 
 
-// const closeBLOG = document.getElementById('clseBLOG')
-// closeBLOG.onclick = function clseBLOG() {
-//   blogCards.style.gridTemplateColumns = "1fr 1fr 1fr";
-// };
+
 // **************************************************************************************get and post blogComments****************************************************************************************
 
 async function blogForm(id) {
@@ -454,6 +450,24 @@ const increment = async (id) => {
       body: JSON.stringify({})
       // window.location.reload()
     });
+    const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}/likes`);
+  const likes = await response.json();
+  const data = likes.count
+  const likesLi = document.getElementById(`like-btn-${id}`);
+  
+  // Remove existing like count
+  while (likesLi.firstChild) {
+    likesLi.removeChild(likesLi.firstChild);
+  }
+  
+
+  
+  // Create a new li element to display the updated like count
+  const newLi = document.createElement("li");
+  newLi.textContent = `${likes.count} likes`;
+  likesLi.appendChild(newLi);
+  
+    blogLikes()
   } catch (e) {
     console.log(e);
   }
@@ -472,8 +486,7 @@ const blogLikes = async (id) => {
     likesLi.removeChild(likesLi.firstChild);
   }
   
-  likesCount = likes.count.length;
-  console.log("COUNTLIKES:", likesCount);
+
   
   // Create a new li element to display the updated like count
   const newLi = document.createElement("li");
@@ -514,7 +527,7 @@ const formData = new FormData();
     formData.append('content', blogDescription.value)
     formData.append('image', blodImage.files[0])
   const getToken = JSON.parse(localStorage.getItem("TOKEN"));
-  // console.log('my token:', getToken);
+
   const settings = {
     method: "POST",
     headers: {
@@ -626,7 +639,7 @@ const editBlog = async (id) => {
       },
       body: formData,
     };
-    // fetch(`http://localhost:5000/api/blogs/${id}`)
+  
     const updateBlog = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`, settings);
     const data = await updateBlog.json();
     console.log('data fetchs', data);
@@ -650,7 +663,8 @@ console.log("delete blog");
   const deleteBlog = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`, settings);
     const data = await deleteBlog.json();
     console.log(data);
-    getBlog();
+    // getBlog();
+    
     // window.location.reload()
   } catch (error) {
     console.error("Error deleting blog", error);
@@ -660,78 +674,78 @@ console.log("delete blog");
 
 const apiUrl = "https://my-brand-api-mi4x.onrender.com/api/blogs";
 
-const getBlog = async () => {
-  try {
-    const response = await fetch(apiUrl);
-    const blogs = await response.json();
-    // console.log(blogs);
+// const getBlog = async () => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const blogs = await response.json();
+//     // console.log(blogs);
     
-    const blogData = blogs.map((item) => {
-      const id = item._id;
-      // console.log(id);
-      return `
-        <div class="blog-card" id="${item.index}">
-          <div class="blog-icons">
-            <img src="./assets/boxArrow.png" alt="box-arrow" />
-            <a href="https://github.com/divinecharlotte/metrics-webapp">
-              <img src="./assets/github.png" alt="github-icon" />
-            </a>
-          </div>
-          <h2>${item.title}</h2>
-          <p>${item.content.substring(0,50)}</p>
-          <button type="button" onclick="blogDetailsFunc('${id}')">full view</button>
-        </div>
-      `;
-    }).join("");
+//     const blogData = blogs.map((item) => {
+//       const id = item._id;
+//       // console.log(id);
+//       return `
+//         <div class="blog-card" id="${item.index}">
+//           <div class="blog-icons">
+//             <img src="./assets/boxArrow.png" alt="box-arrow" />
+//             <a href="https://github.com/divinecharlotte/metrics-webapp">
+//               <img src="./assets/github.png" alt="github-icon" />
+//             </a>
+//           </div>
+//           <h2>${item.title}</h2>
+//           <p>${item.content.substring(0,50)}</p>
+//           <button type="button" onclick="blogDetailsFunc('${id}')">full view</button>
+//         </div>
+//       `;
+//     }).join("");
     
-    blogCards.innerHTML = blogData;
-    // blogCards.style.gridTemplateColumns = "1fr 1fr 1fr"
-    countBlogComments();
-  } catch (error) {
-    console.error("Error fetching blogs", error);
-  }
-};
+//     blogCards.innerHTML = blogData;
+
+//     countBlogComments();
+//   } catch (error) {
+//     console.error("Error fetching blogs", error);
+//   }
+// };
 
 
 
-const blogDetailsFunc = async (id) => {
-  // console.log("blogDetailsFunc :",id);
-blogCards.style.display = "grid";
-blogCards.style.gridTemplateColumns = "1fr"
-  const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
-  const blog = await response.json();
-  // const commentCount = await countComments(blog.id); // Count number of comments for blog
-  const result = `
-    <div class="blog-card">
-      <p onclick="getBlog()"><img src="./assets/Group90.png" alt=""  id="clseBLOG"></p>
-      <img src="${blog.image}"/>
-      <h2>${blog.title}</h2>
-      <p >${blog.content}</p>
-      <ul><li>
-      <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}"></p></li></button>
-        <li id="current-comments-${id}">comments</li> 
-      </ul>
-      <div class="comments" id="comments-${id}"></div>
-      <div class="comments-wrapper">
-        <form class="comment" onsubmit="return false;" id="${blog.index}">
-          <h3 class="form-title">Add your comment</h3>
-          <div class="${blog.index}"></div>
-          <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
-          <br> 
-          <small class="nameError" id="nameError-${id}"></small> <br>
-          <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
-          <br />
-          <small class="messageError" id="messageError-${id}"></small> <br>
-          <button type="button" onclick="return blogForm('${id}')">Submit</button>
-        </form>
-      </div>
-    </div>
-  `;
-  blogCards.innerHTML = result;
+// const blogDetailsFunc = async (id) => {
 
-  blogComments(id);
-  blogLikes(id);
-};
+// blogCards.style.display = "grid";
+// blogCards.style.gridTemplateColumns = "1fr"
+//   const response = await fetch(`https://my-brand-api-mi4x.onrender.com/api/blogs/${id}`);
+//   const blog = await response.json();
+ 
+//   const result = `
+//     <div class="blog-card">
+//       <p onclick="getBlog()"><img src="./assets/Group90.png" alt=""  id="clseBLOG"></p>
+//       <img src="${blog.image}"/>
+//       <h2>${blog.title}</h2>
+//       <p >${blog.content}</p>
+//       <ul><li>
+//       <button type="button" onclick="increment('${id}')"><img src="/assets/like.png" id="like" class="like-count-${blog.index}" alt="likes"><p id="like-btn-${id}"></p></li></button>
+//         <li id="current-comments-${id}">comments</li> 
+//       </ul>
+//       <div class="comments" id="comments-${id}"></div>
+//       <div class="comments-wrapper">
+//         <form class="comment" onsubmit="return false;" id="${blog.index}">
+//           <h3 class="form-title">Add your comment</h3>
+//           <div class="${blog.index}"></div>
+//           <input type="text" name="name" id="name-${id}" class="${blog.index}" placeholder="Your names :" />
+//           <br> 
+//           <small class="nameError" id="nameError-${id}"></small> <br>
+//           <textarea class="${blog.index}" id="comment-${id}" cols="2" rows="4" placeholder="Comment :" ></textarea>
+//           <br />
+//           <small class="messageError" id="messageError-${id}"></small> <br>
+//           <button type="button" onclick="return blogForm('${id}')">Submit</button>
+//         </form>
+//       </div>
+//     </div>
+//   `;
+//   blogCards.innerHTML = result;
+
+//   blogComments(id);
+//   blogLikes(id);
+// };
 
 
 const deleteMessage = async (id) => {
@@ -787,19 +801,6 @@ deleteBtns.forEach((btn) => {
 });
 
 
-
-// const deleteBlog = (index) => {
-//   const allBlogs = JSON.parse(localStorage.getItem("blogs"));
-//   const allComments = JSON.parse(localStorage.getItem("comments"));
-//   if(allBlogs === null || allComments === null){ 
-//     console.log("element not found");
-//   }else{
-//   const newBlogs = allBlogs.filter((blog, i) => i != index);
-//   localStorage.setItem("blogs", JSON.stringify(newBlogs));
-//   const newComments = allComments.filter((comment) => comment.blog !== index);
-//   localStorage.setItem("comments", JSON.stringify(newComments));
-//   getBlog();}
-// };
 const messageUrl = "https://my-brand-api-mi4x.onrender.com/api/messages"
 const messagesTable = document.querySelector(".messages-table");
 const Messagerow = async () => {
@@ -838,7 +839,7 @@ messagesTable.addEventListener('click', async (event) => {
 });
 
 window.addEventListener("load", () => {
-  getBlog();
+  // getBlog();
   row();
   Messagerow();
   // blogLikes()
